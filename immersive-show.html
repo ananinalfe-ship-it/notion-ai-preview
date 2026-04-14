@@ -1,239 +1,280 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-	<meta name="format-detection" content="telephone=no,email=no,address=no" />
-	<title>沉浸式演出，到底"沉浸"在哪？</title>
-	<style>
-		:root{
-			--bg:#ffffff;
-			--text:#1f2329;
-			--muted:#6b7280;
-			--line:#e5e7eb;
-			--brand:#111827;
-			--accent:#4f46e5;
-			--quoteBg:#f9fafb;
-			--radius:14px;
-		}
-		body{
-			margin:0;
-			background:var(--bg);
-			color:var(--text);
-			font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",Segoe UI,Roboto,Helvetica,Arial;
-			-webkit-font-smoothing:antialiased;
-			text-rendering:optimizeLegibility;
-		}
-		.container{
-			max-width:720px;
-			margin:0 auto;
-			padding:20px 18px 40px;
-		}
-		.header{
-			padding-top:6px;
-			padding-bottom:14px;
-			border-bottom:1px solid var(--line);
-		}
-		h1{
-			margin:0 0 10px;
-			font-size:28px;
-			line-height:1.25;
-			letter-spacing:-0.2px;
-			color:var(--brand);
-		}
-		.sub{
-			margin:0;
-			font-size:14px;
-			color:var(--muted);
-			line-height:1.6;
-		}
-		.meta{
-			margin-top:10px;
-			display:flex;
-			gap:10px;
-			flex-wrap:wrap;
-			font-size:12px;
-			color:var(--muted);
-		}
-		.badge{
-			border:1px solid var(--line);
-			padding:4px 10px;
-			border-radius:999px;
-			background:#fff;
-		}
-		.toc{
-			margin:18px 0 18px;
-			padding:14px 14px;
-			border:1px solid var(--line);
-			border-radius:var(--radius);
-			background:#fff;
-		}
-		.toc h3{
-			margin:0 0 8px;
-			font-size:14px;
-		}
-		.toc a{
-			display:block;
-			padding:6px 0;
-			color:var(--accent);
-			text-decoration:none;
-			font-size:14px;
-		}
-		.section{
-			margin:18px 0 0;
-			padding-top:4px;
-		}
-		h2{
-			margin:18px 0 10px;
-			font-size:20px;
-			line-height:1.35;
-		}
-		p{
-			margin:10px 0;
-			font-size:16px;
-			line-height:1.85;
-		}
-		ul{
-			margin:10px 0 10px 20px;
-			padding:0;
-			font-size:16px;
-			line-height:1.85;
-		}
-		hr{
-			border:none;
-			border-top:1px solid var(--line);
-			margin:18px 0;
-		}
-		blockquote{
-			margin:12px 0;
-			padding:12px 12px;
-			background:var(--quoteBg);
-			border-left:4px solid var(--accent);
-			border-radius:10px;
-			color:#374151;
-		}
-		.figure{
-			margin:14px 0;
-			border:1px solid var(--line);
-			border-radius:var(--radius);
-			overflow:hidden;
-			background:#fff;
-		}
-		.figure img{
-			width:100%;
-			display:block;
-		}
-		.figcap{
-			padding:10px 12px;
-			font-size:13px;
-			color:var(--muted);
-			line-height:1.6;
-		}
-		.callout{
-			margin:16px 0;
-			padding:14px 14px;
-			border-radius:var(--radius);
-			background:#111827;
-			color:#fff;
-		}
-		.callout h3{
-			margin:0 0 6px;
-			font-size:16px;
-		}
-		.callout p{
-			margin:0;
-			font-size:14px;
-			line-height:1.7;
-			color:#e5e7eb;
-		}
-		.footer{
-			margin-top:22px;
-			padding-top:18px;
-			border-top:1px solid var(--line);
-			color:var(--muted);
-			font-size:12px;
-			line-height:1.8;
-		}
-	</style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="format-detection" content="telephone=no,email=no,address=no" />
+<title>沉浸式演出，到底"沉浸"在哪？</title>
+<style>
+  :root{
+    --bg:#0b0b0e;
+    --panel:#141419;
+    --text:#e8e6e1;
+    --muted:#8a8780;
+    --line:rgba(255,255,255,0.08);
+    --accent:#d4a056;
+    --accent-soft:rgba(212,160,86,0.15);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"PingFang SC","Hiragino Sans GB","Noto Serif SC",-apple-system,BlinkMacSystemFont,"Microsoft YaHei",serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.85;
+    font-size:16px;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px 60px}
+
+  /* Hero */
+  .hero{
+    position:relative;
+    margin:0 -20px 28px;
+    aspect-ratio:4/5;
+    overflow:hidden;
+    background:#000;
+  }
+  .hero img{
+    width:100%;height:100%;object-fit:cover;
+    opacity:0.75;
+  }
+  .hero-mask{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(11,11,14,0.2) 0%,rgba(11,11,14,0) 40%,rgba(11,11,14,0.95) 100%);
+  }
+  .hero-text{
+    position:absolute;left:0;right:0;bottom:0;
+    padding:28px 24px 32px;
+  }
+  .kicker{
+    display:inline-block;
+    font-size:11px;letter-spacing:0.3em;
+    color:var(--accent);
+    padding:4px 0;
+    border-bottom:1px solid var(--accent);
+    margin-bottom:14px;
+    text-transform:uppercase;
+  }
+  h1{
+    margin:0 0 12px;
+    font-size:30px;
+    line-height:1.3;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  .dek{
+    margin:0;
+    font-size:14px;
+    color:var(--muted);
+    line-height:1.75;
+    max-width:90%;
+  }
+
+  /* Body */
+  .intro{
+    font-size:17px;
+    line-height:1.9;
+    color:#d6d3cc;
+    padding:10px 0 22px;
+    border-bottom:1px solid var(--line);
+    margin-bottom:8px;
+  }
+
+  .section{padding:22px 0 6px}
+  .num{
+    font-family:"Playfair Display","Noto Serif SC",serif;
+    font-size:13px;letter-spacing:0.4em;
+    color:var(--accent);
+    margin-bottom:10px;
+  }
+  h2{
+    margin:0 0 18px;
+    font-size:22px;
+    line-height:1.4;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+
+  p{margin:14px 0;font-size:16px;line-height:1.9;color:#cac7c0}
+  p strong{color:#fff;font-weight:600}
+
+  ul{margin:14px 0;padding-left:0;list-style:none}
+  li{
+    position:relative;
+    padding:8px 0 8px 22px;
+    font-size:15px;
+    line-height:1.8;
+    color:#cac7c0;
+    border-bottom:1px dashed var(--line);
+  }
+  li:last-child{border-bottom:none}
+  li::before{
+    content:"";
+    position:absolute;left:0;top:18px;
+    width:10px;height:1px;
+    background:var(--accent);
+  }
+
+  .pull{
+    margin:20px 0;
+    padding:18px 20px;
+    background:var(--accent-soft);
+    border-left:3px solid var(--accent);
+    font-size:15px;
+    line-height:1.8;
+    color:#e8d9bd;
+  }
+  .pull em{font-style:normal;color:var(--accent);font-weight:600}
+
+  .figure{
+    margin:24px -20px;
+    position:relative;
+  }
+  .figure img{width:100%;display:block}
+  .figcap{
+    padding:10px 20px 0;
+    font-size:12px;
+    color:var(--muted);
+    line-height:1.7;
+    letter-spacing:0.02em;
+  }
+
+  .divider{
+    text-align:center;
+    margin:36px 0 28px;
+    color:var(--muted);
+    letter-spacing:0.6em;
+    font-size:12px;
+  }
+
+  .cta{
+    margin:32px -20px 0;
+    padding:32px 24px;
+    background:linear-gradient(180deg,#17171c 0%,#0e0e12 100%);
+    text-align:center;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .cta-label{
+    font-size:11px;letter-spacing:0.4em;
+    color:var(--accent);
+    margin-bottom:10px;
+  }
+  .cta h3{
+    margin:0 0 10px;
+    font-size:20px;
+    font-weight:600;
+    color:#fff;
+  }
+  .cta p{
+    margin:0;
+    font-size:14px;
+    color:var(--muted);
+    line-height:1.8;
+  }
+
+  .sign{
+    margin-top:40px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    font-size:12px;
+    color:var(--muted);
+    line-height:2;
+    text-align:center;
+    letter-spacing:0.05em;
+  }
+  .sign .name{color:var(--accent);letter-spacing:0.2em}
+</style>
 </head>
 <body>
-	<div class="container">
-		<header class="header">
-			<h1>沉浸式演出，到底"沉浸"在哪？<br>空间叙事、观众参与与情绪设计全拆解</h1>
-			<p class="sub">很多人以为沉浸式只是"换了场地、可以走动"。真正的沉浸来自空间叙事、参与机制、情绪曲线三者的精密配合。本文用「惊喜之夜」做一套可复用的拆解框架。</p>
-			<div class="meta">
-				<span class="badge">公众号图文</span>
-				<span class="badge">阅读时长 5–7 分钟</span>
-				<span class="badge">关键词：沉浸、叙事、情绪</span>
-			</div>
-		</header>
-		<nav class="toc">
-			<h3>目录</h3>
-			<a href="#s1">一、空间叙事：让移动成为主动"阅读"</a>
-			<a href="#s2">二、观众参与：从旁观者到变量</a>
-			<a href="#s3">三、情绪设计：峰值与余韵是可被设计的</a>
-			<a href="#end">结语与行动</a>
-		</nav>
-		<section class="section" id="s1">
-			<h2>一、空间叙事：让移动成为主动"阅读"</h2>
-			<blockquote>关键点：拆除"第四面墙"之后，空间不再只是背景，而是叙事的一部分。</blockquote>
-			<p>在传统剧场里，叙事几乎都发生在舞台上。沉浸式演出的第一步，是把叙事"拆散"到空间里：灯光、道具、文字线索、动线，都在说话。</p>
-			<ul>
-				<li>线索不是装饰：它们决定你理解故事的方式</li>
-				<li>路径差异 = 信息差异：同一场演出会生成不同版本的个人叙事</li>
-			</ul>
-			<div class="figure">
-				<img src="https://images.unsplash.com/photo-1514306191717-452ec28c7814?auto=format&fit=crop&w=1600&q=80" alt="空间线索特写" />
-				<div class="figcap">图 1｜空间线索特写。建议横图，突出"线索感"和可读性。</div>
-			</div>
-			<hr>
-		</section>
-		<section class="section" id="s2">
-			<h2>二、观众参与：从旁观者到变量</h2>
-			<blockquote>关键点：你的出现，会改变叙事的走向。这不是 bug，是设计。</blockquote>
-			<p>当观众意识到自己的选择"有意义"，投入感会快速上升。你不是坐在黑暗里看完一段故事，而是被编排进了故事里。</p>
-			<ul>
-				<li>跟随某位演员，获得更强的情绪连续性</li>
-				<li>独自探索空间，获得更多碎片与线索</li>
-				<li>选择介入或旁观，决定你的体验密度</li>
-			</ul>
-			<div class="figure">
-				<img src="https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&w=1600&q=80" alt="互动瞬间" />
-				<div class="figcap">图 2｜互动瞬间。注意隐私，可打码；横图优先。</div>
-			</div>
-			<hr>
-		</section>
-		<section class="section" id="s3">
-			<h2>三、情绪设计：峰值与余韵是可被设计的</h2>
-			<blockquote>关键点：灯光、声场、距离与停顿的精细配合，构成稳定可复现的情绪峰值。</blockquote>
-			<p>一个典型的情绪段落可能只有 30 秒：空间收缩，声音退场，近距离对视，停顿与转身把你推进"被看见"的瞬间。</p>
-			<ul>
-				<li>情绪曲线：陌生 → 好奇 → 投入 → 震撼 → 余韵</li>
-				<li>每个环节都可被排练、调度与复现</li>
-			</ul>
-			<div class="figure">
-				<img src="https://images.unsplash.com/photo-1503095396549-807759245b35?auto=format&fit=crop&w=1600&q=80" alt="情绪细节近景" />
-				<div class="figcap">图 3｜情绪细节近景。建议抓拍"对视"和"停顿"的瞬间。</div>
-			</div>
-			<blockquote>数据占位：观众满意度 92%｜来源：线下问卷 N=xxx（替换为真实数据）</blockquote>
-			<hr>
-		</section>
-		<section class="section" id="end">
-			<h2>结语与行动</h2>
-			<p>沉浸并不在于"能走动"，而在于你被卷入叙事并成为变量。下次走进「惊喜之夜」，留心那一束光、一次停顿、一次被看见的对视。</p>
-			<div class="callout">
-				<h3>想直接体验？</h3>
-				<p>关注公众号获取场次与购票信息。也欢迎转发给朋友：一起看同一场演出，感受不同"版本"的故事。</p>
-			</div>
-			<div class="footer">
-				<p>发布前检查清单：</p>
-				<ul>
-					<li>图片是否全部替换为可商用或自有版权素材</li>
-					<li>图片加载是否稳定（建议同域名托管）</li>
-					<li>标题、摘要、首图是否匹配公众号风格</li>
-				</ul>
-			</div>
-		</section>
-	</div>
+  <div class="wrap">
+
+    <div class="hero">
+      <img src="https://ananinalfe-ship-it.github.io/notion-ai-preview/imgs/hero.jpg" alt="" />
+      <div class="hero-mask"></div>
+      <div class="hero-text">
+        <div class="kicker">Immersive · 观演笔记</div>
+        <h1>沉浸式演出<br/>到底"沉浸"在哪？</h1>
+        <p class="dek">空间、参与、情绪，三件事决定了你是"看戏"还是"在戏里"。</p>
+      </div>
+    </div>
+
+    <p class="intro">很多人以为沉浸式只是换了个能走动的场地。真正让你忘记时间的，是空间叙事、参与机制、情绪曲线三者的精密咬合——这篇我们把它拆开讲。</p>
+
+    <section class="section">
+      <div class="num">01 / SPACE</div>
+      <h2>空间叙事：让移动本身变成"阅读"</h2>
+
+      <p>传统剧场里，故事只发生在舞台上。沉浸式做的第一件事，是<strong>把叙事拆碎，撒进空间的每一寸</strong>——灯光在说话，道具在说话，甚至一条走廊的宽窄也在说话。</p>
+
+      <div class="pull">拆掉第四面墙之后，<em>空间不再是背景，它就是叙事本身。</em></div>
+
+      <ul>
+        <li>线索不是装饰——它决定你理解故事的方式</li>
+        <li>路径差异 = 信息差异——同一场演出，每个人带走不同版本</li>
+        <li>尺度的变化在操纵你的心跳：收缩的空间让你紧张，开阔处让你松口气</li>
+      </ul>
+
+      <div class="figure">
+        <img src="https://ananinalfe-ship-it.github.io/notion-ai-preview/imgs/scene1.jpg" alt="" />
+        <div class="figcap">— 山海经·巨灵之梦｜现场剧照</div>
+      </div>
+    </section>
+
+    <div class="divider">· · ·</div>
+
+    <section class="section">
+      <div class="num">02 / YOU</div>
+      <h2>观众参与：从旁观者，变成变量</h2>
+
+      <p>当你意识到自己的选择<strong>真的会改变什么</strong>，投入感会成倍放大。你不是坐在暗处看完一段故事，你是被编排进了故事的角色。</p>
+
+      <ul>
+        <li>跟住一位演员——你得到连续的情绪线</li>
+        <li>独自探索空间——你得到更多碎片与线索</li>
+        <li>介入还是旁观——你在决定自己的体验密度</li>
+      </ul>
+
+      <div class="pull">这不是 bug，<em>这是设计。</em></div>
+
+      <div class="figure">
+        <img src="https://ananinalfe-ship-it.github.io/notion-ai-preview/imgs/scene2.jpg" alt="" />
+        <div class="figcap">— 观众与演员的距离被刻意压缩到 1 米内</div>
+      </div>
+    </section>
+
+    <div class="divider">· · ·</div>
+
+    <section class="section">
+      <div class="num">03 / EMOTION</div>
+      <h2>情绪设计：峰值与余韵，都是可被排练的</h2>
+
+      <p>一段真正击中你的情绪，可能只有 30 秒：空间骤然收缩，声音退场，近到能听见对方呼吸，一次停顿、一次转身——把你推进"被看见"的瞬间。</p>
+
+      <ul>
+        <li>情绪曲线：陌生 → 好奇 → 投入 → 震撼 → 余韵</li>
+        <li>每一步都可被排练、调度、稳定复现</li>
+        <li>离场的余韵，比现场的峰值更决定口碑</li>
+      </ul>
+
+      <div class="figure">
+        <img src="https://ananinalfe-ship-it.github.io/notion-ai-preview/imgs/scene3.jpg" alt="" />
+        <div class="figcap">— 灯光、距离、停顿，是情绪的三个变量</div>
+      </div>
+    </section>
+
+    <div class="cta">
+      <div class="cta-label">· 惊喜之夜 ·</div>
+      <h3>下一次，不只是去看</h3>
+      <p>留心那束光、那次停顿、那次<br/>被看见的对视——<br/>沉浸从你走进门的第一步就开始了。</p>
+    </div>
+
+    <div class="sign">
+      文 / <span class="name">夜 枭</span><br/>
+      惊喜之夜 · 观演笔记
+    </div>
+
+  </div>
 </body>
 </html>
