@@ -17,13 +17,19 @@
   body{margin:0;padding:0;background:#fff;color:var(--text);font-family:-apple-system,"PingFang SC","Noto Serif SC","Microsoft YaHei",serif;font-size:16px;line-height:1.9}
   .wrap{max-width:720px;margin:0 auto;padding:0 18px 40px}
 
-  .cover{margin:0 -18px 22px;background:#1a1a1a;color:#fff;padding:72px 24px;text-align:center;position:relative;overflow:hidden}
-  .cover::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,148,85,0.18),transparent 60%);pointer-events:none}
-  .cover .eyebrow{font-size:12px;letter-spacing:0.35em;color:var(--accent);margin-bottom:18px;font-weight:600;position:relative}
-  .cover .big{font-size:28px;line-height:1.4;font-weight:700;margin:0;position:relative}
-  .cover .sub{font-size:14px;color:#c8c8c8;margin-top:16px;letter-spacing:0.1em;position:relative}
+  /* 封面 */
+  .cover{margin:0 -18px 22px;position:relative}
+  .cover img{width:100%;display:block;filter:brightness(0.55)}
+  .cover .overlay{
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    padding:28px 24px 30px;color:#fff;
+  }
+  .cover .eyebrow{font-size:12px;letter-spacing:0.35em;color:var(--accent);margin-bottom:14px;font-weight:600}
+  .cover .big{font-size:26px;line-height:1.4;font-weight:700;margin:0}
+  .cover .sub{font-size:13px;color:#d8d8d8;margin-top:10px;letter-spacing:0.1em}
 
-  h1{margin:22px 0 10px;font-size:23px;line-height:1.5;font-weight:700}
+  h1{margin:22px 0 10px;font-size:22px;line-height:1.5;font-weight:700}
   .meta{font-size:13px;color:var(--muted);margin:0 0 22px;border-bottom:1px solid var(--line);padding-bottom:14px}
 
   .hero-quote{
@@ -32,7 +38,14 @@
     font-size:16px;line-height:1.9;color:#333;font-style:italic;
   }
 
-  /* Part 分节 */
+  /* 章节图 */
+  .section-img{margin:22px -18px;position:relative}
+  .section-img img{width:100%;display:block}
+  .section-img .cap{
+    padding:10px 18px 0;font-size:12px;
+    color:var(--muted);letter-spacing:0.04em;text-align:center;
+  }
+
   .part{
     text-align:center;margin:40px 0 22px;
     font-family:"Playfair Display","Noto Serif SC",serif;
@@ -54,7 +67,6 @@
   }
   .q-list p{margin:6px 0;font-size:15px}
 
-  /* 斜体引语 */
   .quote-italic{
     margin:28px 0;padding:22px 26px;background:#fafafa;
     border-top:1px solid var(--accent);border-bottom:1px solid var(--accent);
@@ -92,15 +104,19 @@
   .follow{margin-top:32px;padding-top:24px;border-top:1px dashed var(--line);text-align:center;font-size:13px;color:var(--muted);line-height:2}
   .follow .brand{color:var(--accent);font-weight:700;letter-spacing:0.2em;font-size:15px;margin-bottom:6px}
   .signature{margin-top:14px;font-size:13px;color:var(--muted);font-style:italic}
+  .img-credit{font-size:11px;color:#999;text-align:center;margin:18px 0 0;letter-spacing:0.05em}
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <div class="cover">
-    <div class="eyebrow">海 外 案 例 ｜ ALGORITHM THEATRE</div>
-    <h2 class="big">当观众数据<br>成为剧本的一部分</h2>
-    <div class="sub">Rimini Protokoll · 柏林 · 2000—至今</div>
+    <img src="https://images.unsplash.com/photo-1517191434949-5e90cd67d2b6?w=1600&q=80" alt="Berlin 夜景" />
+    <div class="overlay">
+      <div class="eyebrow">海 外 案 例 ｜ ALGORITHM THEATRE</div>
+      <h2 class="big">当观众数据<br>成为剧本的一部分</h2>
+      <div class="sub">Rimini Protokoll · 柏林 · 2000—至今</div>
+    </div>
   </div>
 
   <h1>德国 Rimini Protokoll 的「算法剧场」：当观众数据成为剧本的一部分</h1>
@@ -116,6 +132,11 @@
     <span class="part-title">一 家 不 用 演 员 的 剧 团</span>
   </div>
 
+  <div class="section-img">
+    <img src="https://images.unsplash.com/photo-1560969184-10fe8719e047?w=1600&q=80" alt="柏林城市" />
+    <div class="cap">▲ 柏林｜2000 年，三位德国人在这座城市成立了一个不用专业演员的剧团</div>
+  </div>
+
   <p>2000 年，三位德国人——海尔嘉德·郝珂（Helgard Haug）、斯特凡·凯吉（Stefan Kaegi）和丹尼尔·韦策尔（Daniel Wetzel）——在柏林成立了一个名字颇为奇特的剧团：<strong>Rimini Protokoll</strong>（里米尼纪录剧团）。</p>
 
   <p>二十多年来，他们几乎从不使用专业演员。站上他们舞台的，是卡车司机、退役士兵、统计学家、难民、退休老人——剧团称之为「日常专家」（Experts of the Everyday）。这些真实的人，带着自己的真实故事，成为舞台上的主角。</p>
@@ -126,6 +147,11 @@
   <div class="part">
     <span class="part-tag"><b>P</b>art Two</span>
     <span class="part-title">100 % 城 市 ｜ 一 座 城 市 的 统 计 学 肖 像</span>
+  </div>
+
+  <div class="section-img">
+    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1600&q=80" alt="人群" />
+    <div class="cap">▲ 100 位市民 × 人口统计抽样 = 一座城市的微缩样本</div>
   </div>
 
   <h2>《100% 城市》<em>（100% City）</em></h2>
@@ -154,6 +180,11 @@
     <span class="part-title">遥 感 城 市 ｜ 你 的 城 市 被 重 新 叙 述</span>
   </div>
 
+  <div class="section-img">
+    <img src="https://images.unsplash.com/photo-1528150177508-7cc0c36cda5c?w=1600&q=80" alt="城市夜景" />
+    <div class="cap">▲ 一副耳机 + 合成语音 = 一场没有演员的声音漫步</div>
+  </div>
+
   <h2>《遥感城市》<em>（Remote X）</em></h2>
   <p>如果说《100% 城市》是把数据搬上舞台，那么《遥感城市》则是把整座城市变成了舞台。</p>
 
@@ -175,6 +206,11 @@
     <span class="part-title">未 竟 之 室 · 恐 怖 谷</span>
   </div>
 
+  <div class="section-img">
+    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1600&q=80" alt="数据流" />
+    <div class="cap">▲ 20 条叙事线 × 时空调度表 = 一套写在代码里的剧本</div>
+  </div>
+
   <h2>《未竟之室》<em>（Situation Rooms）</em>｜iPad 里的战争迷宫</h2>
   <p>2013 年首演的这部作品把交互机制推到了更极致的程度。20 名观众各持一台 iPad，走进一个由多个房间组成的迷宫式空间。iPad 屏幕上播放着第一人称视角的影像——可能是武器制造商、难民、战地外科医生。</p>
 
@@ -184,6 +220,11 @@
 
   <div class="quote-italic">
     "剧本不是写在纸上的，而是写在一张时空调度表里的。"
+  </div>
+
+  <div class="section-img">
+    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1600&q=80" alt="仿真机器人" />
+    <div class="cap">▲ 当台上站的是一个「看起来像人」的东西</div>
   </div>
 
   <h2>《恐怖谷》<em>（Uncanny Valley）</em>｜当你的替身是一个机器人</h2>
@@ -233,6 +274,11 @@
     <span class="part-title">对 行 业 的 启 示</span>
   </div>
 
+  <div class="section-img">
+    <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?w=1600&q=80" alt="舞台大幕" />
+    <div class="cap">▲ 不是给剧场加上技术，而是用技术重新理解什么是剧场</div>
+  </div>
+
   <p>Rimini Protokoll 的实践给整个表演艺术行业提供了一个重要参照：<strong>算法与剧场的结合，不是把屏幕搬上舞台，而是重新设计「叙事的底层结构」。</strong></p>
 
   <p>他们从不炫耀技术。你在《遥感城市》中几乎感受不到「科技感」——只有一副耳机和你自己的双脚。<strong>但正是这种克制，让技术真正服务于体验，而不是成为体验的干扰。</strong></p>
@@ -259,6 +305,8 @@
     关注我们，看见这个行业正在发生的变化
     <div class="signature">— 夜枭｜笔</div>
   </div>
+
+  <div class="img-credit">配图素材：Unsplash（免费商用授权）</div>
 
 </div>
 </body>
