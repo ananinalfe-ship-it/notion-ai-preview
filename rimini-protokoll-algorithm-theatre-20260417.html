@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Rimini Protokoll 的「算法剧场」 - 惊喜之夜</title>
+<style>
+  :root{
+    --accent: #c89455;
+    --accent-soft: #f5ecdf;
+    --accent-dark: #8a5f2e;
+    --text: #1a1a1a;
+    --muted: #666;
+    --line: #e8e8e8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;padding:0;background:#fff;color:var(--text);font-family:-apple-system,"PingFang SC","Noto Serif SC","Microsoft YaHei",serif;font-size:16px;line-height:1.9}
+  .wrap{max-width:720px;margin:0 auto;padding:0 18px 40px}
+
+  .cover{margin:0 -18px 22px;background:#1a1a1a;color:#fff;padding:72px 24px;text-align:center;position:relative;overflow:hidden}
+  .cover::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,148,85,0.18),transparent 60%);pointer-events:none}
+  .cover .eyebrow{font-size:12px;letter-spacing:0.35em;color:var(--accent);margin-bottom:18px;font-weight:600;position:relative}
+  .cover .big{font-size:28px;line-height:1.4;font-weight:700;margin:0;position:relative}
+  .cover .sub{font-size:14px;color:#c8c8c8;margin-top:16px;letter-spacing:0.1em;position:relative}
+
+  h1{margin:22px 0 10px;font-size:23px;line-height:1.5;font-weight:700}
+  .meta{font-size:13px;color:var(--muted);margin:0 0 22px;border-bottom:1px solid var(--line);padding-bottom:14px}
+
+  .hero-quote{
+    margin:24px 0 30px;padding:20px 24px;
+    background:var(--accent-soft);border-left:3px solid var(--accent);
+    font-size:16px;line-height:1.9;color:#333;font-style:italic;
+  }
+
+  /* Part 分节 */
+  .part{
+    text-align:center;margin:40px 0 22px;
+    font-family:"Playfair Display","Noto Serif SC",serif;
+    color:var(--accent);
+  }
+  .part-tag{font-size:22px;letter-spacing:0.1em;display:block;margin-bottom:4px;font-style:italic}
+  .part-tag b{font-size:28px;font-style:normal;font-weight:700}
+  .part-title{font-size:14px;color:var(--text);font-style:normal;font-weight:600;letter-spacing:0.25em}
+
+  h2{margin:28px 0 12px;font-size:19px;line-height:1.5;font-weight:700;color:var(--text)}
+  h2 em{font-style:normal;color:var(--accent-dark)}
+
+  p{margin:14px 0;font-size:16px;line-height:2}
+  p strong{font-weight:700}
+
+  .q-list{
+    margin:18px 0;padding:18px 22px;background:#fafafa;
+    border-left:3px solid var(--accent);font-size:15px;line-height:2;color:#333;
+  }
+  .q-list p{margin:6px 0;font-size:15px}
+
+  /* 斜体引语 */
+  .quote-italic{
+    margin:28px 0;padding:22px 26px;background:#fafafa;
+    border-top:1px solid var(--accent);border-bottom:1px solid var(--accent);
+    font-style:italic;font-size:17px;line-height:1.9;color:#333;text-align:center;
+  }
+
+  /* 四层逻辑卡片 */
+  .layers{margin:22px 0}
+  .layer{
+    margin:14px 0;padding:18px 20px;
+    background:var(--accent-soft);border-radius:4px;
+  }
+  .layer .n{
+    font-family:"Playfair Display",serif;font-size:13px;
+    color:var(--accent-dark);letter-spacing:0.2em;font-weight:600;
+    margin-bottom:6px;
+  }
+  .layer h4{margin:0 0 8px;font-size:16px;font-weight:700;color:var(--text)}
+  .layer p{margin:6px 0 0;font-size:15px;line-height:1.85;color:#444}
+
+  .divider{text-align:center;margin:32px 0 20px;font-size:15px;color:var(--muted);font-weight:600;letter-spacing:0.1em}
+  .divider::before{content:"▼ "}
+
+  .takeaway{
+    margin:22px 0;padding:20px 22px;background:var(--accent-soft);
+    border-radius:4px;font-size:15px;line-height:1.9;
+  }
+  .takeaway b{color:var(--accent-dark)}
+
+  .footnote{
+    margin-top:36px;padding:18px 20px;background:#f5f5f5;
+    border-radius:4px;font-size:13px;line-height:1.85;color:var(--muted);font-style:italic;
+  }
+
+  .follow{margin-top:32px;padding-top:24px;border-top:1px dashed var(--line);text-align:center;font-size:13px;color:var(--muted);line-height:2}
+  .follow .brand{color:var(--accent);font-weight:700;letter-spacing:0.2em;font-size:15px;margin-bottom:6px}
+  .signature{margin-top:14px;font-size:13px;color:var(--muted);font-style:italic}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="cover">
+    <div class="eyebrow">海 外 案 例 ｜ ALGORITHM THEATRE</div>
+    <h2 class="big">当观众数据<br>成为剧本的一部分</h2>
+    <div class="sub">Rimini Protokoll · 柏林 · 2000—至今</div>
+  </div>
+
+  <h1>德国 Rimini Protokoll 的「算法剧场」：当观众数据成为剧本的一部分</h1>
+  <p class="meta">惊喜之夜 · 行业观察｜2026-04-17</p>
+
+  <div class="hero-quote">
+    当剧场不再只是「演给你看」，而是「用你的数据来演」——德国里米尼纪录剧团正在重新定义舞台叙事的底层逻辑。
+  </div>
+
+  <!-- Part One -->
+  <div class="part">
+    <span class="part-tag"><b>P</b>art One</span>
+    <span class="part-title">一 家 不 用 演 员 的 剧 团</span>
+  </div>
+
+  <p>2000 年，三位德国人——海尔嘉德·郝珂（Helgard Haug）、斯特凡·凯吉（Stefan Kaegi）和丹尼尔·韦策尔（Daniel Wetzel）——在柏林成立了一个名字颇为奇特的剧团：<strong>Rimini Protokoll</strong>（里米尼纪录剧团）。</p>
+
+  <p>二十多年来，他们几乎从不使用专业演员。站上他们舞台的，是卡车司机、退役士兵、统计学家、难民、退休老人——剧团称之为「日常专家」（Experts of the Everyday）。这些真实的人，带着自己的真实故事，成为舞台上的主角。</p>
+
+  <p>但让 Rimini Protokoll 真正成为全球剧场界标杆的，不只是「素人上台」这一招。<strong>他们更大的野心是：让数据、算法和交互机制成为剧本结构的一部分。</strong></p>
+
+  <!-- Part Two -->
+  <div class="part">
+    <span class="part-tag"><b>P</b>art Two</span>
+    <span class="part-title">100 % 城 市 ｜ 一 座 城 市 的 统 计 学 肖 像</span>
+  </div>
+
+  <h2>《100% 城市》<em>（100% City）</em></h2>
+  <p>如果要选一部最能代表 Rimini Protokoll「算法思维」的作品，《100% 城市》系列当之无愧。</p>
+
+  <p>在每座巡演城市，剧团招募 <strong>100 位市民</strong>登上舞台。这 100 个人，按照该城市的官方人口统计数据——年龄分布、性别比例、移民背景、收入层级、居住区域——<strong>精确匹配</strong>，构成一个城市的「微缩样本」。</p>
+
+  <p>演出开始后，舞台上没有剧本台词。取而代之的是一连串问题：</p>
+
+  <div class="q-list">
+    <p>「请按身高排列。」</p>
+    <p>「你撒过谎吗？撒过的站左边。」</p>
+    <p>「你相信上帝吗？」</p>
+    <p>「你愿意统治世界吗？」</p>
+  </div>
+
+  <p>100 个人用自己的身体——站位、移动、举手、沉默——实时「回答」这些问题。<strong>观众看到的不是表演，而是一座城市的数据在舞台上自我呈现。</strong></p>
+
+  <p>这套机制的精妙之处在于：每一场演出的「结果」都不同，因为每座城市的 100 个人不同。<strong>算法（统计抽样 + 提问序列）是固定的，但输出（人的反应）是不可预测的。</strong></p>
+
+  <p>剑桥大学《戏剧研究国际》期刊曾专文分析这部作品，认为它触及了「统计学项目与剧场的深层关联」——数据试图概括人群，而剧场试图呈现个体，两者之间的张力恰恰是《100% 城市》最迷人的地方。</p>
+
+  <!-- Part Three -->
+  <div class="part">
+    <span class="part-tag"><b>P</b>art Three</span>
+    <span class="part-title">遥 感 城 市 ｜ 你 的 城 市 被 重 新 叙 述</span>
+  </div>
+
+  <h2>《遥感城市》<em>（Remote X）</em></h2>
+  <p>如果说《100% 城市》是把数据搬上舞台，那么《遥感城市》则是把整座城市变成了舞台。</p>
+
+  <p>这是一场没有演员、没有舞台的「演出」。50 名观众戴上耳机，在城市街头集合。一个合成语音——听起来像导航软件，又像某种温柔的 AI——开始通过耳机引导你行走。</p>
+
+  <p>它会带你穿过墓地、商场、法院、地铁站。它会在你经过某个路口时说：「看看左边那个人，猜猜 ta 今天早上在想什么。」它会在你站在天桥上时说：「如果你是一个算法，你会如何描述下面这群人的移动模式？」</p>
+
+  <div class="quote-italic">
+    "你不是在『看戏』，你是在用一套预设的算法重新感知自己熟悉的城市。"
+  </div>
+
+  <p>《遥感城市》的路线在每座城市都是定制的——台北、高雄、柏林、圣保罗、上海都曾举办过。剧团团队会提前数月踩点，把城市的地理、声音、人流动线编织进叙事脚本中。</p>
+
+  <p>这部作品在全球巡演超过 50 座城市，被认为是「声音漫步」（Audio Walk）类型作品的巅峰之作。它证明了一件事：<strong>算法不一定是冰冷的，当它被嵌入真实的空间和真实的身体经验中，它可以成为一种诗意的叙事工具。</strong></p>
+
+  <!-- Part Four -->
+  <div class="part">
+    <span class="part-tag"><b>P</b>art Four</span>
+    <span class="part-title">未 竟 之 室 · 恐 怖 谷</span>
+  </div>
+
+  <h2>《未竟之室》<em>（Situation Rooms）</em>｜iPad 里的战争迷宫</h2>
+  <p>2013 年首演的这部作品把交互机制推到了更极致的程度。20 名观众各持一台 iPad，走进一个由多个房间组成的迷宫式空间。iPad 屏幕上播放着第一人称视角的影像——可能是武器制造商、难民、战地外科医生。</p>
+
+  <p><strong>你必须跟着影像中的人物移动</strong>，走进他走过的房间，坐在他坐过的椅子上。20 名观众同时在空间中穿行，每个人跟着不同的人物线索，路线交叉、擦肩而过。</p>
+
+  <p>核心机制是一套精密的<strong>时间-空间同步算法</strong>：20 条叙事线必须在有限的物理空间中无缝交织，既不能让两个观众同时出现在同一个关键位置，又要在特定时刻制造「偶遇」的戏剧张力。</p>
+
+  <div class="quote-italic">
+    "剧本不是写在纸上的，而是写在一张时空调度表里的。"
+  </div>
+
+  <h2>《恐怖谷》<em>（Uncanny Valley）</em>｜当你的替身是一个机器人</h2>
+  <p>2018 年的这部作品更直接地触碰了人与算法的边界。舞台上只有一个按照作家托马斯·梅勒（Thomas Melle）外貌制作的仿真机器人。它坐在椅子上，用梅勒的声音讲述梅勒的故事：他的童年、他的精神疾病、他对「被替代」的恐惧。</p>
+
+  <p><strong>观众全程知道台上是一个机器人，但依然会产生共情、会觉得不安、会在某些瞬间忘记它不是真人。</strong></p>
+
+  <p>Rimini Protokoll 用一整场演出验证并挑战了「恐怖谷」理论：当算法控制了一个「人形容器」，故事的真实性是增强了还是消解了？</p>
+
+  <!-- Part Five -->
+  <div class="part">
+    <span class="part-tag"><b>P</b>art Five</span>
+    <span class="part-title">算 法 参 与 叙 事 的 四 层 逻 辑</span>
+  </div>
+
+  <p>回顾 Rimini Protokoll 二十多年的创作脉络，可以提炼出他们使用算法参与舞台叙事的<strong>四层逻辑</strong>：</p>
+
+  <div class="layers">
+    <div class="layer">
+      <div class="n">LAYER 01</div>
+      <h4>数据作为选角</h4>
+      <p>《100% 城市》用统计数据决定谁站上舞台。选角不再是导演的主观判断，而是一套人口学算法的输出结果。</p>
+    </div>
+
+    <div class="layer">
+      <div class="n">LAYER 02</div>
+      <h4>规则作为剧本</h4>
+      <p>很多作品没有传统意义上的「台词本」，取而代之的是一套交互规则——提问序列、行走路线、时空调度表。剧本是一个系统，不是一个文本。</p>
+    </div>
+
+    <div class="layer">
+      <div class="n">LAYER 03</div>
+      <h4>观众作为变量</h4>
+      <p>在传统剧场中，观众是常量（坐着看）。在 Rimini Protokoll 的作品中，观众的选择、移动、反应成为叙事的组成部分。每个观众都是算法的输入值，每场演出都是一次独特的运算。</p>
+    </div>
+
+    <div class="layer">
+      <div class="n">LAYER 04</div>
+      <h4>技术作为叙事者</h4>
+      <p>从《遥感城市》的合成语音到《恐怖谷》的仿真机器人，技术本身承担了「讲故事的人」的角色。不是人在用技术讲故事，而是技术在用人的数据讲故事。</p>
+    </div>
+  </div>
+
+  <!-- Part Six -->
+  <div class="part">
+    <span class="part-tag"><b>P</b>art Six</span>
+    <span class="part-title">对 行 业 的 启 示</span>
+  </div>
+
+  <p>Rimini Protokoll 的实践给整个表演艺术行业提供了一个重要参照：<strong>算法与剧场的结合，不是把屏幕搬上舞台，而是重新设计「叙事的底层结构」。</strong></p>
+
+  <p>他们从不炫耀技术。你在《遥感城市》中几乎感受不到「科技感」——只有一副耳机和你自己的双脚。<strong>但正是这种克制，让技术真正服务于体验，而不是成为体验的干扰。</strong></p>
+
+  <div class="takeaway">
+    <b>一句话记下｜</b>不是给剧场加上技术，而是用技术重新理解什么是剧场。
+  </div>
+
+  <div class="quote-italic">
+    "空间即剧本。<br>而算法，也可以是剧本的语法。"
+  </div>
+
+  <div class="footnote">
+    Rimini Protokoll 成立于 2000 年，总部位于柏林，由海尔嘉德·郝珂、斯特凡·凯吉和丹尼尔·韦策尔三人组成。作品曾受邀至全球数十个国家和城市演出，多次获得欧洲戏剧大奖。
+  </div>
+
+  <div class="divider">关 于 惊 喜 之 夜</div>
+
+  <p>惊喜之夜以观察者视角，持续跟进全球剧场行业的前沿实践。<strong>关注我们，一起看见舞台之外的行业图景。</strong></p>
+
+  <div class="follow">
+    <div class="brand">惊 喜 之 夜</div>
+    空间即剧本 · 观众即主角<br>
+    关注我们，看见这个行业正在发生的变化
+    <div class="signature">— 夜枭｜笔</div>
+  </div>
+
+</div>
+</body>
+</html>
