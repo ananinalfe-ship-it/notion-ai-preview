@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>6 米巨灵，从扬州出发——《山海经·巨灵之梦》首演之后的故事</title>
+<style>
+  :root{
+    --accent: #2c5f4a;
+    --accent-soft: #e3ede8;
+    --accent-dark: #153428;
+    --text: #1a1a1a;
+    --muted: #666;
+    --line: #e8e8e8;
+    --bg: #ffffff;
+    --card-bg: #fafafa;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;padding:0;background:var(--bg);color:var(--text);
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    font-size:16px;line-height:1.9;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:0 18px 60px}
+
+  /* 封面 */
+  .cover{
+    margin:0 -18px 0;
+    position:relative;overflow:hidden;
+    background:var(--accent-dark);
+  }
+  .cover img{width:100%;display:block;opacity:0.82}
+  .cover-overlay{
+    position:absolute;bottom:0;left:0;right:0;
+    padding:28px 24px;
+    background:linear-gradient(transparent, rgba(21,52,40,0.88));
+  }
+  .cover-tag{
+    display:inline-block;
+    background:var(--accent);
+    color:#fff;font-size:11px;letter-spacing:0.2em;font-weight:700;
+    padding:3px 10px;margin-bottom:10px;
+  }
+  .cover-title{
+    color:#fff;font-size:21px;line-height:1.45;font-weight:700;
+    text-shadow:0 1px 4px rgba(0,0,0,0.4);
+    margin:0;
+  }
+
+  /* 主标题 */
+  h1{
+    margin:22px 0 8px;
+    font-size:22px;line-height:1.45;font-weight:700;
+    letter-spacing:0.01em;
+  }
+  .meta{
+    font-size:13px;color:var(--muted);
+    margin:0 0 24px;letter-spacing:0.03em;
+    padding-bottom:16px;
+    border-bottom:1px solid var(--line);
+  }
+  .meta span{margin-right:14px}
+
+  /* 导语 */
+  .lede{
+    font-size:15px;line-height:1.85;
+    color:#444;font-style:italic;
+    margin:0 0 28px;padding:16px 18px;
+    background:var(--accent-soft);
+    border-left:3px solid var(--accent);
+  }
+
+  p{margin:14px 0;font-size:16px;line-height:1.95}
+  p strong{font-weight:700}
+
+  /* 图片 */
+  .img-full{margin:20px -18px;line-height:0}
+  .img-full img{width:100%;display:block}
+  .img-cap{
+    font-size:12px;color:var(--muted);
+    text-align:center;padding:6px 18px 0;
+    line-height:1.6;
+  }
+
+  /* ▼ 分隔符（惊喜之夜品牌标识） */
+  .divider{
+    text-align:center;margin:32px 0 20px;
+    font-size:14px;color:var(--accent);font-weight:700;
+    letter-spacing:0.15em;
+  }
+  .divider::before{content:"▼ "}
+
+  /* 引用块：左边框 + 墨绿 */
+  .pullquote{
+    margin:24px 0;padding:18px 20px;
+    background:var(--accent-soft);
+    border-left:4px solid var(--accent);
+    font-size:16px;line-height:1.85;
+    color:#2a2a2a;
+  }
+  .pullquote .source{
+    display:block;margin-top:10px;
+    font-size:12px;color:var(--muted);font-style:normal;
+  }
+
+  /* 观众反馈 */
+  .fb-wrap{margin:20px 0}
+  .fb{
+    margin:12px 0;padding:14px 16px;
+    background:var(--card-bg);
+    border-radius:8px;
+    border:1px solid var(--line);
+    font-size:15px;line-height:1.75;color:#333;
+  }
+  .fb .marker{
+    color:var(--accent);font-weight:700;margin-right:6px;
+  }
+
+  /* 数据条 */
+  .stats{
+    display:flex;justify-content:space-around;
+    margin:28px 0;padding:20px 0;
+    border-top:2px solid var(--accent);
+    border-bottom:2px solid var(--accent);
+    text-align:center;
+  }
+  .stats .item .num{
+    font-size:28px;font-weight:700;
+    color:var(--accent);display:block;line-height:1;
+  }
+  .stats .item .label{
+    font-size:12px;color:var(--muted);
+    margin-top:6px;display:block;letter-spacing:0.05em;
+  }
+
+  /* 演出信息 */
+  .show-info{
+    margin:36px 0 24px;padding:22px;
+    border-top:2px solid var(--accent);
+    border-bottom:2px solid var(--accent);
+    text-align:center;
+  }
+  .show-info .title{
+    font-size:13px;letter-spacing:0.3em;
+    color:var(--accent);font-weight:700;margin-bottom:14px;
+  }
+  .show-info .name{font-size:19px;font-weight:700;margin:0 0 16px}
+  .show-info .field{margin:12px 0}
+  .show-info .label{font-size:12px;color:var(--muted);margin-bottom:4px}
+  .show-info .value{font-size:15px;line-height:1.85;font-weight:500}
+
+  /* 文末落款 */
+  .follow{
+    margin-top:36px;padding-top:22px;
+    border-top:1px dashed var(--line);
+    text-align:center;
+    font-size:13px;color:var(--muted);line-height:2.1;
+  }
+  .follow .brand{
+    color:var(--accent);font-weight:700;
+    font-size:15px;letter-spacing:0.1em;
+    display:block;margin-bottom:4px;
+  }
+  .follow .sig{
+    color:var(--accent-dark);font-weight:600;
+    display:block;margin-top:12px;font-size:14px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 封面 -->
+  <div class="cover">
+    <img src="https://images.unsplash.com/photo-1514306191717-452ec28c7814?w=1600&q=80" alt="戏剧舞台灯光" />
+    <div class="cover-overlay">
+      <div class="cover-tag">首演报道</div>
+      <h2 class="cover-title">6 米巨灵，从扬州出发<br>《山海经·巨灵之梦》首演之后的故事</h2>
+    </div>
+  </div>
+
+  <h1>6 米巨灵，从扬州出发——《山海经·巨灵之梦》首演之后的故事</h1>
+  <p class="meta">
+    <span>2026 年初首演</span>
+    <span>扬州运河大剧院</span>
+    <span>惊喜之夜 × 扬州市木偶研究所</span>
+  </p>
+
+  <div class="lede">
+    当一部剧从首演走向全国推介，它带去的不只是一台演出，更是一种关于传统与当代如何对话的回答。
+  </div>
+
+  <!-- 首演之夜 -->
+  <div class="divider">从扬州运河大剧院出发</div>
+
+  <div class="img-full">
+    <img src="https://images.unsplash.com/photo-1499364615650-ec38552f4f34?w=1600&q=80" alt="大剧院内景" />
+  </div>
+  <p class="img-cap">▲ 扬州运河大剧院·首演之夜——帷幕升起的瞬间，古老与当代在同一个空间相遇</p>
+
+  <p>2026 年初，扬州运河大剧院的舞台上，一尊 6 米高的巨灵缓缓苏醒。</p>
+
+  <p>这是《山海经·巨灵之梦》的首演之夜。90 分钟里，毕方振翅、九尾狐回眸、精卫衔石、应龙破云——这些沉睡在《山海经》古卷中的神兽，以巨型木偶的形态，在多媒体光影与现场音乐的交织中一一复活。</p>
+
+  <p>这部由<strong>惊喜之夜</strong>担纲制作创意与运营、<strong>扬州市木偶研究所（江苏省木偶剧团）</strong>倾力出演的大型木偶奇幻剧，从立项之初就带着一个朴素的信念：<strong>让非遗走进当代剧场，让古老的想象力重新呼吸。</strong></p>
+
+  <!-- 首演反响 -->
+  <div class="divider">首演之后，反响如何？</div>
+
+  <div class="img-full">
+    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1600&q=80" alt="观众席全场" />
+  </div>
+  <p class="img-cap">▲ 首演结束，掌声持续了很久——观众席上有家庭、有戏剧爱好者，也有木偶艺术领域的同行</p>
+
+  <p>首演当晚，观众席上有带着孩子的家庭，有专程从外地赶来的戏剧爱好者，也有木偶艺术领域的同行。演出结束时，掌声持续了很久。</p>
+
+  <div class="fb-wrap">
+    <div class="fb">
+      <span class="marker">观众留言</span>「没想到木偶剧可以这么震撼，巨灵站起来的那一刻，全场屏息。」
+    </div>
+  </div>
+
+  <p>这恰恰是创作团队最希望看到的反馈——<strong>打破人们对「木偶剧」的刻板印象</strong>。《山海经·巨灵之梦》不是传统意义上的提线木偶表演，而是一次将非遗技艺与当代舞台语言深度融合的实验：</p>
+
+  <p>
+    · <strong>6 米 × 10 米的巨型偶体</strong>，需要多位操偶师协同控制，每一个动作都凝聚着扬州木偶数百年的技艺传承<br>
+    · <strong>国际化的音乐设计</strong>，由英国作曲家 Sid Peacock 操刀，将东方意境与当代声场编织在一起<br>
+    · <strong>多媒体融合舞美</strong>，让山海经的奇幻世界在舞台上真实地「生长」出来<br>
+    · <strong>4 岁以上全年龄覆盖</strong>，既能让孩子惊叹于神兽的壮观，也能让成人感受到东方美学的深层韵味
+  </p>
+
+  <!-- 口碑积累 -->
+  <div class="divider">口碑积累：一部剧的「慢生长」</div>
+
+  <div class="img-full">
+    <img src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?w=1600&q=80" alt="舞台演出现场" />
+  </div>
+  <p class="img-cap">▲ 每一场演出都在打磨——对灯光节奏、偶体动线、音乐衔接的细节优化，构成了这部剧口碑的底座</p>
+
+  <p>在惊喜之夜的创作哲学里，有一句话被反复提及：<strong>「克制，是另一种强度。」</strong></p>
+
+  <p>这句话不仅适用于舞台上的留白与节制，也适用于一部剧的市场培育。首演成功只是起点。在过去几个月里，团队做了大量「台下功夫」：</p>
+
+  <p><strong>打磨演出品质。</strong>根据首演观众的真实反馈，对灯光节奏、偶体动线、音乐衔接等细节进行了多轮优化。每一场演出都比上一场更精准、更流畅。</p>
+
+  <p><strong>积累口碑基础。</strong>来自观众、媒体和行业同仁的评价逐渐汇聚，形成了这部剧独特的口碑画像——「视觉震撼」「东方诗意」「非遗活化」「适合全家」，这些关键词反复出现。</p>
+
+  <div class="pullquote">
+    在传统意境与当代表达之间寻找语言，让意象、声场与身体共同构成「可行走的诗」。
+    <span class="source">——惊喜之夜创作哲学</span>
+  </div>
+
+  <!-- 演交会 -->
+  <div class="divider">演交会：面向全国剧院的一次亮相</div>
+
+  <div class="img-full">
+    <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=1600&q=80" alt="现代建筑会展" />
+  </div>
+  <p class="img-cap">▲ 4 月 20 日，全国演出交易会开幕——《山海经·巨灵之梦》将作为重点推介剧目正式亮相</p>
+
+  <p>4 月 20 日，全国演出交易会即将开幕。</p>
+
+  <p>对于演出行业而言，这是全国最重要的剧目推介与交易平台之一——来自各地的剧院、演出商、文化机构齐聚一堂，寻找值得引进的优质剧目。<strong>《山海经·巨灵之梦》将作为重点推介剧目，在本届演交会上正式亮相。</strong></p>
+
+  <p>这意味着这部诞生于扬州的木偶奇幻剧，正式开始面向全国剧院展示自己。它带去的不仅仅是一段精彩的演出片段，更是背后一整套成熟的创作逻辑与运营体系：</p>
+
+  <div class="stats">
+    <div class="item">
+      <span class="num">8年</span>
+      <span class="label">惊喜之夜积累</span>
+    </div>
+    <div class="item">
+      <span class="num">2000+</span>
+      <span class="label">场演出经验</span>
+    </div>
+    <div class="item">
+      <span class="num">30+</span>
+      <span class="label">巡演城市</span>
+    </div>
+  </div>
+
+  <!-- 为什么是现在 -->
+  <div class="divider">为什么是现在？</div>
+
+  <div class="img-full">
+    <img src="https://images.unsplash.com/photo-1503095396549-807759245b35?w=1600&q=80" alt="历史剧场舞台" />
+  </div>
+  <p class="img-cap">▲ 《山海经·巨灵之梦》是惊喜之夜第一次深度牵手国家级非遗院团——这一步，走了 8 年</p>
+
+  <p>惊喜之夜创立于 2018 年，从一场小型实验演出起步，到今天拥有《终极骗局 3.0》《海底两万里》《巴啦啦小魔仙》《聂小倩》等 8 部原创及合作剧目，足迹遍布 30 多个城市。</p>
+
+  <p>但《山海经·巨灵之梦》对惊喜之夜而言有着特别的意义——它是团队<strong>第一次深度牵手国家级非遗院团</strong>，第一次尝试将传统木偶艺术与当代舞台美学做如此大胆的融合。</p>
+
+  <div class="pullquote">
+    从扬州运河大剧院的首演掌声，到全国演交会的推介展台——这部剧正在一步一步，走向更大的舞台。而它带去的，不只是一台演出。<br><br>
+    <strong>是一种可能性：传统可以很当代，非遗可以很震撼，木偶剧可以让全场屏息。</strong>
+  </div>
+
+  <!-- 演出信息 -->
+  <div class="show-info">
+    <div class="title">关于这部剧</div>
+    <div class="name">《山海经·巨灵之梦》</div>
+    <div class="field">
+      <div class="label">出品 | Production</div>
+      <div class="value">惊喜之夜</div>
+    </div>
+    <div class="field">
+      <div class="label">出演 | Performance</div>
+      <div class="value">扬州市木偶研究所（江苏省木偶剧团）</div>
+    </div>
+    <div class="field">
+      <div class="label">音乐设计 | Music</div>
+      <div class="value">Sid Peacock（英国）</div>
+    </div>
+    <div class="field">
+      <div class="label">适合人群</div>
+      <div class="value">4 岁以上 · 全年龄覆盖<br>演出时长约 90 分钟</div>
+    </div>
+    <div class="field">
+      <div class="label">全国巡演</div>
+      <div class="value">筹备中 · 更多城市站信息敬请关注惊喜之夜官方账号</div>
+    </div>
+  </div>
+
+  <!-- 落款 -->
+  <div class="follow">
+    <span class="brand">惊喜之夜</span>
+    关注我们，持续追踪《山海经·巨灵之梦》全国巡演动态<br>
+    小红书 / 抖音 / 公众号：惊喜之夜<br>
+    商务合作：contact@surprise-night.com
+    <span class="sig">—— 夜枭｜惊喜之夜</span>
+  </div>
+
+</div>
+</body>
+</html>
