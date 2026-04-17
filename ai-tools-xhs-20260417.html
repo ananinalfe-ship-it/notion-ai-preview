@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=375, initial-scale=1.0">
+<title>2026戏剧人在用的6个AI工具 | 惊喜之夜</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0c;
+    font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    width: 375px;
+    margin: 0 auto;
+  }
+
+  /* ─── CARD BASE ─── */
+  .card {
+    width: 375px;
+    aspect-ratio: 3 / 4;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-bottom: 4px;
+  }
+
+  .card-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0,0,0,0.96) 0%,
+      rgba(0,0,0,0.68) 38%,
+      rgba(0,0,0,0.18) 72%,
+      rgba(0,0,0,0.0) 100%
+    );
+  }
+
+  /* 大编号左上悬浮 */
+  .num-overlay {
+    position: absolute;
+    top: 18px;
+    left: 20px;
+    z-index: 3;
+    font-size: 96px;
+    font-weight: 900;
+    color: #c89455;
+    line-height: 1;
+    letter-spacing: -5px;
+    font-family: 'Georgia', 'Noto Serif SC', serif;
+    opacity: 0.90;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.6);
+  }
+
+  .card-body {
+    position: relative;
+    z-index: 2;
+    padding: 20px 22px 26px;
+  }
+
+  /* ─── COVER ─── */
+  .cover-tag {
+    display: inline-block;
+    background: #c89455;
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    padding: 4px 12px;
+    font-weight: 700;
+    border-radius: 1px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+
+  .cover-title {
+    font-family: 'Noto Serif SC', 'STSong', Georgia, serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 14px;
+    letter-spacing: 0.02em;
+  }
+
+  .cover-title em {
+    color: #c89455;
+    font-style: normal;
+  }
+
+  .cover-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.58);
+    line-height: 1.65;
+    letter-spacing: 0.3px;
+  }
+
+  /* ─── NUMBERED CARDS ─── */
+  .card-label {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: rgba(255,255,255,0.42);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .card-title {
+    font-family: 'Noto Serif SC', 'STSong', Georgia, serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 14px;
+    letter-spacing: 0.01em;
+  }
+
+  .card-title em {
+    color: #c89455;
+    font-style: normal;
+  }
+
+  .card-fact {
+    font-size: 13px;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.75;
+    border-left: 2px solid #c89455;
+    padding-left: 10px;
+    margin-bottom: 12px;
+  }
+
+  .card-caption {
+    font-size: 10px;
+    color: rgba(255,255,255,0.28);
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+  }
+
+  /* ─── TOOL CHIPS ─── */
+  .tool-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .chip {
+    font-size: 10px;
+    color: #c89455;
+    background: rgba(200,148,85,0.15);
+    border: 1px solid rgba(200,148,85,0.3);
+    padding: 3px 9px;
+    border-radius: 2px;
+    letter-spacing: 0.3px;
+    font-weight: 600;
+  }
+
+  /* ─── CONCLUSION CARD ─── */
+  .card-end {
+    width: 375px;
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(155deg, #0d1520 0%, #0b0f14 45%, #060a10 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 44px 28px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-end::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(200,148,85,0.14) 0%, transparent 65%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .card-end::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle, rgba(100,140,200,0.08) 0%, transparent 65%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .end-eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #c89455;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .end-heading {
+    font-family: 'Noto Serif SC', Georgia, serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.35;
+    margin-bottom: 6px;
+    position: relative;
+  }
+
+  .end-heading em {
+    color: #c89455;
+    font-style: normal;
+    display: block;
+  }
+
+  .end-divider {
+    width: 32px;
+    height: 2px;
+    background: #c89455;
+    margin: 18px 0;
+  }
+
+  .end-body {
+    font-size: 13px;
+    color: rgba(255,255,255,0.62);
+    line-height: 1.9;
+    margin-bottom: 24px;
+  }
+
+  .end-body strong { color: rgba(255,255,255,0.85); }
+
+  .cta-block {
+    background: rgba(200,148,85,0.08);
+    border: 1px solid rgba(200,148,85,0.25);
+    border-radius: 3px;
+    padding: 13px 15px;
+    margin-bottom: 20px;
+  }
+
+  .cta-q {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.65;
+    margin-bottom: 7px;
+  }
+
+  .cta-action {
+    font-size: 11px;
+    color: #c89455;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  .tag {
+    font-size: 11px;
+    color: rgba(200,148,85,0.72);
+    background: rgba(200,148,85,0.08);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  .byline {
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 1px;
+    text-align: right;
+  }
+
+  .byline strong { color: #c89455; opacity: 0.85; }
+
+  /* ─── DOWNLOAD BUTTON ─── */
+  .dl-btn {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    z-index: 10;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: #fff;
+    font-size: 12px;
+    font-family: 'Noto Sans SC', sans-serif;
+    letter-spacing: 0.5px;
+    padding: 7px 14px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+    user-select: none;
+  }
+  .dl-btn:hover { background: rgba(200,148,85,0.75); border-color: transparent; }
+  .dl-btn:active { transform: scale(0.96); }
+  .dl-btn.loading { opacity: 0.5; pointer-events: none; }
+</style>
+</head>
+<body>
+
+<!-- ░░ CARD 0 · 封面 ░░ -->
+<div class="card" id="card-0">
+  <img class="card-bg"
+    src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=750&h=1000&fit=crop&q=80"
+    crossorigin="anonymous" alt="舞台">
+  <div class="card-overlay"></div>
+  <div class="card-body">
+    <span class="cover-tag">AI × 戏剧工具</span>
+    <h1 class="cover-title">
+      <em>6 个</em> AI 工具<br>
+      戏剧人都在用
+    </h1>
+    <p class="cover-sub">从剧本讨论到票房分析<br>2026 全链路工具实操图谱 🎭</p>
+  </div>
+  <button class="dl-btn" onclick="downloadCard('card-0','封面')">↓ 保存图片</button>
+</div>
+
+<!-- ░░ CARD 1 · 创作期 ░░ -->
+<div class="card" id="card-1">
+  <img class="card-bg"
+    src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=750&h=1000&fit=crop&q=80"
+    crossorigin="anonymous" alt="AI创作">
+  <div class="card-overlay"></div>
+  <div class="num-overlay">01</div>
+  <div class="card-body">
+    <p class="card-label">创作期 · 剧本开发</p>
+    <h2 class="card-title">把 <em>AI</em> 当<br>编剧搭子</h2>
+    <div class="tool-chips">
+      <span class="chip">ChatGPT</span>
+      <span class="chip">Claude</span>
+    </div>
+    <p class="card-fact">
+      斯坦福 HAI 实验：LLM 实时生成台词<br>
+      分配给佩戴耳机的即兴演员<br>
+      编剧团队用 AI 加速「从 0 到 1」发散
+    </p>
+    <p class="card-caption">▲ 出自 Stanford HAI 即兴戏剧 AI 研究 · 2025</p>
+  </div>
+  <button class="dl-btn" onclick="downloadCard('card-1','01-创作期')">↓ 保存图片</button>
+</div>
+
+<!-- ░░ CARD 2 · 制作期 ░░ -->
+<div class="card" id="card-2">
+  <img class="card-bg"
+    src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=750&h=1000&fit=crop&q=80"
+    crossorigin="anonymous" alt="舞台制作">
+  <div class="card-overlay"></div>
+  <div class="num-overlay">02</div>
+  <div class="card-body">
+    <p class="card-label">制作期 · 舞美与音乐</p>
+    <h2 class="card-title">虚拟舞台<br><em>+ AI 配乐</em></h2>
+    <div class="tool-chips">
+      <span class="chip">Virtual Stage</span>
+      <span class="chip">AIVA</span>
+      <span class="chip">Google Arts</span>
+    </div>
+    <p class="card-fact">
+      芬兰国家歌剧院用 Virtual Stage<br>
+      在虚拟空间里搭建、调整舞美方案<br>
+      AIVA 生成专属配乐，减少制作返工
+    </p>
+    <p class="card-caption">▲ Finnish National Opera & Ballet · Virtual Stage 平台使用现场</p>
+  </div>
+  <button class="dl-btn" onclick="downloadCard('card-2','02-制作期')">↓ 保存图片</button>
+</div>
+
+<!-- ░░ CARD 3 · 宣发期 ░░ -->
+<div class="card" id="card-3">
+  <img class="card-bg"
+    src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=750&h=1000&fit=crop&q=80"
+    crossorigin="anonymous" alt="宣发设计">
+  <div class="card-overlay"></div>
+  <div class="num-overlay">03</div>
+  <div class="card-body">
+    <p class="card-label">宣发期 · 海报与票房</p>
+    <h2 class="card-title">AI 海报<br><em>+ 数据预测</em></h2>
+    <div class="tool-chips">
+      <span class="chip">Midjourney</span>
+      <span class="chip">DALL·E</span>
+      <span class="chip">Tessitura</span>
+    </div>
+    <p class="card-fact">
+      Midjourney / DALL·E 生成演出海报初稿<br>
+      Tessitura AI 基于历史票务数据<br>
+      预测不同场次上座率，优化排期定价
+    </p>
+    <p class="card-caption">▲ Tessitura Network · 欧美剧场运营团队标配数据平台</p>
+  </div>
+  <button class="dl-btn" onclick="downloadCard('card-3','03-宣发期')">↓ 保存图片</button>
+</div>
+
+<!-- ░░ CARD 4 · 总结 ░░ -->
+<div class="card-end" id="card-4">
+  <p class="end-eyebrow">· 总结 ·</p>
+  <h2 class="end-heading">
+    工具是加速器<br><em>审美是核心竞争力</em>
+  </h2>
+  <div class="end-divider"></div>
+  <p class="end-body">
+    这 6 个工具覆盖创作、制作、宣发全链路。<strong>没有一个能替代创作者的判断</strong>——AI 压缩的是执行成本，放大的是你的审美决策。
+  </p>
+  <div class="cta-block">
+    <p class="cta-q">你的剧团 / 团队现在用 AI 做什么了？</p>
+    <p class="cta-action">评论区说说 👇 收藏备用 📌</p>
+  </div>
+  <div class="tags">
+    <span class="tag">#戏剧人</span>
+    <span class="tag">#AI工具</span>
+    <span class="tag">#舞台制作</span>
+    <span class="tag">#演出营销</span>
+    <span class="tag">#沉浸式戏剧</span>
+  </div>
+  <p class="byline">—— <strong>夜枭</strong>｜惊喜之夜</p>
+  <button class="dl-btn" onclick="downloadCard('card-4','04-总结')">↓ 保存图片</button>
+</div>
+
+<script>
+async function downloadCard(id, label) {
+  const el = document.getElementById(id);
+  const btn = el.querySelector('.dl-btn');
+  btn.classList.add('loading');
+  btn.textContent = '生成中…';
+  try {
+    const canvas = await html2canvas(el, {
+      useCORS: true,
+      allowTaint: false,
+      scale: 2,
+      width: el.offsetWidth,
+      height: el.offsetHeight,
+      backgroundColor: null,
+      ignoreElements: (node) => node.classList && node.classList.contains('dl-btn')
+    });
+    const link = document.createElement('a');
+    link.download = `AI工具图谱_${label}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  } finally {
+    btn.classList.remove('loading');
+    btn.textContent = '↓ 保存图片';
+  }
+}
+</script>
+</body>
+</html>
