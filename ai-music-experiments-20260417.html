@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=375, initial-scale=1.0">
 <title>当AI开始给舞台剧写配乐 | 惊喜之夜</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -252,15 +253,39 @@
   }
 
   .byline strong { color: #c89455; opacity: 0.9; }
+
+  /* ─── DOWNLOAD BUTTON ─── */
+  .dl-btn {
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    z-index: 10;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: #fff;
+    font-size: 12px;
+    font-family: 'Noto Sans SC', sans-serif;
+    letter-spacing: 0.5px;
+    padding: 7px 14px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+    user-select: none;
+  }
+  .dl-btn:hover { background: rgba(200,148,85,0.75); border-color: transparent; }
+  .dl-btn:active { transform: scale(0.96); }
+  .dl-btn.loading { opacity: 0.5; pointer-events: none; }
 </style>
 </head>
 <body>
 
 <!-- ░░ CARD 0 · 封面 ░░ -->
-<div class="card">
+<div class="card" id="card-0">
   <img class="card-bg"
     src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=750&h=1000&fit=crop&q=80"
-    alt="音乐厅">
+    crossorigin="anonymous" alt="音乐厅">
   <div class="card-overlay"></div>
   <div class="card-body">
     <span class="cover-tag">AI × 舞台音乐</span>
@@ -269,13 +294,14 @@
     </h1>
     <p class="cover-sub">3 个海外剧团的真实实验<br>结果让人意外 🎵</p>
   </div>
+  <button class="dl-btn" onclick="downloadCard('card-0','封面')">↓ 保存图片</button>
 </div>
 
 <!-- ░░ CARD 1 · KTH ░░ -->
-<div class="card">
+<div class="card" id="card-1">
   <img class="card-bg"
     src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=750&h=1000&fit=crop&q=80"
-    alt="机器人">
+    crossorigin="anonymous" alt="机器人">
   <div class="card-overlay"></div>
   <div class="num-overlay">01</div>
   <div class="card-body">
@@ -287,13 +313,14 @@
     </p>
     <p class="card-caption">▲ 出自《伟大计算机的故事》｜KTH 核反应堆歌剧 · 机器人「国王」演奏现场</p>
   </div>
+  <button class="dl-btn" onclick="downloadCard('card-1','01-KTH机器人歌剧')">↓ 保存图片</button>
 </div>
 
 <!-- ░░ CARD 2 · The Oracle ░░ -->
-<div class="card">
+<div class="card" id="card-2">
   <img class="card-bg"
     src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=750&h=1000&fit=crop&q=80"
-    alt="神谕">
+    crossorigin="anonymous" alt="神谕">
   <div class="card-overlay"></div>
   <div class="num-overlay">02</div>
   <div class="card-body">
@@ -305,13 +332,14 @@
     </p>
     <p class="card-caption">▲ 出自《The Oracle》Skövde PlayLab｜一对一沉浸式神谕体验</p>
   </div>
+  <button class="dl-btn" onclick="downloadCard('card-2','02-神谕')">↓ 保存图片</button>
 </div>
 
 <!-- ░░ CARD 3 · Stanford ░░ -->
-<div class="card">
+<div class="card" id="card-3">
   <img class="card-bg"
     src="https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=750&h=1000&fit=crop&q=80"
-    alt="舞台投影">
+    crossorigin="anonymous" alt="舞台投影">
   <div class="card-overlay"></div>
   <div class="num-overlay">03</div>
   <div class="card-body">
@@ -323,10 +351,11 @@
     </p>
     <p class="card-caption">▲ 出自斯坦福 HAI AI 戏剧实验｜AI 实时生成画面叠加投影舞台</p>
   </div>
+  <button class="dl-btn" onclick="downloadCard('card-3','03-斯坦福HAI')">↓ 保存图片</button>
 </div>
 
 <!-- ░░ CARD 4 · 总结 ░░ -->
-<div class="card-end">
+<div class="card-end" id="card-4">
   <h2 class="end-heading">
     技术打开可能性<br><em>人性决定上限</em>
   </h2>
@@ -346,7 +375,34 @@
     <span class="tag">#音乐实验</span>
   </div>
   <p class="byline">—— <strong>夜枭</strong>｜惊喜之夜</p>
+  <button class="dl-btn" onclick="downloadCard('card-4','04-总结')">↓ 保存图片</button>
 </div>
 
+<script>
+async function downloadCard(id, label) {
+  const el = document.getElementById(id);
+  const btn = el.querySelector('.dl-btn');
+  btn.classList.add('loading');
+  btn.textContent = '生成中…';
+  try {
+    const canvas = await html2canvas(el, {
+      useCORS: true,
+      allowTaint: false,
+      scale: 2,
+      width: el.offsetWidth,
+      height: el.offsetHeight,
+      backgroundColor: null,
+      ignoreElements: (node) => node.classList && node.classList.contains('dl-btn')
+    });
+    const link = document.createElement('a');
+    link.download = `AI配乐实验_${label}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  } finally {
+    btn.classList.remove('loading');
+    btn.textContent = '↓ 保存图片';
+  }
+}
+</script>
 </body>
 </html>
