@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=375, initial-scale=1.0">
+<title>AI接管舞台投影 | 惊喜之夜</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #080c12;
+    font-family: 'Noto Sans SC', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    width: 375px;
+    margin: 0 auto;
+  }
+
+  /* ─── CARD BASE ─── */
+  .card {
+    width: 375px;
+    aspect-ratio: 3 / 4;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-bottom: 4px;
+  }
+
+  .card-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* 蓝调渐变遮罩 */
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(4,12,30,0.97) 0%,
+      rgba(8,20,50,0.70) 38%,
+      rgba(12,28,60,0.20) 72%,
+      rgba(0,0,0,0.05) 100%
+    );
+  }
+
+  /* 大编号描边风格，电蓝 */
+  .num-overlay {
+    position: absolute;
+    top: 16px;
+    left: 18px;
+    z-index: 3;
+    font-size: 96px;
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 2px #4f8de8;
+    text-stroke: 2px #4f8de8;
+    line-height: 1;
+    letter-spacing: -5px;
+    font-family: 'Georgia', 'Noto Serif SC', serif;
+    opacity: 0.85;
+  }
+
+  .card-body {
+    position: relative;
+    z-index: 2;
+    padding: 18px 20px 24px;
+  }
+
+  /* ─── COVER ─── */
+  .cover-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .cover-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #4f8de8;
+    display: inline-block;
+  }
+  .cover-tag-text {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: #4f8de8;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .cover-title {
+    font-family: 'Noto Serif SC', 'STSong', Georgia, serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.22;
+    margin-bottom: 14px;
+    letter-spacing: 0.02em;
+  }
+
+  .cover-title em {
+    color: #4f8de8;
+    font-style: normal;
+  }
+
+  .cover-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.52);
+    line-height: 1.65;
+  }
+
+  /* ─── NUMBERED CARDS ─── */
+  .card-label {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: rgba(79,141,232,0.7);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .card-title {
+    font-family: 'Noto Serif SC', 'STSong', Georgia, serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+
+  .card-title em {
+    color: #4f8de8;
+    font-style: normal;
+  }
+
+  .card-fact {
+    font-size: 13px;
+    color: rgba(255,255,255,0.70);
+    line-height: 1.75;
+    border-left: 2px solid #4f8de8;
+    padding-left: 10px;
+    margin-bottom: 10px;
+  }
+
+  .tech-badge {
+    display: inline-block;
+    font-size: 10px;
+    color: #4f8de8;
+    background: rgba(79,141,232,0.12);
+    border: 1px solid rgba(79,141,232,0.3);
+    padding: 3px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-right: 5px;
+  }
+
+  .card-caption {
+    font-size: 10px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+  }
+
+  /* ─── CONCLUSION CARD ─── */
+  .card-end {
+    width: 375px;
+    aspect-ratio: 3 / 4;
+    background: linear-gradient(160deg, #060e1e 0%, #08101c 50%, #030608 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 44px 26px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* grid lines decoration */
+  .card-end::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(79,141,232,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,141,232,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .card-end::after {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, rgba(79,141,232,0.12) 0%, transparent 60%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .end-eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #4f8de8;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .end-heading {
+    font-family: 'Noto Serif SC', Georgia, serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.35;
+    margin-bottom: 4px;
+    position: relative;
+  }
+
+  .end-heading em {
+    color: #4f8de8;
+    font-style: normal;
+    display: block;
+  }
+
+  .end-divider {
+    width: 28px;
+    height: 2px;
+    background: #4f8de8;
+    margin: 18px 0;
+    position: relative;
+  }
+
+  .end-body {
+    font-size: 13px;
+    color: rgba(255,255,255,0.58);
+    line-height: 1.9;
+    margin-bottom: 22px;
+    position: relative;
+  }
+
+  .end-body strong { color: rgba(255,255,255,0.82); }
+
+  .cta-block {
+    background: rgba(79,141,232,0.08);
+    border: 1px solid rgba(79,141,232,0.22);
+    border-radius: 3px;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    position: relative;
+  }
+
+  .cta-q {
+    font-size: 13px;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.65;
+    margin-bottom: 6px;
+  }
+
+  .cta-action {
+    font-size: 11px;
+    color: #4f8de8;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .tag {
+    font-size: 10px;
+    color: rgba(79,141,232,0.7);
+    background: rgba(79,141,232,0.08);
+    padding: 3px 7px;
+    border-radius: 2px;
+  }
+
+  .byline {
+    font-size: 11px;
+    color: rgba(255,255,255,0.22);
+    letter-spacing: 1px;
+    text-align: right;
+    position: relative;
+  }
+
+  .byline strong { color: #4f8de8; opacity: 0.8; }
+
+  /* ─── DOWNLOAD ─── */
+  .dl-btn {
+    position: absolute;
+    bottom: 14px; right: 14px;
+    z-index: 10;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: #fff;
+    font-size: 12px;
+    padding: 7px 14px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+    user-select: none;
+  }
+  .dl-btn:hover { background: rgba(79,141,232,0.7); border-color: transparent; }
+  .dl-btn:active { transform: scale(0.96); }
+  .dl-btn.loading { opacity: 0.5; pointer-events: none; }
+</style>
+</head>
+<body>
+
+<!-- ░░ CARD 0 · 封面 ░░ -->
+<div class="card" id="card-0">
+  <img class="card-bg"
+    src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=750&h=1000&fit=crop&q=80"
+    crossorigin="anonymous" alt="舞台投影">
+  <div class="card-overlay"></div>
+  <div class="card-body">
+    <div class="cover-eyebrow">
+      <span class="cover-dot"></span>
+      <span class="cover-tag-text">AI × 舞台投影</span>
+    </div>
+    <h1 class="cover-title">
+      当 <em>AI</em> 接管<br>
+      了舞台投影
+    </h1>
+    <p class="cover-sub">这 5 个国外剧场的视觉<br>效果已经封神了 🎭✨</p>
+  </div>
+  <button class="dl-btn" onclick="downloadCard('card-0','封面')">↓ 保存图片</button>
+</div>
+
+<!-- ░░ CARD 1 · 百老汇 + Disguise ░░ -->
+<div class="card" id="card-1">
+  <img class="card-bg"
+    src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=750&h=1000&fit=crop&q=80"
+    crossorigin="anonymous" alt="海洋舞台投影">
+  <div class="card-overlay"></div>
+  <div class="num-overlay">01</div>
+  <div class="card-body">
+    <p class="card-label">百老汇 · 实时响应投影</p>
+    <h2 class="card-title">整块舞台<br>变成<em>活画布</em></h2>
+    <span class="tech-badge">AI 动作追踪</span>
+    <p class="card-fact">
+      《少年 Pi》舞台：海浪会感知演员位置<br>
+      Disguise 实时渲染引擎 → 电影级画质<br>
+      实时生成，告别预录视频时代
+    </p>
+    <p class="card-caption">▲ 出自《少年 Pi 的奇幻漂流》百老汇版 · 59 Productions 投影设计</p>
+  </div>
+  <button class="dl-btn" onclick="downloadCard('card-1','01-百老汇')">↓ 保存图片</button>
+</div>
+
+<!-- ░░ CARD 2 · Royal Court + HeavyM ░░ -->
+<div class="card" id="card-2">
+  <img class="card-bg"
+    src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=750&h=1000&fit=crop&q=80"
+    crossorigin="anonymous" alt="数字艺术投影">
+  <div class="card-overlay"></div>
+  <div class="num-overlay">02</div>
+  <div class="card-body">
+    <p class="card-label">英国 · AI 辅助视觉创作</p>
+    <h2 class="card-title">设计师的<br><em>想象力倍增器</em></h2>
+    <span class="tech-badge">Royal Court Theatre</span>
+    <span class="tech-badge">HeavyM</span>
+    <p class="card-fact">
+      输入场景需求 → AI 生成数十种视觉方案<br>
+      HeavyM 实时响应音乐节奏与演员走位<br>
+      制作周期从数周压缩到几天
+    </p>
+    <p class="card-caption">▲ Royal Court Theatre / HeavyM 投影映射系统 · 伦敦</p>
+  </div>
+  <button class="dl-btn" onclick="downloadCard('card-2','02-英国剧院')">↓ 保存图片</button>
+</div>
+
+<!-- ░░ CARD 3 · 旧金山州立 ░░ -->
+<div class="card" id="card-3">
+  <img class="card-bg"
+    src="https://images.unsplash.com/photo-1562774053-701939374585?w=750&h=1000&fit=crop&q=80"
+    crossorigin="anonymous" alt="学院设计">
+  <div class="card-overlay"></div>
+  <div class="num-overlay">03</div>
+  <div class="card-body">
+    <p class="card-label">美国 · 下一代设计师</p>
+    <h2 class="card-title">AI 已经进入<br><em>学院课堂</em></h2>
+    <span class="tech-badge">SF State University</span>
+    <p class="card-fact">
+      生成式 AI 制作舞台屏幕合成图和故事板<br>
+      让学生快速可视化设计构想<br>
+      AI 正成为下一代舞台设计师的基础技能
+    </p>
+    <p class="card-caption">▲ 旧金山州立大学戏剧学院 · Michael Schweikardt 教授课程</p>
+  </div>
+  <button class="dl-btn" onclick="downloadCard('card-3','03-学院')">↓ 保存图片</button>
+</div>
+
+<!-- ░░ CARD 4 · 总结 ░░ -->
+<div class="card-end" id="card-4">
+  <p class="end-eyebrow">· 总结 ·</p>
+  <h2 class="end-heading">
+    技术越强<br><em>审美越值钱</em>
+  </h2>
+  <div class="end-divider"></div>
+  <p class="end-body">
+    AI 没有在「取代」舞台设计师，而是在帮他们<strong>打开想象力的天花板</strong>。以前一个投影方案从构思到落地要几个月，现在可以在一天内看到几十种可能性——<strong>选出最打动人的那个，才是真正的核心竞争力</strong>。
+  </p>
+  <div class="cta-block">
+    <p class="cta-q">你见过最震撼的舞台视觉是哪一场？</p>
+    <p class="cta-action">评论区分享 👇 收藏备用 📌</p>
+  </div>
+  <div class="tags">
+    <span class="tag">#舞台设计</span>
+    <span class="tag">#AI与艺术</span>
+    <span class="tag">#沉浸式戏剧</span>
+    <span class="tag">#投影映射</span>
+    <span class="tag">#剧场黑科技</span>
+  </div>
+  <p class="byline">—— <strong>夜枭</strong>｜惊喜之夜</p>
+  <button class="dl-btn" onclick="downloadCard('card-4','04-总结')">↓ 保存图片</button>
+</div>
+
+<script>
+async function downloadCard(id, label) {
+  const el = document.getElementById(id);
+  const btn = el.querySelector('.dl-btn');
+  btn.classList.add('loading');
+  btn.textContent = '生成中…';
+  try {
+    const canvas = await html2canvas(el, {
+      useCORS: true, allowTaint: false, scale: 2,
+      width: el.offsetWidth, height: el.offsetHeight,
+      backgroundColor: null,
+      ignoreElements: (node) => node.classList && node.classList.contains('dl-btn')
+    });
+    const link = document.createElement('a');
+    link.download = `AI舞台投影_${label}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  } finally {
+    btn.classList.remove('loading');
+    btn.textContent = '↓ 保存图片';
+  }
+}
+</script>
+</body>
+</html>
