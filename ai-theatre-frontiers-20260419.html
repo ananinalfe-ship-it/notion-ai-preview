@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>当生成式 AI 走进剧场最前沿 · 惊喜之夜</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+:root{
+  --accent:#1e5a8b;
+  --accent-light:#e8f0f8;
+  --accent-dark:#134070;
+  --gold:#c89455;
+  --text:#1d1d1d;
+  --muted:#666;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",
+         "Source Han Sans SC","Noto Sans CJK SC",
+         "Microsoft YaHei UI","Microsoft YaHei",sans-serif;
+  --display:"Playfair Display",Georgia,"Times New Roman",serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--sans);
+  font-size:25px;
+  line-height:1.85;
+  color:var(--text);
+  background:#f0f4f8;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  font-feature-settings:"kern" 1,"liga" 1;
+}
+img{image-rendering:-webkit-optimize-contrast}
+.wrap{
+  max-width:720px;
+  margin:0 auto;
+  background:#fff;
+}
+
+/* ── 刊头 ── */
+.masthead{
+  background:var(--accent);
+  padding:14px 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.masthead .brand{color:#fff;font-size:14px;font-weight:700;letter-spacing:0.1em}
+.masthead .label{color:rgba(255,255,255,0.7);font-size:12px;letter-spacing:0.06em}
+
+/* ── 封面 ── */
+.cover{position:relative;height:460px;overflow:hidden}
+.cover img{width:100%;height:100%;object-fit:cover}
+.cover-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(30,90,139,0.55) 0%,rgba(0,0,0,0.88) 100%)
+}
+.cover-body{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:36px 32px;color:#fff
+}
+.cover-tag{
+  display:inline-block;
+  background:var(--gold);color:#fff;
+  font-size:12px;font-weight:700;letter-spacing:0.1em;
+  padding:4px 10px;margin-bottom:16px
+}
+.cover-title{
+  font-size:29px;font-weight:800;line-height:1.4;
+  margin-bottom:12px;letter-spacing:0
+}
+.cover-sub{
+  font-size:23px;color:rgba(255,255,255,0.85);
+  line-height:1.55
+}
+.cover-byline{
+  margin-top:20px;font-size:14px;
+  color:rgba(255,255,255,0.6)
+}
+
+/* ── 导语 ── */
+.lede-block{
+  margin:48px 32px 40px;
+  padding:28px 32px;
+  border-left:4px solid var(--accent);
+  background:var(--accent-light)
+}
+.lede-text{
+  font-size:23px;line-height:1.8;color:var(--text)
+}
+
+/* ── 三路径总览卡 ── */
+.path-overview{
+  margin:0 28px 48px;
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px
+}
+.path-card{
+  background:var(--accent);color:#fff;
+  padding:20px 14px;text-align:center;border-radius:4px
+}
+.path-num{
+  font-size:38px;font-weight:900;line-height:1;
+  font-family:var(--display);margin-bottom:8px;color:var(--gold)
+}
+.path-label{font-size:13px;line-height:1.5;color:rgba(255,255,255,0.9)}
+
+/* ── 分隔线 ── */
+.divider{
+  text-align:center;margin:28px 0;
+  color:var(--accent);font-size:18px;letter-spacing:8px
+}
+
+/* ── 章节图 ── */
+.section{margin-bottom:64px}
+.section-img{
+  width:100%;height:320px;object-fit:cover;display:block
+}
+.img-caption{
+  font-size:14px;color:var(--muted);
+  padding:8px 28px 0;line-height:1.55
+}
+
+/* ── 章节标题区 ── */
+.section-header{
+  margin:0 28px;padding:28px 0 20px;
+  border-bottom:2px solid var(--accent-light)
+}
+.section-num{
+  display:inline-block;
+  background:var(--accent);color:#fff;
+  font-size:12px;font-weight:700;letter-spacing:0.12em;
+  padding:4px 10px;margin-bottom:12px
+}
+.section-title{
+  font-size:32px;font-weight:800;line-height:1.35;
+  color:var(--text);letter-spacing:0
+}
+
+/* ── 正文 ── */
+.section-body{margin:24px 28px 0}
+.section-body p{
+  font-size:25px;line-height:1.85;
+  margin-bottom:20px;color:var(--text)
+}
+.section-body strong{font-weight:700}
+
+/* ── 事实框 ── */
+.fact-box{
+  background:var(--accent-light);
+  border-left:3px solid var(--accent);
+  padding:20px 24px;margin:24px 0;
+  border-radius:0 4px 4px 0
+}
+.fact-box p{
+  font-size:25px;line-height:1.75;
+  margin-bottom:10px;color:var(--text)
+}
+.fact-box p:last-child{margin-bottom:0}
+
+/* ── h3 小节 ── */
+.section-body h3{
+  font-size:25px;font-weight:700;
+  margin:28px 0 12px;color:var(--accent-dark);
+  padding-left:12px;border-left:3px solid var(--gold);
+  line-height:1.6
+}
+
+/* ── pull-quote ── */
+.pull-quote{
+  margin:40px 28px 32px;
+  padding:22px 24px 28px;
+  text-align:center;
+  border-top:2px solid var(--accent);
+  border-bottom:2px solid var(--accent)
+}
+.pull-quote .quo{
+  display:block;
+  font-family:var(--display);font-size:56px;
+  color:var(--accent);line-height:1;font-weight:700;
+  margin:0 auto 8px;height:36px
+}
+.pull-quote p{
+  font-size:23px;line-height:1.8;
+  color:var(--text);font-style:italic
+}
+
+/* ── 路径总结蓝块 ── */
+.path-summary{
+  margin:0 28px 48px;
+  padding:32px;background:var(--accent);color:#fff
+}
+.path-summary h3{
+  font-size:25px;font-weight:800;
+  color:var(--gold);margin-bottom:20px;
+  border:none;padding-left:0;line-height:1.5
+}
+.path-summary ul{list-style:none;padding:0}
+.path-summary li{
+  font-size:25px;line-height:1.75;
+  padding:12px 0;
+  border-bottom:1px solid rgba(255,255,255,0.15);
+  color:rgba(255,255,255,0.95)
+}
+.path-summary li:last-child{border-bottom:none}
+.path-arrow{
+  display:inline-block;color:var(--gold);
+  margin-right:8px;font-weight:900
+}
+
+/* ── 结语 ── */
+.closing{margin:0 28px 64px}
+.closing p{
+  font-size:25px;line-height:1.85;
+  margin-bottom:20px;color:var(--text)
+}
+
+/* ── 来源 ── */
+.sources{
+  margin:0 28px 40px;padding:24px;background:#f5f5f5
+}
+.sources h4{
+  font-size:14px;font-weight:700;
+  letter-spacing:0.06em;color:var(--muted);
+  margin-bottom:12px
+}
+.sources ol{padding-left:20px}
+.sources li{
+  font-size:14px;color:var(--muted);
+  line-height:1.6;margin-bottom:6px
+}
+
+/* ── CTA ── */
+.cta-block{
+  margin:0 28px 48px;
+  padding:28px;
+  background:linear-gradient(135deg,var(--accent-light) 0%,#fff 100%);
+  border:1px solid var(--accent-light);text-align:center
+}
+.cta-block p{
+  font-size:25px;line-height:1.75;
+  color:var(--text);margin-bottom:14px
+}
+.cta-block .tag-line{font-size:14px;color:var(--muted)}
+
+/* ── 落款 ── */
+.footer{
+  background:var(--accent-dark);
+  padding:32px 28px;text-align:center;
+  color:rgba(255,255,255,0.85)
+}
+.footer .byline{font-size:14px;letter-spacing:0.05em;margin-bottom:8px}
+.footer .slogan{font-size:23px;color:#fff;font-weight:700}
+
+/* ── 下载FAB ── */
+.dl-fab{
+  position:fixed;right:18px;bottom:18px;z-index:99;
+  display:flex;align-items:center;gap:8px;
+  padding:12px 18px;
+  background:var(--accent);color:#fff;
+  border:none;border-radius:28px;cursor:pointer;
+  font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:0.05em;
+  box-shadow:0 6px 22px rgba(0,0,0,0.25);
+  transition:all 0.2s ease;-webkit-tap-highlight-color:transparent
+}
+.dl-fab:hover{transform:translateY(-2px)}
+.dl-fab.loading{background:#666;cursor:wait;pointer-events:none}
+.dl-fab.done{background:#2d7a3a}
+.dl-fab svg{width:18px;height:18px;flex-shrink:0}
+.dl-fab .sp{
+  width:16px;height:16px;
+  border:2px solid #fff;border-top-color:transparent;
+  border-radius:50%;animation:spin 0.8s linear infinite
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.dl-toast{
+  position:fixed;left:50%;bottom:80px;
+  transform:translateX(-50%) translateY(20px);
+  background:rgba(20,20,20,0.92);color:#fff;
+  padding:14px 22px;border-radius:8px;
+  font-family:var(--sans);font-size:14px;font-weight:500;
+  opacity:0;pointer-events:none;transition:all 0.3s ease;
+  z-index:100;max-width:90%;text-align:center;line-height:1.6
+}
+.dl-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.downloading .dl-fab,.downloading .dl-toast{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 刊头 -->
+  <div class="masthead">
+    <span class="brand">惊喜之夜</span>
+    <span class="label">行业观察 · 2026.04.19</span>
+  </div>
+
+  <!-- 封面 -->
+  <div class="cover">
+    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=2400&q=90&auto=format&fit=crop"
+         alt="AI 与剧场" crossorigin="anonymous" />
+    <div class="cover-overlay"></div>
+    <div class="cover-body">
+      <span class="cover-tag">AI + 剧场 · 行业观察</span>
+      <h1 class="cover-title">当生成式 AI 走进<br>剧场最前沿</h1>
+      <p class="cover-sub">Porto · 斯坦福 TAPS · Theater Machine<br>三条实验线索拆解</p>
+      <div class="cover-byline">夜枭 · 惊喜之夜行业观察笔记</div>
+    </div>
+  </div>
+
+  <!-- 导语 -->
+  <div class="lede-block">
+    <p class="lede-text">生成式 AI 能不能成为现场演出中实时参与、被观众当场感知到的那一层？2025 年前后，海外出现了三条值得关注的 AI＋剧场实验线索：一条进入真实现场演出，一条进入 live performance 的研究开发，一条进入剧院门厅的交互式装置探索。对于国内从业者而言，这三条路径都具有参考价值。</p>
+  </div>
+
+  <!-- 三路径总览 -->
+  <div class="path-overview">
+    <div class="path-card">
+      <div class="path-num">01</div>
+      <div class="path-label">AI 进入<br>表演现场</div>
+    </div>
+    <div class="path-card">
+      <div class="path-num">02</div>
+      <div class="path-label">AI 进入<br>创作研发</div>
+    </div>
+    <div class="path-card">
+      <div class="path-num">03</div>
+      <div class="path-label">AI 进入<br>观众动线</div>
+    </div>
+  </div>
+
+  <div class="divider">▼</div>
+
+  <!-- §I Porto -->
+  <div class="section">
+    <img class="section-img"
+         src="https://images.unsplash.com/photo-1514306191717-452ec28c7814?w=2400&q=90&auto=format&fit=crop"
+         alt="舞台灯光" crossorigin="anonymous" />
+    <p class="img-caption">▲ 灯光与声音实时响应舞者动作，形成即时反馈闭环｜Porto Coliseum《Re-embodied Machine》</p>
+    <div class="section-header">
+      <div class="section-num">路径 01</div>
+      <h2 class="section-title">Porto Coliseum<br>《Re-embodied Machine》<br>AI 做实时协演者</h2>
+    </div>
+    <div class="section-body">
+      <p>2025 年 9 月，葡萄牙北部 Porto Coliseum 剧院上演了《Re-embodied Machine》。舞台上只有一位舞者，身上佩戴动作传感器——舞者的动作数据被系统实时捕捉，并驱动灯光与声音发生响应，形成<strong>舞者与舞台环境之间的即时反馈闭环</strong>。</p>
+      <div class="fact-box">
+        <p>▶ <strong>规模</strong>：300 名现场观众 + 200 名 VR 远程接入</p>
+        <p>▶ <strong>来源</strong>：欧盟 Horizon 研究项目，公开报道见于欧盟研究与创新司 Horizon Magazine</p>
+        <p>▶ <strong>核心</strong>：AI 不是预先生成素材后播放，而是在现场和舞者共同工作的"协演者"</p>
+      </div>
+      <p>这一案例说明，AI 已经不再只是创作前期的辅助工具，而<strong>开始进入真实剧院的现场反馈机制</strong>中。现场与远程的同场叠加，正在把"观众在哪里"这个问题重新打开。</p>
+    </div>
+  </div>
+
+  <div class="divider">▼</div>
+
+  <!-- §II Stanford -->
+  <div class="section">
+    <img class="section-img"
+         src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=2400&q=90&auto=format&fit=crop"
+         alt="AI 科技研究" crossorigin="anonymous" />
+    <p class="img-caption">▲ 顶尖研究机构把 AI 明确纳入 live performance 研发议程｜Stanford HAI 种子基金</p>
+    <div class="section-header">
+      <div class="section-num">路径 02</div>
+      <h2 class="section-title">斯坦福 TAPS × HAI<br>AI 做叙事合作者</h2>
+    </div>
+    <div class="section-body">
+      <p>斯坦福大学戏剧与表演研究项目（TAPS）助理教授 Michael Rau，在 2025 年初获得斯坦福以人为本人工智能研究所（HAI）种子基金，用于把 AI 系统性地整合进现场戏剧创作。</p>
+      <div class="fact-box">
+        <p>▶ <strong>关键细节</strong>：他拿到的是 HAI 的资助，而非戏剧学院内部创作基金</p>
+        <p>▶ <strong>意义</strong>：在斯坦福校内以"人工智能研究"的口径立项，戏剧作为应用场景被放进了 AI 研究的视野</p>
+        <p>▶ <strong>来源</strong>：Stanford Report，2025 年 1 月 15 日</p>
+      </div>
+      <p>这条线的重要性，未必在于它已经形成了成熟作品，而在于<strong>顶尖研究机构开始把"AI 如何进入现场表演"当成一个正式的研究方向</strong>——从"艺术家的个人探索"抬升成"技术机构愿意长期投入的方向"。</p>
+    </div>
+  </div>
+
+  <div class="divider">▼</div>
+
+  <!-- §III Theater Machine -->
+  <div class="section">
+    <img class="section-img"
+         src="https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?w=2400&q=90&auto=format&fit=crop"
+         alt="剧院空间" crossorigin="anonymous" />
+    <p class="img-caption">▲ 进场前的候场空间可以被重新设计｜剧院门厅的新可能性</p>
+    <div class="section-header">
+      <div class="section-num">路径 03</div>
+      <h2 class="section-title">《The Theater Machine》<br>AI 做观众侧装置</h2>
+    </div>
+    <div class="section-body">
+      <p>2025 年 ACM 数字图书馆收录了论文《The Theater Machine: An Interactive Generative-AI-Based Installation》，介绍了一套面向剧院门厅场景开发的交互式生成式 AI 装置，把观众进场前的候场时间转化为<strong>一段可被设计的参与式体验</strong>。</p>
+      <div class="pull-quote">
+        <span class="quo">&ldquo;</span>
+        <p>演出不是从大幕升起开始的，而是从观众推开剧院大门那一刻开始的。</p>
+      </div>
+      <p>相较于舞台级系统，这类门厅装置对剧目本体的依赖更低，因此<strong>在剧场空间中的复用潜力更值得关注</strong>。这是目前海外把 AI 用进剧场里最"非舞台化"、也最容易被复用的一种形态。</p>
+    </div>
+  </div>
+
+  <div class="divider">▼</div>
+
+  <!-- 路径总结 -->
+  <div class="section">
+    <img class="section-img"
+         src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?w=2400&q=90&auto=format&fit=crop"
+         alt="剧场大幕" crossorigin="anonymous" />
+    <p class="img-caption">▲ AI 在剧场中的位置，正在从单一工具转向多点嵌入</p>
+  </div>
+
+  <div class="path-summary">
+    <h3>▼ 三条路径 · 并排来看</h3>
+    <ul>
+      <li><span class="path-arrow">→</span><strong>Porto</strong> 把 AI 放进了表演现场，让它成为舞者的实时协演者</li>
+      <li><span class="path-arrow">→</span><strong>斯坦福 TAPS</strong> 把 AI 放进了创作过程，让它成为导演的叙事合作者</li>
+      <li><span class="path-arrow">→</span><strong>Theater Machine</strong> 把 AI 放进了观众动线，让它成为进场前的小型装置</li>
+    </ul>
+  </div>
+
+  <!-- 结语 -->
+  <div class="closing">
+    <p>把这三件事并排放在一起，更重要的不是得出一个统一答案，而是看见三条不同的路径：AI 可以进入表演现场，可以进入创作研发，也可以进入观众的进场动线。</p>
+    <p>它们共同提示的是，AI 在剧场中的位置，<strong>正在从单一工具转向多点嵌入</strong>。</p>
+    <p>如果你所在的剧院明天要做一个小型 AI 实验，你会选择把它放进台上、幕后，还是门厅？这三个位置，对应的是三种完全不同的资源投入、三种观众预期、也是三种不同的行业想象力。</p>
+  </div>
+
+  <!-- 来源 -->
+  <div class="sources">
+    <h4>参考来源</h4>
+    <ol>
+      <li>Horizon Magazine（欧盟研究与创新司），2026 年 1 月 14 日</li>
+      <li>Stanford Report，《AI brings new potential to the art of theater》，2025 年 1 月 15 日</li>
+      <li>ACM Digital Library，《The Theater Machine》，2025</li>
+      <li>American Theatre，《What Can AI Do for the Arts?》，2025 年 6 月</li>
+      <li>ScienceDirect，《Curtain call for AI: Transforming theatre through technology》，2025</li>
+    </ol>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <p>惊喜之夜正在以观察者的视角持续跟进全球戏剧行业与 AI 的交汇。如果你也在做剧，欢迎一起看见这个行业正在发生的变化。</p>
+    <div class="tag-line">#AI戏剧 #沉浸式演出 #行业观察 #剧场技术 #惊喜之夜</div>
+  </div>
+
+  <!-- 落款 -->
+  <div class="footer">
+    <div class="byline">—— 夜枭｜惊喜之夜</div>
+    <div class="slogan">在传统意境与当代表达之间寻找语言</div>
+  </div>
+
+</div><!-- /wrap -->
+
+<!-- 下载长图 FAB -->
+<button class="dl-fab" id="dlBtn" onclick="savelongImage()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <polyline points="7 10 12 15 17 10"/>
+    <line x1="12" y1="15" x2="12" y2="3"/>
+  </svg>
+  <span id="dlText">保存长图</span>
+</button>
+<div class="dl-toast" id="dlToast"></div>
+
+<script>
+  const FILENAME_BASE='AI剧场前沿三条路径';
+  const MAX_BYTES=9*1024*1024;
+  const HARD_MAX_BYTES=10*1024*1024;
+  const QUALITIES=[0.92,0.85,0.80];
+  function toast(msg,ms=2400){const t=document.getElementById('dlToast');t.textContent=msg;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),ms);}
+  async function waitImgsReady(root){const imgs=[...root.querySelectorAll('img')];await Promise.all(imgs.map(img=>img.complete&&img.naturalWidth>0?Promise.resolve():new Promise(res=>{img.addEventListener('load',res,{once:true});img.addEventListener('error',res,{once:true});})));}
+  async function savelongImage(){
+    const btn=document.getElementById('dlBtn');
+    if(btn.classList.contains('loading'))return;
+    btn.classList.add('loading');btn.innerHTML='<span class="sp"></span><span>生成中...</span>';
+    toast('正在渲染长图，请稍候（约 3-8 秒）');
+    try{
+      const target=document.querySelector('.wrap');
+      await waitImgsReady(target);
+      if(document.fonts&&document.fonts.ready){try{await document.fonts.ready}catch(_){}}
+      document.body.classList.add('downloading');
+      const canvas=await html2canvas(target,{useCORS:true,allowTaint:false,backgroundColor:'#ffffff',scale:2,logging:false,imageTimeout:15000,windowWidth:target.offsetWidth,onclone:(d)=>{['dlBtn','dlToast'].forEach(id=>{const el=d.getElementById(id);if(el)el.remove();})}});
+      document.body.classList.remove('downloading');
+      const toBlob=(q)=>new Promise(res=>canvas.toBlob(b=>res(b),'image/jpeg',q));
+      let blob=null,usedQ=0;
+      for(const q of QUALITIES){const b=await toBlob(q);if(b&&b.size<=MAX_BYTES){blob=b;usedQ=q;break;}if(!blob||(b&&b.size<blob.size)){blob=b;usedQ=q;}}
+      if(!blob)throw new Error('blob 生成失败');
+      const sizeMB=(blob.size/1024/1024).toFixed(1);
+      const compressed=usedQ<0.92;
+      const overSize=blob.size>HARD_MAX_BYTES;
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');a.href=url;a.download=FILENAME_BASE+'.jpg';document.body.appendChild(a);a.click();document.body.removeChild(a);
+      setTimeout(()=>URL.revokeObjectURL(url),1000);
+      btn.classList.remove('loading');btn.classList.add('done');
+      btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>已保存</span>';
+      let msg;if(overSize){msg=`⚠️ 已下载 ${sizeMB}MB · 超出公众号 10MB 建议，可手动再压一下`;}else if(compressed){msg=`✅ 已下载 ${sizeMB}MB · 已压缩适配公众号（质量 q${Math.round(usedQ*100)}）`;}else{msg=`✅ 已下载 ${sizeMB}MB · 原质量（无损压缩适配公众号）`;}
+      toast(msg,overSize?5500:3800);
+      setTimeout(()=>{btn.classList.remove('done');btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>保存长图</span>';},4000);
+    }catch(e){
+      document.body.classList.remove('downloading');
+      btn.classList.remove('loading');
+      btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>保存长图</span>';
+      toast('⚠️ 生成失败：'+(e.message||'跨域或网络问题'),4000);console.error(e);
+    }
+  }
+</script>
+</body>
+</html>
