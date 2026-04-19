@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>皇家莎士比亚剧团的AI实验 - 惊喜之夜</title>
-<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <style>
   /*
    * 字号规范（v3，严格按 2026-04-17 规则）：
@@ -67,9 +67,8 @@
     margin:0 0 20px;color:var(--ink);
   }
   .cover h1 em{
-    color:var(--rsc);font-style:italic;
-    font-family:var(--display);font-weight:700;
-    vertical-align:baseline;
+    /* 不切字体，只用颜色+斜体强调，避免 html2canvas 内联字体切换错位 */
+    color:var(--rsc);font-style:italic;font-weight:900;
   }
   .cover .dek{
     /* 导语 = 23px */
@@ -151,10 +150,9 @@
     border-left:4px solid var(--rsc);color:var(--ink);
   }
   h3 em{
-    color:var(--rsc);font-style:italic;
-    font-family:var(--display);font-weight:700;
-    margin-right:10px;font-size:26px;
-    vertical-align:baseline;line-height:1;
+    /* 数字年份强调：不切字体，用 RSC 红+斜体+稍大字号实现 */
+    color:var(--rsc);font-style:italic;font-weight:800;
+    margin-right:10px;
   }
 
   /* 章节插图 */
@@ -494,40 +492,34 @@
     try{
       const target = document.querySelector('.wrap');
       await waitImgsReady(target);
-      // 等待字体加载完成（防止 Playfair 未加载就渲染导致基线偏移）
       if (document.fonts && document.fonts.ready){
         try { await document.fonts.ready; } catch(_){}
       }
+      document.body.classList.add('downloading');
 
-      // 使用 html-to-image 的 toJpeg：用 SVG foreignObject 渲染，精度比 html2canvas 高
-      // 智能压缩：尝试多档质量，找到 ≤ 9MB 的最高质量
-      const toImageJpeg = (q) => htmlToImage.toJpeg(target, {
-        quality: q,
-        pixelRatio: 2,         // Retina 2x
+      const canvas = await html2canvas(target, {
+        useCORS: true,
+        allowTaint: false,
         backgroundColor: '#ffffff',
-        cacheBust: true,
-        skipFonts: false,
-        filter: (node) => {
-          // 过滤掉下载按钮和 toast
-          if (node.id === 'dlBtn' || node.id === 'dlToast') return false;
-          return true;
+        scale: 2,
+        logging: false,
+        imageTimeout: 15000,
+        windowWidth: target.offsetWidth,
+        onclone: (clonedDoc) => {
+          ['dlBtn', 'dlToast'].forEach(id => {
+            const el = clonedDoc.getElementById(id);
+            if (el) el.remove();
+          });
         }
       });
 
-      // dataUrl → blob
-      const dataUrlToBlob = (dataUrl) => {
-        const [meta, b64] = dataUrl.split(',');
-        const bin = atob(b64);
-        const len = bin.length;
-        const buf = new Uint8Array(len);
-        for (let i = 0; i < len; i++) buf[i] = bin.charCodeAt(i);
-        return new Blob([buf], {type: 'image/jpeg'});
-      };
+      document.body.classList.remove('downloading');
 
+      // 智能压缩：尝试多档 JPEG 质量
+      const toBlob = (q) => new Promise(res => canvas.toBlob(b => res(b), 'image/jpeg', q));
       let blob = null, usedQ = 0;
       for (const q of QUALITIES){
-        const dataUrl = await toImageJpeg(q);
-        const b = dataUrlToBlob(dataUrl);
+        const b = await toBlob(q);
         if (b && b.size <= MAX_BYTES){ blob = b; usedQ = q; break; }
         if (!blob || (b && b.size < blob.size)){ blob = b; usedQ = q; }
       }
