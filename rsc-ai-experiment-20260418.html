@@ -2,199 +2,257 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>皇家莎士比亚剧团的AI实验 - 惊喜之夜</title>
 <style>
   :root{
     --rsc: #9b1c2e;
     --rsc-soft: #f6e8ea;
     --rsc-dark: #5a0d1a;
-    --ink: #1a1a1a;
-    --muted: #6a6a6a;
+    --ink: #111;
+    --ink-2: #1d1d1d;
+    --muted: #5c5c5c;
     --rule: #d9c9cb;
     --paper: #fbf8f4;
+    /* 字体栈：iOS → Android → Windows → 通用 */
+    --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Source Han Sans SC", "Noto Sans CJK SC", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+    --serif: "Songti SC", "STSong", "SimSun", "Noto Serif SC", "Source Han Serif SC", serif;
+    --display: "Playfair Display", Georgia, "Times New Roman", serif;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   body{
     background:var(--paper);
     color:var(--ink);
-    font-family:"Noto Serif SC","Songti SC","STSong","Source Han Serif SC",serif;
-    font-size:17px;line-height:1.95;
+    font-family:var(--sans);
+    font-size:18px;line-height:1.95;
     -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:optimizeLegibility;
+    font-feature-settings:"kern" 1,"liga" 1;
   }
-  .wrap{max-width:680px;margin:0 auto;background:#fff;padding:0 0 50px;box-shadow:0 0 40px rgba(0,0,0,0.04)}
+  img{
+    max-width:100%;height:auto;display:block;
+    image-rendering:-webkit-optimize-contrast;
+  }
+  .wrap{
+    max-width:720px;margin:0 auto;background:#fff;
+    padding:0 0 52px;box-shadow:0 0 40px rgba(0,0,0,0.04);
+  }
 
-  /* 顶部刊头 — 杂志式 */
+  /* 顶部刊头 */
   .masthead{
     display:flex;justify-content:space-between;align-items:center;
-    padding:16px 24px;border-bottom:2px solid var(--ink);
-    font-family:-apple-system,"PingFang SC",sans-serif;
+    padding:18px 24px;border-bottom:2px solid var(--ink);
+    font-family:var(--sans);
   }
   .masthead .logo{
-    font-family:"Playfair Display","Noto Serif SC",serif;
-    font-size:18px;font-weight:800;letter-spacing:0.02em;color:var(--ink);
+    font-size:17px;font-weight:800;letter-spacing:0.02em;color:var(--ink);
   }
-  .masthead .logo em{color:var(--rsc);font-style:normal}
-  .masthead .issue{font-size:11px;letter-spacing:0.25em;color:var(--muted);font-weight:600;text-transform:uppercase}
+  .masthead .logo em{color:var(--rsc);font-style:normal;margin:0 4px}
+  .masthead .issue{
+    font-size:12px;letter-spacing:0.25em;color:var(--muted);
+    font-weight:700;text-transform:uppercase;
+  }
 
   /* 封面 */
-  .cover{padding:40px 24px 32px;text-align:center;border-bottom:1px solid var(--rule)}
+  .cover{padding:44px 28px 34px;text-align:center;border-bottom:1px solid var(--rule)}
   .kicker{
-    font-family:-apple-system,"PingFang SC",sans-serif;
-    font-size:12px;letter-spacing:0.3em;font-weight:700;
-    color:var(--rsc);margin-bottom:22px;text-transform:uppercase;
+    font-family:var(--sans);
+    font-size:13px;letter-spacing:0.3em;font-weight:800;
+    color:var(--rsc);margin-bottom:24px;text-transform:uppercase;
   }
   .cover h1{
-    font-family:"Noto Serif SC","Songti SC",serif;
-    font-weight:800;font-size:32px;line-height:1.4;
-    margin:0 0 18px;letter-spacing:-0.01em;
+    font-family:var(--sans);
+    font-weight:900;font-size:38px;line-height:1.35;
+    margin:0 0 20px;letter-spacing:-0.01em;
+    color:var(--ink);
   }
-  .cover h1 em{color:var(--rsc);font-style:italic;font-family:"Playfair Display",serif}
+  .cover h1 em{
+    color:var(--rsc);font-style:italic;
+    font-family:var(--display);font-weight:700;
+  }
   .cover .dek{
-    font-family:"Noto Serif SC",serif;
-    font-size:16px;line-height:1.85;color:#444;font-style:italic;
-    max-width:520px;margin:0 auto;
+    font-family:var(--sans);
+    font-size:18px;line-height:1.85;color:#333;
+    max-width:560px;margin:0 auto;
+    font-weight:400;
   }
   .cover .byline{
-    margin-top:28px;padding-top:16px;
+    margin-top:30px;padding-top:18px;
     border-top:1px solid var(--rule);
-    font-family:-apple-system,"PingFang SC",sans-serif;
-    font-size:12px;letter-spacing:0.15em;color:var(--muted);
+    font-family:var(--sans);
+    font-size:13px;letter-spacing:0.1em;color:var(--muted);
+    font-weight:500;
   }
-  .cover .byline b{color:var(--rsc);font-weight:700;letter-spacing:0.05em}
+  .cover .byline b{color:var(--rsc);font-weight:800;letter-spacing:0.05em}
 
   /* 封面图 */
-  .hero-img{margin:28px -24px 0}
+  .hero-img{margin:30px 0 0}
   .hero-img img{width:100%;display:block}
   .hero-img .cap{
-    padding:10px 24px 0;font-size:12px;
-    font-family:-apple-system,"PingFang SC",sans-serif;
+    padding:12px 28px 0;font-size:13px;
+    font-family:var(--sans);
     color:var(--muted);text-align:center;letter-spacing:0.03em;
+    line-height:1.7;
   }
 
-  .body{padding:36px 28px 0;max-width:640px;margin:0 auto}
+  .body{padding:38px 28px 0;max-width:660px;margin:0 auto}
 
-  /* 引言（首字下沉） */
-  .lede{font-size:17px;line-height:2;margin:0 0 24px}
+  /* 引言 */
+  .lede{
+    font-size:19px;line-height:2;margin:0 0 26px;
+    color:var(--ink-2);font-weight:500;
+  }
   .lede::first-letter{
-    float:left;font-family:"Playfair Display","Noto Serif SC",serif;
-    font-size:68px;line-height:0.85;font-weight:800;
-    color:var(--rsc);margin:8px 10px -4px 0;
+    float:left;font-family:var(--display);
+    font-size:78px;line-height:0.85;font-weight:800;
+    color:var(--rsc);margin:10px 12px -4px 0;
   }
 
-  p{margin:14px 0;font-size:16px;line-height:2}
+  p{
+    margin:16px 0;font-size:18px;line-height:2;
+    color:var(--ink-2);font-weight:400;
+  }
   p strong{font-weight:700;color:var(--ink)}
+  em{font-style:italic}
 
   /* § 章节标题 */
   .section-mark{
-    text-align:center;margin:42px 0 20px;
+    text-align:center;margin:46px 0 22px;
     display:flex;align-items:center;gap:16px;
   }
   .section-mark .line{flex:1;height:1px;background:var(--rule)}
   .section-mark .sign{
-    font-family:"Playfair Display",serif;font-size:22px;
-    color:var(--rsc);letter-spacing:0.2em;font-weight:600;
+    font-family:var(--display);font-size:24px;
+    color:var(--rsc);letter-spacing:0.2em;font-weight:700;
   }
 
   h2{
-    font-family:"Noto Serif SC","Songti SC",serif;
-    font-weight:800;font-size:22px;line-height:1.5;
-    margin:12px 0 18px;text-align:center;
+    font-family:var(--sans);
+    font-weight:900;font-size:26px;line-height:1.45;
+    margin:14px 0 22px;text-align:center;
+    color:var(--ink);letter-spacing:-0.005em;
   }
   h2 small{
-    display:block;margin-top:8px;
-    font-family:-apple-system,"PingFang SC",sans-serif;
-    font-size:11px;font-weight:600;color:var(--muted);
-    letter-spacing:0.25em;text-transform:uppercase;
+    display:block;margin-top:10px;
+    font-family:var(--sans);
+    font-size:12px;font-weight:700;color:var(--muted);
+    letter-spacing:0.28em;text-transform:uppercase;
   }
 
   /* 子节时间轴标题 */
   h3{
-    font-family:"Noto Serif SC",serif;
-    font-weight:700;font-size:17px;line-height:1.5;
-    margin:28px 0 10px;padding-left:14px;
-    border-left:3px solid var(--rsc);
+    font-family:var(--sans);
+    font-weight:800;font-size:19px;line-height:1.5;
+    margin:30px 0 12px;padding-left:16px;
+    border-left:4px solid var(--rsc);
+    color:var(--ink);
   }
-  h3 em{color:var(--rsc);font-style:normal;font-family:"Playfair Display",serif;margin-right:6px}
+  h3 em{
+    color:var(--rsc);font-style:italic;
+    font-family:var(--display);font-weight:700;
+    margin-right:8px;font-size:20px;
+  }
 
   /* 章节插图 */
-  .section-img{margin:22px -28px;position:relative}
+  .section-img{margin:24px 0}
   .section-img img{width:100%;display:block}
   .section-img .cap{
-    padding:10px 28px 0;font-size:12px;
-    font-family:-apple-system,"PingFang SC",sans-serif;
-    color:var(--muted);letter-spacing:0.03em;font-style:italic;
+    padding:12px 0 0;font-size:13px;
+    font-family:var(--sans);
+    color:var(--muted);letter-spacing:0.03em;
+    line-height:1.7;font-style:italic;
   }
 
-  /* 大号引用块（带大括号） */
+  /* 大号引用块 */
   .pull-quote{
-    margin:32px 0;padding:28px 20px;text-align:center;
-    position:relative;border-top:2px solid var(--rsc);border-bottom:2px solid var(--rsc);
+    margin:34px -4px;padding:32px 22px 26px;text-align:center;
+    position:relative;
+    border-top:2px solid var(--rsc);border-bottom:2px solid var(--rsc);
   }
   .pull-quote::before{
     content:"\201C";
-    position:absolute;top:-18px;left:50%;transform:translateX(-50%);
-    background:#fff;padding:0 14px;
-    font-family:"Playfair Display",serif;font-size:48px;
-    color:var(--rsc);line-height:1;
+    position:absolute;top:-22px;left:50%;transform:translateX(-50%);
+    background:#fff;padding:0 16px;
+    font-family:var(--display);font-size:54px;
+    color:var(--rsc);line-height:1;font-weight:700;
   }
   .pull-quote p{
-    font-family:"Noto Serif SC",serif;
-    font-size:18px;line-height:1.85;font-style:italic;
-    color:var(--ink);margin:0;
+    font-family:var(--sans);
+    font-size:20px;line-height:1.85;
+    color:var(--ink);margin:0;font-weight:500;
   }
   .pull-quote .src{
-    margin-top:14px;font-style:normal;font-size:12px;
-    font-family:-apple-system,"PingFang SC",sans-serif;
-    color:var(--muted);letter-spacing:0.1em;
+    margin-top:16px;font-size:13px;
+    font-family:var(--sans);
+    color:var(--muted);letter-spacing:0.1em;font-weight:500;
   }
 
-  /* 行内小卡（事实） */
+  /* 事实框 */
   .fact{
-    margin:20px 0;padding:16px 20px;
-    background:var(--rsc-soft);border-left:3px solid var(--rsc);
-    font-size:15px;line-height:1.85;color:#2c2c2c;
+    margin:22px 0;padding:18px 22px;
+    background:var(--rsc-soft);border-left:4px solid var(--rsc);
+    font-size:17px;line-height:1.9;color:var(--ink-2);
+    font-weight:400;
   }
-  .fact b{color:var(--rsc-dark);font-weight:700}
+  .fact b{color:var(--rsc-dark);font-weight:800}
+  .fact strong{color:var(--ink);font-weight:700}
 
-  /* 结语/启示块 */
+  /* 启示块 */
   .takeaway{
-    margin:28px 0;padding:24px;
+    margin:30px 0;padding:26px;
     background:#faf6f6;border:1px solid var(--rule);
+    border-radius:2px;
   }
   .takeaway h4{
-    font-family:-apple-system,"PingFang SC",sans-serif;
-    font-size:11px;font-weight:800;letter-spacing:0.3em;
-    color:var(--rsc);margin:0 0 14px;text-transform:uppercase;
+    font-family:var(--sans);
+    font-size:12px;font-weight:900;letter-spacing:0.3em;
+    color:var(--rsc);margin:0 0 16px;text-transform:uppercase;
   }
-  .takeaway p{margin:8px 0;font-size:15px;line-height:1.9}
-  .takeaway p strong{color:var(--ink)}
+  .takeaway p{margin:10px 0;font-size:17px;line-height:1.9}
+  .takeaway p strong{color:var(--ink);font-weight:800}
 
-  /* 结尾刊物尾 */
+  /* 刊物尾 */
   .colophon{
-    margin:42px 28px 0;padding:28px 0 10px;
+    margin:46px 28px 0;padding:30px 0 12px;
     border-top:2px solid var(--ink);text-align:center;
-    font-family:-apple-system,"PingFang SC",sans-serif;
+    font-family:var(--sans);
   }
   .colophon .mark{
-    font-family:"Playfair Display",serif;font-size:28px;
-    color:var(--rsc);font-style:italic;margin-bottom:12px;
+    font-family:var(--display);font-size:32px;
+    color:var(--rsc);font-style:italic;margin-bottom:14px;font-weight:700;
   }
   .colophon .brand{
-    font-size:14px;font-weight:800;letter-spacing:0.3em;color:var(--ink);
-    margin-bottom:8px;
+    font-size:16px;font-weight:900;letter-spacing:0.3em;
+    color:var(--ink);margin-bottom:10px;
   }
-  .colophon .sub{font-size:12px;color:var(--muted);letter-spacing:0.1em;line-height:1.9}
+  .colophon .sub{
+    font-size:13px;color:var(--muted);
+    letter-spacing:0.08em;line-height:1.9;
+  }
   .colophon .sig{
-    margin-top:14px;font-size:12px;color:var(--muted);
-    font-style:italic;font-family:"Noto Serif SC",serif;
+    margin-top:16px;font-size:13px;color:var(--muted);
+    font-style:italic;
   }
 
   .img-credit{
-    font-size:10px;color:#bbb;text-align:center;
-    margin:16px 0 0;letter-spacing:0.05em;padding:0 28px;
-    font-family:-apple-system,"PingFang SC",sans-serif;
+    font-size:11px;color:#bbb;text-align:center;
+    margin:18px 0 0;letter-spacing:0.05em;padding:0 28px;
+    font-family:var(--sans);
+  }
+
+  /* 手机端微调 */
+  @media (max-width: 480px){
+    body{font-size:18px}
+    .cover h1{font-size:32px}
+    .cover .dek{font-size:17px}
+    h2{font-size:23px}
+    h3{font-size:18px}
+    .pull-quote p{font-size:18px}
+    p, .lede{font-size:17px}
+    .fact{font-size:16px}
+    .takeaway p{font-size:16px}
   }
 </style>
 </head>
@@ -203,7 +261,7 @@
 
   <!-- 刊头 -->
   <div class="masthead">
-    <div class="logo">惊喜之夜 <em>·</em> 剧场观察</div>
+    <div class="logo">惊喜之夜<em>·</em>剧场观察</div>
     <div class="issue">VOL. 04 / 2026</div>
   </div>
 
@@ -216,7 +274,7 @@
   </div>
 
   <div class="hero-img">
-    <img src="https://images.unsplash.com/photo-1516307365426-bea591f05011?w=1600&q=80" alt="英国剧场外观" />
+    <img src="https://images.unsplash.com/photo-1516307365426-bea591f05011?w=2400&q=90&auto=format&fit=crop" alt="英国剧场外观" />
     <div class="cap">▲ 英国老牌剧场｜百年经典院团正在走一条意想不到的技术路径</div>
   </div>
 
@@ -233,7 +291,7 @@
     <h2>精灵 Ariel 的数字化身<small>A STAGE RULE, REWRITTEN</small></h2>
 
     <div class="section-img">
-      <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1600&q=80" alt="舞台投影与数字影像" />
+      <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=2400&q=90&auto=format&fit=crop" alt="舞台投影与数字影像" />
       <div class="cap">▲ 数字化身走上舞台｜动作来自真人演员，渲染由处理器实时完成</div>
     </div>
 
@@ -262,9 +320,9 @@
 
     <p>《暴风雨》的成功只是起点。此后，RSC 在数字技术与表演艺术的交叉地带持续深耕。</p>
 
-    <h3><em>2021</em> Dream 项目</h3>
+    <h3><em>2021</em>Dream 项目</h3>
     <div class="section-img">
-      <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=1600&q=80" alt="VR 虚拟森林体验" />
+      <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=2400&q=90&auto=format&fit=crop" alt="VR 虚拟森林体验" />
       <div class="cap">▲ 实时游戏引擎 + 线上观众｜Dream 将剧场推出物理围墙之外</div>
     </div>
 
@@ -276,9 +334,9 @@
       <b>Dream 的意义｜</b>它证明了戏剧不必局限于物理剧场的围墙之内，数字技术可以创造全新的「在场感」。
     </div>
 
-    <h3><em>2022</em> AI 与表演的交叉研究</h3>
+    <h3><em>2022</em>AI 与表演的交叉研究</h3>
     <div class="section-img">
-      <img src="https://images.unsplash.com/photo-1617839625591-e5a789593135?w=1600&q=80" alt="数字艺术与批判性研究" />
+      <img src="https://images.unsplash.com/photo-1617839625591-e5a789593135?w=2400&q=90&auto=format&fit=crop" alt="数字艺术与批判性研究" />
       <div class="cap">▲ 不是简单地把 AI 搬上舞台，而是审视它带来的偏见</div>
     </div>
 
@@ -288,9 +346,9 @@
 
     <p>这不是简单的「把 AI 搬上舞台」，而是从更深层次审视：当 AI 进入创作领域，它带来了什么样的偏见？<strong>戏剧人如何在使用技术的同时保持批判性思考？</strong></p>
 
-    <h3><em>2024</em> — <em>2025</em> CreaTech Frontiers 集群</h3>
+    <h3><em>2024</em>—<em>2025</em>CreaTech Frontiers 集群</h3>
     <div class="section-img">
-      <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1600&q=80" alt="创意产业集群工作室" />
+      <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=2400&q=90&auto=format&fit=crop" alt="创意产业集群工作室" />
       <div class="cap">▲ £6.75M 政府资助｜RSC 提供现场表演的专业经验</div>
     </div>
 
@@ -308,9 +366,9 @@
 
     <p>在 RSC 的实践之外，学术界也在用 AI 与机器学习重新审视莎士比亚的文本。以下两项研究来自不同的团队、不同的方法路径，值得分开来看。</p>
 
-    <h3><em>研究一</em> Shakespeare Machine（2024）</h3>
+    <h3><em>研究一</em>Shakespeare Machine（2024）</h3>
     <div class="section-img">
-      <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?w=1600&q=80" alt="莎士比亚手稿与标注" />
+      <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?w=2400&q=90&auto=format&fit=crop" alt="莎士比亚手稿与标注" />
       <div class="cap">▲ 逐行情感标注｜让数据看见肉眼不可见的纹理</div>
     </div>
 
@@ -318,7 +376,7 @@
 
     <p>研究者发现，AI 可以识别出不同性别角色在情感表达上的微妙差异，以及莎士比亚笔下角色情绪曲线的结构性特征。</p>
 
-    <h3><em>研究二</em> 机器学习的风格计量（2023）</h3>
+    <h3><em>研究二</em>机器学习的风格计量（2023）</h3>
     <div class="fact">
       <b>一个有趣的数字｜</b>用机器学习对莎士比亚全部剧作进行风格计量（stylometry）分析，发现<strong>实际写作年份与内容风格之间存在 0.71 的相关性</strong>——比如《罗密欧与朱丽叶》虽然写于 1596 年，但其风格特征却更接近 1600 年之后的作品。
     </div>
@@ -334,7 +392,7 @@
     <h2>经典院团拥抱 AI 的启示<small>A TEMPLATE FROM STRATFORD</small></h2>
 
     <div class="section-img">
-      <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?w=1600&q=80" alt="经典文学与书卷" />
+      <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?w=2400&q=90&auto=format&fit=crop" alt="经典文学与书卷" />
       <div class="cap">▲ 传统与创新并非对立，关键在出发点</div>
     </div>
 
