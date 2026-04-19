@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>皇家莎士比亚剧团的AI实验 - 惊喜之夜</title>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
 <style>
   /*
    * 字号规范（v3，严格按 2026-04-17 规则）：
@@ -498,34 +498,38 @@
       if (document.fonts && document.fonts.ready){
         try { await document.fonts.ready; } catch(_){}
       }
-      document.body.classList.add('downloading');
 
-      const canvas = await html2canvas(target, {
-        useCORS: true,
-        allowTaint: false,
+      // 使用 html-to-image 的 toJpeg：用 SVG foreignObject 渲染，精度比 html2canvas 高
+      // 智能压缩：尝试多档质量，找到 ≤ 9MB 的最高质量
+      const toImageJpeg = (q) => htmlToImage.toJpeg(target, {
+        quality: q,
+        pixelRatio: 2,         // Retina 2x
         backgroundColor: '#ffffff',
-        scale: 2,   // Retina 2x
-        logging: false,
-        imageTimeout: 15000,
-        windowWidth: target.offsetWidth,
-        // 在克隆文档里彻底移除浮动元素（防止 FAB/toast 被渲染进长图）
-        onclone: (clonedDoc) => {
-          ['dlBtn', 'dlToast'].forEach(id => {
-            const el = clonedDoc.getElementById(id);
-            if (el) el.remove();
-          });
+        cacheBust: true,
+        skipFonts: false,
+        filter: (node) => {
+          // 过滤掉下载按钮和 toast
+          if (node.id === 'dlBtn' || node.id === 'dlToast') return false;
+          return true;
         }
       });
 
-      document.body.classList.remove('downloading');
+      // dataUrl → blob
+      const dataUrlToBlob = (dataUrl) => {
+        const [meta, b64] = dataUrl.split(',');
+        const bin = atob(b64);
+        const len = bin.length;
+        const buf = new Uint8Array(len);
+        for (let i = 0; i < len; i++) buf[i] = bin.charCodeAt(i);
+        return new Blob([buf], {type: 'image/jpeg'});
+      };
 
-      // 智能压缩：尝试多档 JPEG 质量，找到 ≤ 9MB 的最高质量
-      const toBlob = (q) => new Promise(res => canvas.toBlob(b => res(b), 'image/jpeg', q));
       let blob = null, usedQ = 0;
       for (const q of QUALITIES){
-        const b = await toBlob(q);
+        const dataUrl = await toImageJpeg(q);
+        const b = dataUrlToBlob(dataUrl);
         if (b && b.size <= MAX_BYTES){ blob = b; usedQ = q; break; }
-        if (!blob || (b && b.size < blob.size)){ blob = b; usedQ = q; }  // 保底最小那一版
+        if (!blob || (b && b.size < blob.size)){ blob = b; usedQ = q; }
       }
       if (!blob){ throw new Error('blob 生成失败'); }
 
