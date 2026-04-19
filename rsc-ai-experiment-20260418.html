@@ -455,7 +455,9 @@
 <div class="dl-toast" id="dlToast"></div>
 
 <script>
-  const FILENAME = '皇家莎士比亚RSC-AI实验-20260418.png';
+  const FILENAME_BASE = '皇家莎士比亚RSC-AI实验-20260418';
+  const MAX_BYTES = 9 * 1024 * 1024;  // 公众号建议 ≤10MB，留 1MB 余量
+  const QUALITIES = [0.92, 0.85, 0.78, 0.70];  // 逐级降质
 
   function toast(msg, ms=2400){
     const t = document.getElementById('dlToast');
@@ -502,27 +504,37 @@
 
       document.body.classList.remove('downloading');
 
-      // 转 blob 触发下载
-      canvas.toBlob(blob => {
-        if (!blob){ throw new Error('blob 生成失败'); }
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url; a.download = FILENAME;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        setTimeout(()=>URL.revokeObjectURL(url), 1000);
+      // 智能压缩：尝试多档 JPEG 质量，找到 ≤ 9MB 的最高质量
+      const toBlob = (q) => new Promise(res => canvas.toBlob(b => res(b), 'image/jpeg', q));
+      let blob = null, usedQ = 0;
+      for (const q of QUALITIES){
+        const b = await toBlob(q);
+        if (b && b.size <= MAX_BYTES){ blob = b; usedQ = q; break; }
+        if (!blob || (b && b.size < blob.size)){ blob = b; usedQ = q; }  // 保底最小那一版
+      }
+      if (!blob){ throw new Error('blob 生成失败'); }
 
-        btn.classList.remove('loading');
-        btn.classList.add('done');
-        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>已保存</span>';
-        toast('✅ 长图已下载到你的设备，查看下载文件夹', 3600);
+      const sizeMB = (blob.size / 1024 / 1024).toFixed(1);
+      const compressed = usedQ < 0.92;
+      const filename = FILENAME_BASE + '.jpg';
 
-        setTimeout(()=>{
-          btn.classList.remove('done');
-          btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>保存长图</span>';
-        }, 4000);
-      }, 'image/png', 0.95);
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(()=>URL.revokeObjectURL(url), 1000);
+
+      btn.classList.remove('loading');
+      btn.classList.add('done');
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>已保存</span>';
+      toast(`✅ 长图已下载 · ${sizeMB}MB${compressed ? ' (已压缩适配公众号)' : ''}`, 3800);
+
+      setTimeout(()=>{
+        btn.classList.remove('done');
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>保存长图</span>';
+      }, 4000);
 
     }catch(e){
       document.body.classList.remove('downloading');
