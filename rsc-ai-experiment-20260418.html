@@ -494,6 +494,10 @@
     try{
       const target = document.querySelector('.wrap');
       await waitImgsReady(target);
+      // 等待字体加载完成（防止 Playfair 未加载就渲染导致基线偏移）
+      if (document.fonts && document.fonts.ready){
+        try { await document.fonts.ready; } catch(_){}
+      }
       document.body.classList.add('downloading');
 
       const canvas = await html2canvas(target, {
@@ -504,6 +508,13 @@
         logging: false,
         imageTimeout: 15000,
         windowWidth: target.offsetWidth,
+        // 在克隆文档里彻底移除浮动元素（防止 FAB/toast 被渲染进长图）
+        onclone: (clonedDoc) => {
+          ['dlBtn', 'dlToast'].forEach(id => {
+            const el = clonedDoc.getElementById(id);
+            if (el) el.remove();
+          });
+        }
       });
 
       document.body.classList.remove('downloading');
