@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=375,initial-scale=1">
+<title>AI 能生成任何画面的年代，我们为什么还在剧场里扛起一只巨型木偶｜《山海经·巨灵之梦》幕后小记</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --accent:#C4832A;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Source Han Sans SC","Noto Sans CJK SC","Microsoft YaHei UI","Microsoft YaHei",sans-serif;
+  --display:"Playfair Display",Georgia,"Times New Roman",serif;
+}
+body{
+  background:#0d0d0d;
+  font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  width:375px;
+  margin:0 auto;
+}
+img{image-rendering:-webkit-optimize-contrast;display:block}
+.card{
+  position:relative;width:375px;aspect-ratio:3/4;
+  overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;
+}
+.card-bg{position:absolute;inset:0;background:#0d0d0d}
+.card-bg img{width:100%;height:100%;object-fit:cover;opacity:0.8}
+.card-grad{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,0.96) 0%,rgba(0,0,0,0.35) 55%,rgba(0,0,0,0.0) 100%);
+}
+.card-num{
+  position:absolute;top:20px;left:22px;
+  font-family:var(--display);font-size:96px;font-weight:900;
+  color:var(--accent);opacity:0.88;line-height:1;letter-spacing:0;
+}
+.brand{
+  position:absolute;top:24px;right:18px;
+  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(255,255,255,0.5);font-weight:500;
+}
+.card-body{position:relative;z-index:2;padding:20px 22px 26px}
+.ctag{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.48);margin-bottom:8px;font-weight:500}
+.ctitle{font-size:26px;font-weight:700;color:#fff;line-height:1.38;margin-bottom:12px}
+.cfact{font-size:13px;color:rgba(255,255,255,0.82);line-height:1.75;padding-left:10px;border-left:2px solid var(--accent);margin-bottom:9px}
+.ccap{font-size:10px;color:rgba(255,255,255,0.32);line-height:1.5;margin-top:4px}
+
+/* 封面 */
+.cover .card-grad{background:linear-gradient(to top,rgba(0,0,0,0.97) 0%,rgba(0,0,0,0.55) 45%,rgba(0,0,0,0.12) 100%)}
+.cov-eye{position:relative;z-index:2;padding:0 22px 6px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);font-weight:600}
+.cov-h1{position:relative;z-index:2;padding:0 22px 10px;font-size:27px;font-weight:800;color:#fff;line-height:1.32}
+.cov-line{position:relative;z-index:2;margin:0 22px 14px;height:1px;background:linear-gradient(to right,var(--accent),transparent)}
+.cov-sub{position:relative;z-index:2;padding:0 22px 10px;font-size:13px;color:rgba(255,255,255,0.66);line-height:1.7}
+.cov-by{position:relative;z-index:2;padding:0 22px 26px;font-size:11px;color:rgba(255,255,255,0.38);letter-spacing:1px}
+
+/* 总结卡 */
+.sum-card{
+  width:375px;aspect-ratio:3/4;
+  background:linear-gradient(155deg,#1c1208 0%,#0d0d0d 50%,#141008 100%);
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:44px 28px 32px;
+}
+.sum-quo{font-family:var(--display);font-size:72px;color:var(--accent);opacity:0.25;line-height:1;margin-bottom:16px}
+.sum-q{font-size:21px;font-weight:700;color:#fff;line-height:1.55;margin-bottom:16px}
+.sum-a{font-size:14px;color:rgba(255,255,255,0.72);line-height:1.85;border-left:2px solid var(--accent);padding-left:12px;margin-bottom:28px}
+.sum-box{border:1px solid rgba(196,131,42,0.38);border-radius:4px;padding:14px 16px;text-align:center;color:var(--accent);font-size:12px;letter-spacing:1px;line-height:1.7;margin-bottom:20px}
+.sum-tags{font-size:11px;color:rgba(255,255,255,0.28);line-height:2;text-align:center}
+.sum-ft{text-align:center;font-size:11px;color:rgba(255,255,255,0.28);letter-spacing:1px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.07)}
+</style>
+</head>
+<body>
+
+<!-- 封面卡 -->
+<div class="card cover">
+  <div class="card-bg">
+    <img src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?w=1080&h=1440&fit=crop&q=90&auto=format"
+         alt="舞台表演" crossorigin="anonymous">
+  </div>
+  <div class="card-grad"></div>
+  <div class="brand">惊喜之夜</div>
+  <div class="cov-eye">山海经·巨灵之梦 ｜ 幕后小记</div>
+  <div class="cov-h1">AI 能生成任何画面的年代，我们为什么还在剧场里扛起一只巨型木偶？</div>
+  <div class="cov-line"></div>
+  <div class="cov-sub">当「生成」变得越来越容易，我们反而更想保住那些必须靠身体、时间和劳动才能成立的东西。</div>
+  <div class="cov-by">—— 夜枭 ｜ 惊喜之夜</div>
+</div>
+
+<!-- Card 01 -->
+<div class="card">
+  <div class="card-bg">
+    <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?w=1080&h=1440&fit=crop&q=90&auto=format"
+         alt="剧场大幕" crossorigin="anonymous">
+  </div>
+  <div class="card-grad"></div>
+  <div class="card-num">01</div>
+  <div class="brand">惊喜之夜</div>
+  <div class="card-body">
+    <div class="ctag">木偶 · 不是一种旧媒介</div>
+    <div class="ctitle">大家买票进剧场，<br>要看的不是「一个巨物形象」</div>
+    <div class="cfact">是「几个人一起把它举起来」这件事本身——那份重量和操控的紧张，是这个场面核心</div>
+    <div class="cfact">5 米高的巨偶，从打造到让它在舞台上走起来，是计以月计的工程</div>
+    <div class="ccap">▲ 扬州杖头木偶非遗 ｜ 操偶师的身体劳动是演出意义的一部分</div>
+  </div>
+</div>
+
+<!-- Card 02 -->
+<div class="card">
+  <div class="card-bg">
+    <img src="https://images.unsplash.com/photo-1514306191717-452ec28c7814?w=1080&h=1440&fit=crop&q=90&auto=format"
+         alt="舞台灯光" crossorigin="anonymous">
+  </div>
+  <div class="card-grad"></div>
+  <div class="card-num">02</div>
+  <div class="brand">惊喜之夜</div>
+  <div class="card-body">
+    <div class="ctag">现当代结合 · 不是装饰，是翻译</div>
+    <div class="ctitle">「当代」的所有手段，<br>是让木偶这种古老语言<br>被今天的人读懂</div>
+    <div class="cfact">多媒体不是替木偶制造奇观<br>音乐不是让传统显得洋气<br>而是对得上今天观众的感知节奏</div>
+    <div class="ccap">▲ 国际音乐设计 Sid Peacock × 扬州杖头木偶 ｜ 技术是翻译工具</div>
+  </div>
+</div>
+
+<!-- Card 03 -->
+<div class="card">
+  <div class="card-bg">
+    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1080&h=1440&fit=crop&q=90&auto=format"
+         alt="AI科技" crossorigin="anonymous">
+  </div>
+  <div class="card-grad"></div>
+  <div class="card-num">03</div>
+  <div class="brand">惊喜之夜</div>
+  <div class="card-body">
+    <div class="ctag">AI · 暂时的三个感觉</div>
+    <div class="ctitle">它更适合靠近排练厅，<br>而不是替代舞台</div>
+    <div class="cfact">✓ 也许可以进来：前期视觉预演、音乐草稿生成、工种间沟通前置</div>
+    <div class="cfact">✗ 暂时不碰：操偶师与巨偶之间真实的力学关系，观众看见劳动时产生的震动</div>
+    <div class="ccap">▲ 我们不想过早替 AI 在戏剧里下定义 ｜ 比起答案，更愿把它当探索中的工具</div>
+  </div>
+</div>
+
+<!-- 总结卡 -->
+<div class="sum-card">
+  <div>
+    <div class="sum-quo">"</div>
+    <div class="sum-q">当生成愈来愈便宜，我们还愿不愿意花几个月、几十个人的力气，把一只 5 米高的偶真的举到舞台上？</div>
+    <div class="sum-a">我们的答案在扬州的剧院里数了数，是愿意。</div>
+    <div class="sum-box">4月20-24日 · 全国演出交易会现场见<br>7月 · 百域偶韵 北京顺义大剧院</div>
+    <div class="sum-tags">#沉浸式演出 #非遗活化 #木偶剧 #山海经 #AI与艺术 #剧场幕后<br>#惊喜之夜 #巨灵之梦</div>
+  </div>
+  <div class="sum-ft">—— 夜枭 ｜ 惊喜之夜</div>
+</div>
+
+</body>
+</html>
