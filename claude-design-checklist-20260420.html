@@ -4,220 +4,203 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Claude Design 不是设计师 · 公众号</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <style>
-/* ──────── RESET & BASE ──────── */
 *{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-font-smoothing:antialiased}
 body{
   background:#f5f5f0;
-  font-family:'Noto Sans SC','PingFang SC','Helvetica Neue',sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Source Han Sans SC","Noto Sans CJK SC","Microsoft YaHei UI","Microsoft YaHei",sans-serif;
   color:#1a1a1a;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
 }
+img{image-rendering:-webkit-optimize-contrast}
 
-/* ──────── ARTICLE WRAPPER ──────── */
-.article{
-  max-width:780px;
-  margin:0 auto;
-  background:#fff;
-}
+.wrap{max-width:720px;margin:0 auto;background:#fff}
 
-/* ──────── HERO ──────── */
+/* ── HERO ── */
 .hero{
+  height:480px;
+  background-image:url('https://ananinalfe-ship-it.github.io/notion-ai-preview/gzh-checklist-hero.jpg');
+  background-size:cover;background-position:center;
   position:relative;
-  height:520px;overflow:hidden;
-  background:#1a1a1a;
-}
-.hero img{
-  width:100%;height:100%;object-fit:cover;object-position:center top;
-  opacity:.55;
 }
 .hero-overlay{
   position:absolute;inset:0;
-  background:linear-gradient(175deg,rgba(26,26,26,.3) 0%,rgba(26,26,26,.88) 100%);
+  background:linear-gradient(175deg,rgba(20,20,20,.3) 0%,rgba(20,20,20,.88) 100%);
 }
 .hero-inner{
   position:absolute;inset:0;
-  display:flex;flex-direction:column;
-  justify-content:flex-end;
-  padding:52px 56px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:48px 52px;
 }
 .hero-eyebrow{
-  font-size:16px;letter-spacing:.2em;color:#e87722;
-  font-weight:600;text-transform:uppercase;
-  margin-bottom:16px;
+  font-size:14px;letter-spacing:.2em;color:#e87722;
+  font-weight:600;text-transform:uppercase;margin-bottom:14px;
 }
 .hero-h{
-  font-size:36px;font-weight:900;color:#fff;
-  line-height:1.3;margin-bottom:20px;
+  font-size:29px;font-weight:900;color:#fff;line-height:1.35;margin-bottom:16px;
 }
 .hero-sub{
-  font-size:19px;color:rgba(255,255,255,.72);line-height:1.6;
+  font-size:19px;color:rgba(255,255,255,.7);line-height:1.6;
 }
 
-/* ──────── LEAD ──────── */
+/* ── LEAD ── */
 .lead{
-  padding:48px 56px 0;
-  font-size:23px;color:#444;line-height:1.8;
+  padding:36px 52px;
+  font-size:23px;color:#444;line-height:1.85;
   border-left:4px solid #e87722;
   background:#fffbf7;
-  padding-top:32px;padding-bottom:32px;
-  margin:0;
 }
 
-/* ──────── BODY SECTION ──────── */
-.body-wrap{padding:0 56px 56px}
+/* ── SECTION IMG ── */
+.section-img{
+  width:100%;height:320px;
+  background-size:cover;background-position:center;
+}
 
-/* 分节编号 */
+/* ── BODY ── */
+.body-wrap{padding:0 52px 56px}
+
 .section{margin-top:56px}
 .section-num{
-  font-size:72px;font-weight:900;
-  color:#f0ede8;line-height:1;
-  font-family:Georgia,serif;
-  margin-bottom:-20px;
-  letter-spacing:-.02em;
+  font-size:68px;font-weight:900;color:#f0ede8;line-height:1;
+  font-family:Georgia,serif;margin-bottom:-16px;letter-spacing:-.02em;
 }
 .section-h{
-  font-size:32px;font-weight:800;color:#1a1a1a;
-  line-height:1.3;padding-bottom:16px;
-  border-bottom:2px solid #e87722;
-  margin-bottom:24px;
+  font-size:32px;font-weight:800;color:#1a1a1a;line-height:1.3;
+  padding-bottom:14px;border-bottom:2px solid #e87722;margin-bottom:22px;
 }
 .section-h em{color:#e87722;font-style:normal}
+.section-sub{font-size:21px;color:#888;font-weight:500;display:block;margin-top:4px}
 
-/* 正文 */
-p.body{
-  font-size:25px;color:#333;line-height:1.85;
-  margin-bottom:20px;
-}
+p.body{font-size:25px;color:#333;line-height:1.85;margin-bottom:20px}
 p.body strong{color:#1a1a1a;font-weight:700}
+p.body em{color:#e87722;font-style:normal}
+
+/* 列表 */
+.body-list{margin:20px 0;padding-left:0;list-style:none}
+.body-list li{
+  font-size:25px;color:#333;line-height:1.75;
+  padding:10px 0 10px 32px;
+  border-bottom:1px solid rgba(232,135,34,.1);
+  position:relative;
+}
+.body-list li:last-child{border-bottom:none}
+.body-list li::before{
+  content:"▶";font-size:11px;color:#e87722;
+  position:absolute;left:8px;top:16px;
+}
+.body-list li strong{color:#1a1a1a;font-weight:700}
 
 /* 检查清单 */
 .checklist{
-  background:#fffbf7;
-  border:1.5px solid #f0e0cc;
-  border-radius:12px;
-  padding:32px 36px;
-  margin:24px 0;
+  background:#fffbf7;border:1.5px solid #f0e0cc;border-radius:12px;
+  padding:28px 32px;margin:22px 0;
 }
 .checklist-title{
-  font-size:19px;font-weight:700;color:#e87722;
-  letter-spacing:.05em;margin-bottom:20px;
-  display:flex;align-items:center;gap:8px;
+  font-size:17px;font-weight:700;color:#e87722;letter-spacing:.05em;
+  margin-bottom:18px;display:flex;align-items:center;gap:8px;
 }
-.checklist-title::before{content:"✦";font-size:14px}
+.checklist-title::before{content:"✦";font-size:13px}
 .check-item{
-  display:flex;align-items:flex-start;gap:14px;
-  font-size:24px;color:#333;line-height:1.65;
-  padding:10px 0;
-  border-bottom:1px solid rgba(232,135,34,.1);
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:25px;color:#333;line-height:1.65;
+  padding:10px 0;border-bottom:1px solid rgba(232,135,34,.1);
 }
 .check-item:last-child{border-bottom:none;padding-bottom:0}
 .check-mark{
-  flex-shrink:0;width:28px;height:28px;
-  background:#e87722;border-radius:50%;
+  flex-shrink:0;width:26px;height:26px;background:#e87722;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  color:#fff;font-size:14px;font-weight:700;
-  margin-top:4px;
+  color:#fff;font-size:12px;font-weight:700;margin-top:5px;
 }
+.check-mark.q{background:#bbb}
+.check-mark.hi{background:#e87722}
+.check-mark.mid{background:#aaa}
+.check-mark.lo{background:#d0d0d0;color:#666}
+.check-item span strong{color:#1a1a1a}
 
 /* 金句引用 */
 .pullquote{
-  margin:32px 0;
-  padding:32px 40px;
+  margin:28px 0;padding:28px 36px;
   background:linear-gradient(135deg,#fff9f4,#fff3e8);
-  border-radius:12px;
-  border-left:5px solid #e87722;
+  border-radius:12px;border-left:5px solid #e87722;
 }
-.pullquote p{
-  font-size:26px;color:#333;line-height:1.7;
-  font-style:italic;
-}
-.pullquote strong{color:#e87722;font-style:normal;font-weight:700}
+.pullquote p{font-size:25px;color:#333;line-height:1.75}
+.pullquote strong{color:#e87722;font-weight:700}
 
 /* ▼ 分隔符 */
 .divider{
   text-align:center;margin:44px 0 28px;
-  font-size:15px;color:#bbb;
-  font-weight:600;letter-spacing:.1em;
+  font-size:13px;color:#bbb;font-weight:600;letter-spacing:.1em;
 }
 .divider::before{content:"▼  "}
 
-/* ──────── 结语区 ──────── */
+/* ── 结语 ── */
 .coda{
-  background:#1a1a1a;
-  color:#fff;
-  padding:56px 56px 48px;
-  margin-top:64px;
+  background:#1a1a1a;color:#fff;
+  padding:52px 52px 44px;margin-top:60px;
 }
-.coda-h{
-  font-size:30px;font-weight:800;color:#fff;
-  line-height:1.4;margin-bottom:20px;
-}
+.coda-h{font-size:29px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:18px}
 .coda-h em{color:#e87722;font-style:normal}
-.coda-p{
-  font-size:24px;color:rgba(255,255,255,.75);
-  line-height:1.8;
-}
+.coda-p{font-size:25px;color:rgba(255,255,255,.78);line-height:1.85}
 .coda-p strong{color:#e87722}
 
-/* ──────── 底部 ──────── */
+/* ── 底部 ── */
 .footer{
-  background:#f5f5f0;
-  padding:40px 56px;
+  background:#f5f5f0;padding:36px 52px;
   display:flex;justify-content:space-between;align-items:center;
 }
-.footer-brand{font-size:18px;color:#888;letter-spacing:.05em}
+.footer-brand{font-size:16px;color:#888;letter-spacing:.05em}
 .footer-tag{
-  font-size:16px;color:#e87722;
-  background:rgba(232,135,34,.08);
-  padding:6px 16px;border-radius:20px;
+  font-size:15px;color:#e87722;
+  background:rgba(232,135,34,.08);padding:6px 16px;border-radius:20px;
   border:1px solid rgba(232,135,34,.25);
 }
 
-/* ──────── 下载按钮 (html2canvas FAB) ──────── */
-#dl-btn{
-  position:fixed;bottom:32px;right:32px;z-index:9999;
-  width:60px;height:60px;border-radius:50%;
-  background:#e87722;color:#fff;
-  border:none;cursor:pointer;
-  font-size:24px;
-  box-shadow:0 4px 20px rgba(232,135,34,.45);
-  display:flex;align-items:center;justify-content:center;
-  transition:transform .15s,box-shadow .15s;
+/* ── 下载FAB ── */
+.dl-fab{
+  position:fixed;right:18px;bottom:18px;z-index:99;
+  display:flex;align-items:center;gap:8px;padding:12px 18px;
+  background:#e87722;color:#fff;border:none;border-radius:28px;cursor:pointer;
+  font-family:inherit;font-size:14px;font-weight:700;letter-spacing:.05em;
+  box-shadow:0 6px 22px rgba(232,135,34,.4);
+  transition:all .2s ease;-webkit-tap-highlight-color:transparent;
 }
-#dl-btn:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(232,135,34,.55)}
-#dl-btn:active{transform:scale(.96)}
+.dl-fab:hover{transform:translateY(-2px)}
+.dl-fab.loading{background:#888;cursor:wait;pointer-events:none}
+.dl-fab.done{background:#2d7a3a}
+.dl-fab svg{width:18px;height:18px;flex-shrink:0}
+.dl-fab .sp{width:16px;height:16px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.dl-toast{
+  position:fixed;left:50%;bottom:80px;transform:translateX(-50%) translateY(20px);
+  background:rgba(20,20,20,.92);color:#fff;padding:14px 22px;border-radius:8px;
+  font-family:inherit;font-size:14px;font-weight:500;
+  opacity:0;pointer-events:none;transition:all .3s ease;z-index:100;
+  max-width:90%;text-align:center;line-height:1.6;
+}
+.dl-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.downloading .dl-fab,.downloading .dl-toast{display:none}
 </style>
 </head>
 <body>
 
-<!-- ── FAB 下载按钮 ── -->
-<button id="dl-btn" title="保存长图">⬇</button>
-<script>
-(function(){
-  var s=document.createElement('script');
-  s.src='https://html2canvas.hertzen.com/dist/html2canvas.min.js';
-  s.onload=function(){
-    document.getElementById('dl-btn').onclick=function(){
-      var btn=this;btn.style.display='none';
-      html2canvas(document.body,{scale:2,useCORS:true,allowTaint:true,backgroundColor:'#f5f5f0'}).then(function(c){
-        var a=document.createElement('a');
-        a.download='claude-design-checklist-20260420.png';
-        a.href=c.toDataURL('image/png');
-        a.click();
-        btn.style.display='flex';
-      });
-    };
-  };
-  document.head.appendChild(s);
-})();
-</script>
+<button class="dl-fab" id="dlBtn" onclick="savelongImage()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <polyline points="7 10 12 15 17 10"/>
+    <line x1="12" y1="15" x2="12" y2="3"/>
+  </svg>
+  <span id="dlText">保存长图</span>
+</button>
+<div class="dl-toast" id="dlToast"></div>
 
-<div class="article">
+<div class="wrap">
 
-  <!-- ── HERO ── -->
+  <!-- HERO -->
   <div class="hero">
-    <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=780&h=520&fit=crop&crop=top" alt="">
     <div class="hero-overlay"></div>
     <div class="hero-inner">
       <div class="hero-eyebrow">Claude Design 实战</div>
@@ -226,75 +209,112 @@ p.body strong{color:#1a1a1a;font-weight:700}
     </div>
   </div>
 
-  <!-- ── LEAD ── -->
+  <!-- LEAD -->
   <div class="lead">
-    你以为 Claude Design 的价值是"帮你把页面画出来"。我这两天的体感恰好相反：它最厉害的地方，是逼你把<strong>「导演的标准」说清楚</strong>——并且把这些标准变成一张可以验收的清单。
+    你以为 Claude Design 的价值是"帮你把页面画出来"。我这两天的体感恰好相反：它最厉害的地方，是逼你把"导演的标准"说清楚——并且把这些标准变成一张可以验收的清单。<br><br>
+    我昨天把惊喜之夜官网推进到"可对外演示版"：首页 + 作品页 + 山海经 5 页 + 6 个作品详情页 + 合作/关于/合作艺术家，共 15 页，整体完成度约 92%。这个过程中，Claude 帮我做的不是"灵感"，而是把我脑子里那些模糊的判断（克制、强度、观众路径、空间即剧本）拆成了可执行的步骤。<br><br>
+    下面这份清单，是我在实际搭建中反复用来"判对/判错"的标准。你也可以拿去验收任何一个品牌网站、作品集网站，甚至一条内容落地页。
   </div>
 
-  <!-- ── BODY ── -->
+  <!-- SECTION IMG 01 -->
+  <div class="section-img" style="background-image:url('https://ananinalfe-ship-it.github.io/notion-ai-preview/gzh-checklist-img01.jpg');background-position:center top"></div>
+  <div style="font-size:13px;color:#aaa;text-align:center;padding:8px 0 0;font-family:inherit">▲ 惊喜之夜品牌设计系统 · 由 Claude Design 推进</div>
+
   <div class="body-wrap">
 
+    <!-- 01 -->
     <div class="section">
       <div class="section-num">01</div>
-      <div class="section-h">先定<em>「可演示版本」</em>的定义<br><span style="font-size:22px;color:#888;font-weight:500">否则永远在做半成品</span></div>
+      <div class="section-h">先定<em>「可演示版本」</em>的定义<span class="section-sub">否则永远在做半成品</span></div>
       <p class="body">很多人做网站失败，不是不会做页面，而是不知道"什么叫可以给别人看"。</p>
+      <p class="body"><strong>我对可演示版的定义：</strong></p>
       <div class="checklist">
         <div class="checklist-title">可演示版 · 检查清单</div>
-        <div class="check-item"><span class="check-mark">✓</span><span>走完整个观众路径：首页 → 作品 → 详情 → 核心信息/视频 → 能返回继续浏览</span></div>
-        <div class="check-item"><span class="check-mark">✓</span><span>每个关键页至少有：清晰标题 + 1个主视觉 + 1个信息区块 + 1个行动引导（CTA）</span></div>
+        <div class="check-item"><span class="check-mark">✓</span><span>走完整个观众路径：从首页进入 → 看到作品 → 点进详情 → 看到核心信息/视频/剧照 → 能返回继续浏览</span></div>
+        <div class="check-item"><span class="check-mark">✓</span><span>每个关键页至少有：清晰标题 + 1 个主视觉（图/视频）+ 1 个信息区块 + 1 个行动引导（CTA）</span></div>
         <div class="check-item"><span class="check-mark">✓</span><span>不做"未来会写"的空块：宁愿删掉，也不要留占位</span></div>
       </div>
-      <p class="body">Claude Design 在这里的作用：它会不断追问"<strong>你的用户下一步要去哪？</strong>"——这逼你把网站当成"动线"，而不是"图册"。</p>
+      <p class="body">Claude Design 在这里的作用：它会不断追问"你的用户下一步要去哪？"这逼你把网站当成"动线"，而不是"图册"。</p>
     </div>
 
     <div class="divider">观众路径</div>
 
+    <!-- 02 -->
     <div class="section">
       <div class="section-num">02</div>
-      <div class="section-h"><em>观众路径</em>优先<br><span style="font-size:22px;color:#888;font-weight:500">页面数量不重要，转场顺不顺才重要</span></div>
-      <p class="body">我做官网时最大的判断标准，是用"导演语言"来描述每一页：</p>
+      <div class="section-h"><em>观众路径</em>优先<span class="section-sub">页面数量不重要，转场顺不顺才重要</span></div>
+      <p class="body">我做官网时最大的判断标准是：</p>
       <div class="checklist">
         <div class="checklist-title">导演视角 · 页面诊断</div>
         <div class="check-item"><span class="check-mark">✓</span><span><strong>首页</strong>不是介绍自己，是让观众"选入口"</span></div>
-        <div class="check-item"><span class="check-mark">✓</span><span><strong>作品页</strong>不是陈列，是给观众一个"浏览模式"</span></div>
-        <div class="check-item"><span class="check-mark">✓</span><span><strong>详情页</strong>不是堆信息，而是一个节奏：主视觉 → 关键一句话 → 证据 → 余味</span></div>
+        <div class="check-item"><span class="check-mark">✓</span><span><strong>作品页</strong>不是陈列，是给观众一个"浏览模式"（比如 Grid/Timeline）</span></div>
+        <div class="check-item"><span class="check-mark">✓</span><span><strong>详情页</strong>不是堆信息，而是一个"节奏"：主视觉 → 关键一句话 → 证据（视频/剧照）→ 余味</span></div>
       </div>
+      <p class="body">你会发现，这些都是导演的语言：入口、节奏、转场、证据。</p>
     </div>
 
     <div class="divider">可复用模块</div>
 
+  </div><!-- end body-wrap first part -->
+
+  <!-- SECTION IMG 02 -->
+  <div class="section-img" style="background-image:url('https://ananinalfe-ship-it.github.io/notion-ai-preview/gzh-checklist-img02.jpg');background-position:left top"></div>
+  <div style="font-size:13px;color:#aaa;text-align:center;padding:8px 0 0;font-family:inherit">▲ Token 表 · Dark — 设计系统的"单一真实来源"</div>
+
+  <div class="body-wrap" style="padding-top:0">
+
+    <!-- 03 -->
     <div class="section">
       <div class="section-num">03</div>
-      <div class="section-h">统一<em>「可复用模块」</em><br><span style="font-size:22px;color:#888;font-weight:500">比单页优化更省命</span></div>
-      <p class="body">搭建中强行做了几件"全局统一"的事：视频双源切换、Logo 替换联动全站、剧照交互统一。</p>
+      <div class="section-h">统一<em>「可复用模块」</em><span class="section-sub">比单页优化更省命</span></div>
+      <p class="body">我在搭建中强行做了几件"全局统一"的事：</p>
+      <ul class="body-list">
+        <li>作品宣传片统一为 <strong>YouTube + B 站双源切换</strong>（否则每个页面都会变成一次独立维护）</li>
+        <li>Logo 替换策略先定：只要替换一个核心文件/路径，<strong>全站联动</strong></li>
+        <li>剧照交互统一：点击放大 + 键盘左右切换（统一体验，也统一心智）</li>
+      </ul>
+      <p class="body"><strong>这里的检查问题：</strong></p>
       <div class="checklist">
         <div class="checklist-title">模块化 · 两个判断题</div>
-        <div class="check-item"><span class="check-mark">?</span><span>这个功能会出现在多少页？<strong>超过 3 页，就必须模块化。</strong></span></div>
-        <div class="check-item"><span class="check-mark">?</span><span>这个模块的输入输出是什么？（比如：视频 ID、剧照数组、标题）</span></div>
+        <div class="check-item"><span class="check-mark q">?</span><span>这个功能会出现在多少页？如果<strong>超过 3 页，就必须模块化</strong></span></div>
+        <div class="check-item"><span class="check-mark q">?</span><span>这个模块的输入输出是什么？（比如：视频 ID、剧照数组、标题）</span></div>
       </div>
+      <p class="body">Claude Design 的价值：把"模块化"从工程师习惯变成内容/设计也能讨论的结构。</p>
     </div>
 
     <div class="divider">克制</div>
 
+    <!-- 04 -->
     <div class="section">
       <div class="section-num">04</div>
-      <div class="section-h"><em>「克制」</em>不是少做<br><span style="font-size:22px;color:#888;font-weight:500">而是删掉不服务目标的部分</span></div>
-      <p class="body">搭建过程中有个反复做的动作：<strong>删</strong>。</p>
-      <div class="pullquote">
-        <p>任何一块内容，如果不能让观众更快理解"<strong>我们是谁 / 我们能做什么 / 我们做过什么</strong>"，就删掉。</p>
-      </div>
+      <div class="section-h"><em>「克制」</em>不是少做<span class="section-sub">而是删掉不服务目标的部分</span></div>
+      <p class="body">我在搭建过程中有个反复做的动作：<strong>删</strong>。</p>
+      <ul class="body-list">
+        <li>任何一块如果不能让观众更快理解"我们是谁/我们能做什么/我们做过什么"，就删掉</li>
+        <li>任何一段文案如果只是"漂亮"，但不提供信息密度，就重写</li>
+      </ul>
       <div class="checklist">
         <div class="checklist-title">克制 · 灵魂拷问</div>
-        <div class="check-item"><span class="check-mark">?</span><span>这块内容服务的是<strong>品牌定位</strong>，还是服务的是创作者的虚荣？</span></div>
+        <div class="check-item"><span class="check-mark q">?</span><span>这块内容服务的是<strong>品牌定位</strong>，还是服务的是创作者的虚荣？</span></div>
       </div>
     </div>
 
     <div class="divider">交互彩蛋</div>
 
+  </div><!-- end body-wrap second part -->
+
+  <!-- SECTION IMG 03 -->
+  <div class="section-img" style="background-image:url('https://ananinalfe-ship-it.github.io/notion-ai-preview/gzh-checklist-img03.jpg');background-position:center top"></div>
+  <div style="font-size:13px;color:#aaa;text-align:center;padding:8px 0 0;font-family:inherit">▲ 字体系统 · 空间即剧本的视觉语言</div>
+
+  <div class="body-wrap" style="padding-top:0">
+
+    <!-- 05 -->
     <div class="section">
       <div class="section-num">05</div>
-      <div class="section-h">交互彩蛋要<em>「收口」</em><br><span style="font-size:22px;color:#888;font-weight:500">可玩，但必须可解释</span></div>
-      <p class="body">首页做了"三把钥匙"解锁隐藏卡的彩蛋。彩蛋很容易失控——做着做着变成独立小游戏。</p>
+      <div class="section-h">交互彩蛋要<em>「收口」</em><span class="section-sub">可玩，但必须可解释</span></div>
+      <p class="body">我在首页做了"三把钥匙"解锁隐藏卡的彩蛋。<br>彩蛋很容易失控：做着做着就变成一个独立小游戏。</p>
+      <p class="body"><strong>我的收口规则：</strong></p>
       <div class="checklist">
         <div class="checklist-title">彩蛋 · 收口规则</div>
         <div class="check-item"><span class="check-mark">✓</span><span>彩蛋只做一次机制，不做多套</span></div>
@@ -305,40 +325,84 @@ p.body strong{color:#1a1a1a;font-weight:700}
 
     <div class="divider">优先级</div>
 
+    <!-- 06 -->
     <div class="section">
       <div class="section-num">06</div>
-      <div class="section-h">最后才做<em>「锦上添花」</em>层<br><span style="font-size:22px;color:#888;font-weight:500">SEO / OG / 性能</span></div>
+      <div class="section-h">最后才做<em>「锦上添花」</em>层<span class="section-sub">SEO / OG / 性能</span></div>
       <p class="body">把优先级写在纸面上非常重要。我把待办分成三层：</p>
       <div class="checklist">
         <div class="checklist-title">待办优先级矩阵</div>
-        <div class="check-item"><span class="check-mark" style="background:#e87722">高</span><span><strong>高优</strong>：contact 页升级、新 logo 替换、内容二次校对</span></div>
-        <div class="check-item"><span class="check-mark" style="background:#999">中</span><span><strong>中</strong>：移动端真机测试、筛选器细节、i18n</span></div>
-        <div class="check-item"><span class="check-mark" style="background:#ccc">低</span><span><strong>低</strong>：SEO/OG、WebP/懒加载、favicon、统一弹窗动画</span></div>
+        <div class="check-item"><span class="check-mark hi">高</span><span><strong>高优</strong>：contact 页升级、新 logo 替换、内容二次校对</span></div>
+        <div class="check-item"><span class="check-mark mid">中</span><span><strong>中</strong>：移动端真机测试、筛选器细节、i18n</span></div>
+        <div class="check-item"><span class="check-mark lo">低</span><span><strong>低</strong>：SEO/OG、WebP/懒加载、favicon、统一弹窗动画</span></div>
       </div>
-      <div class="checklist" style="margin-top:16px">
+      <p class="body"><strong>检查问题：</strong></p>
+      <div class="checklist" style="margin-top:0">
         <div class="checklist-title">每件事做之前问</div>
-        <div class="check-item"><span class="check-mark">?</span><span>这件事不做，会影响"可演示"吗？</span></div>
-        <div class="check-item"><span class="check-mark">?</span><span>这件事不做，会影响"可信度"吗？</span></div>
+        <div class="check-item"><span class="check-mark q">?</span><span>这件事不做，会影响"可演示"吗？</span></div>
+        <div class="check-item"><span class="check-mark q">?</span><span>这件事不做，会影响"可信度"吗？（比如 contact）</span></div>
       </div>
     </div>
 
   </div><!-- end body-wrap -->
 
-  <!-- ── 结语 ── -->
+  <!-- 结语 -->
   <div class="coda">
     <div class="coda-h">AI 时代，最稀缺的<br>不是手速，是<em>「裁决标准」</em></div>
     <p class="coda-p">
       Claude Design 会让做网站变快，但真正决定你作品质感的，是你能否给出清晰的裁决：<strong>什么算对，什么算不对。</strong><br><br>
-      当你把这些标准写成清单，你就拥有了一个可复制的工作流：换一个项目、换一套素材，网站依然能稳定落地。
+      当你把这些标准写成清单，你就拥有了一个可复制的工作流：换一个项目、换一套素材，网站依然能稳定落地。<br><br>
+      （完）
     </p>
   </div>
 
-  <!-- ── 底部 ── -->
+  <!-- 底部 -->
   <div class="footer">
-    <span class="footer-brand">惊喜之夜 · 夜枭</span>
+    <span class="footer-brand">—— 夜枭｜惊喜之夜</span>
     <span class="footer-tag"># ClaudeDesign</span>
   </div>
 
-</div><!-- end article -->
+</div><!-- end wrap -->
+
+<script>
+const FILENAME_BASE = 'Claude-Design-检查清单';
+const MAX_BYTES = 9 * 1024 * 1024;
+const HARD_MAX_BYTES = 10 * 1024 * 1024;
+const QUALITIES = [0.92, 0.85, 0.80];
+function toast(msg,ms=2400){const t=document.getElementById('dlToast');t.textContent=msg;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),ms);}
+async function waitImgsReady(root){const imgs=[...root.querySelectorAll('img')];await Promise.all(imgs.map(img=>img.complete&&img.naturalWidth>0?Promise.resolve():new Promise(res=>{img.addEventListener('load',res,{once:true});img.addEventListener('error',res,{once:true});})));}
+async function savelongImage(){
+  const btn=document.getElementById('dlBtn');
+  if(btn.classList.contains('loading'))return;
+  btn.classList.add('loading');btn.innerHTML='<span class="sp"></span><span>生成中...</span>';
+  toast('正在渲染长图，请稍候（约 5-10 秒）');
+  try{
+    const target=document.querySelector('.wrap');
+    await waitImgsReady(target);
+    if(document.fonts&&document.fonts.ready){try{await document.fonts.ready}catch(_){}}
+    document.body.classList.add('downloading');
+    const canvas=await html2canvas(target,{useCORS:true,allowTaint:false,backgroundColor:'#ffffff',scale:2,logging:false,imageTimeout:15000,windowWidth:target.offsetWidth,onclone:(d)=>{['dlBtn','dlToast'].forEach(id=>{const el=d.getElementById(id);if(el)el.remove();}); }});
+    document.body.classList.remove('downloading');
+    const toBlob=(q)=>new Promise(res=>canvas.toBlob(b=>res(b),'image/jpeg',q));
+    let blob=null,usedQ=0;
+    for(const q of QUALITIES){const b=await toBlob(q);if(b&&b.size<=MAX_BYTES){blob=b;usedQ=q;break;}if(!blob||(b&&b.size<blob.size)){blob=b;usedQ=q;}}
+    if(!blob)throw new Error('blob 生成失败');
+    const sizeMB=(blob.size/1024/1024).toFixed(1);
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download=FILENAME_BASE+'.jpg';document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    btn.classList.remove('loading');btn.classList.add('done');
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>已保存</span>';
+    const overSize=blob.size>HARD_MAX_BYTES;
+    toast(overSize?`⚠️ 已下载 ${sizeMB}MB · 超出建议大小`:`✅ 已下载 ${sizeMB}MB`,overSize?5500:3800);
+    setTimeout(()=>{btn.classList.remove('done');btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>保存长图</span>';},4000);
+  }catch(e){
+    document.body.classList.remove('downloading');
+    btn.classList.remove('loading');
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>保存长图</span>';
+    toast('⚠️ 生成失败：'+(e.message||'跨域或网络问题'),4000);console.error(e);
+  }
+}
+</script>
 </body>
 </html>
