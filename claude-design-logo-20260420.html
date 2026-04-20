@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Claude Design 像素交付四条规则 · 小红书</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d0d0d;font-family:'Noto Sans SC','PingFang SC','Helvetica Neue',sans-serif}
+
+.card{
+  width:1200px;height:1500px;
+  position:relative;overflow:hidden;
+  margin:0 auto 16px;
+  display:flex;flex-direction:column;
+}
+.card-img{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;object-position:center;
+}
+.overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(175deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,.72) 55%,rgba(0,0,0,.93) 100%);
+}
+.content{
+  position:relative;z-index:2;
+  height:100%;display:flex;flex-direction:column;
+  padding:88px 88px 72px;
+}
+
+/* ── 封面 ── */
+.cover-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  background:#e85c2a;color:#fff;
+  font-size:22px;font-weight:700;letter-spacing:.1em;
+  padding:10px 26px;border-radius:40px;
+  width:fit-content;margin-bottom:auto;
+}
+.cover-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:48px 0 32px}
+.cover-h{
+  font-size:76px;font-weight:900;color:#fff;line-height:1.15;
+  margin-bottom:28px;
+}
+.cover-h em{color:#e85c2a;font-style:normal}
+.cover-sub{
+  font-size:30px;color:rgba(255,255,255,.72);line-height:1.65;
+}
+.cover-sub strong{color:#e85c2a}
+
+/* ── 大编号 ── */
+.big-num{
+  font-size:160px;font-weight:900;
+  color:#e85c2a;line-height:1;
+  letter-spacing:-.04em;font-family:Georgia,serif;
+  opacity:.9;
+}
+.rule-tag{
+  font-size:20px;letter-spacing:.25em;color:#e85c2a;
+  font-weight:600;text-transform:uppercase;margin-bottom:12px;
+}
+.rule-h{
+  font-size:52px;font-weight:800;color:#fff;
+  line-height:1.2;margin-bottom:36px;
+}
+.rule-p{
+  font-size:27px;color:rgba(255,255,255,.82);
+  line-height:1.72;font-weight:400;
+}
+.rule-p strong{color:#e85c2a;font-weight:700}
+
+/* 亮点盒子 */
+.insight{
+  background:rgba(232,92,42,.1);
+  border-left:4px solid #e85c2a;
+  padding:28px 32px;border-radius:0 10px 10px 0;
+  margin-top:32px;
+}
+.insight p{
+  font-size:26px;color:rgba(255,255,255,.9);line-height:1.65;
+}
+.insight em{
+  background:rgba(232,92,42,.18);padding:2px 8px;
+  border-radius:4px;font-style:normal;color:#ffb89a;
+}
+.insight strong{color:#e85c2a;font-weight:700}
+
+/* ── 底栏 ── */
+.bar{
+  margin-top:auto;
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:36px;
+  border-top:1px solid rgba(255,255,255,.12);
+}
+.bar-account{font-size:22px;color:rgba(255,255,255,.5);letter-spacing:.05em}
+.bar-tag{
+  font-size:18px;color:#e85c2a;
+  background:rgba(232,92,42,.12);
+  padding:6px 18px;border-radius:20px;
+  border:1px solid rgba(232,92,42,.28);
+}
+
+/* ── 结尾卡 ── */
+.end-wrap{
+  position:relative;z-index:2;
+  height:100%;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;padding:88px;
+  background:linear-gradient(145deg,#1a1a1a 0%,#2a1005 100%);
+}
+.end-line{width:56px;height:4px;background:#e85c2a;border-radius:2px;margin:0 auto 56px}
+.end-h{font-size:58px;font-weight:900;color:#fff;line-height:1.25;margin-bottom:32px}
+.end-q{font-size:30px;color:rgba(255,255,255,.72);line-height:1.75;max-width:900px;margin:0 auto 56px}
+.end-q strong{color:#e85c2a}
+</style>
+</head>
+<body>
+
+<!-- ═══ CARD 0 · COVER ═══ -->
+<div class="card">
+  <img class="card-img"
+    src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&h=1500&fit=crop&crop=center" alt="">
+  <div class="overlay" style="background:linear-gradient(160deg,rgba(20,8,2,.88) 0%,rgba(26,10,4,.93) 100%)"></div>
+  <div class="content">
+    <div class="cover-eyebrow">Claude Design 实战笔记</div>
+    <div class="cover-body">
+      <div class="cover-h">返工 3 次<br>才搞懂的<br>「像素交付」<br><em>四条规则</em></div>
+      <div class="cover-sub">
+        好看早就有了，<br>
+        真正拖到深夜的是——<br>
+        <strong>把屏幕上那个版本<br>精确交付成 PNG</strong>
+      </div>
+    </div>
+    <div class="bar">
+      <span class="bar-account">惊喜之夜 · 夜枭</span>
+      <span class="bar-tag"># AI设计工具</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CARD 1 ═══ -->
+<div class="card">
+  <img class="card-img"
+    src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=1500&fit=crop&crop=center" alt="">
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="big-num">01</div>
+    <div class="rule-tag">Rule One</div>
+    <div class="rule-h">先问清楚：<br>重渲染，<br>还是像素快照？</div>
+    <div class="rule-p">
+      <strong>重渲染</strong>：用代码重新画一张<br>"看起来一样"的图<br>（最容易产生微差）<br><br>
+      <strong>像素快照</strong>：把用户看到的已渲染结果直接存成图（所见即所得）
+    </div>
+    <div class="insight">
+      <p>当对方说<em>"像素一致""别有一点点差"</em>，<strong>就别再写导出器——直接走快照路径。</strong></p>
+    </div>
+    <div class="bar">
+      <span class="bar-account">惊喜之夜 · 夜枭</span>
+      <span class="bar-tag">1 / 4</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CARD 2 ═══ -->
+<div class="card">
+  <img class="card-img"
+    src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=1200&h=1500&fit=crop&crop=center" alt="">
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="big-num">02</div>
+    <div class="rule-tag">Rule Two</div>
+    <div class="rule-h">"看起来一样"<br>不等于<br>"代码一样"<br>（容器会骗你）</div>
+    <div class="rule-p">
+      同样的 SVG、同样的字体参数，<br>放在<strong>不同比例的容器</strong>里，<br>视觉比例就会变。
+    </div>
+    <div class="insight">
+      <p>别一上来改字重改字距，<br>先定位：你看到的效果<em>来自哪个文件？</em><br>这个 Mark <em>嵌在哪个容器？</em></p>
+    </div>
+    <div class="bar">
+      <span class="bar-account">惊喜之夜 · 夜枭</span>
+      <span class="bar-tag">2 / 4</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CARD 3 ═══ -->
+<div class="card">
+  <img class="card-img"
+    src="https://images.unsplash.com/photo-1588532897291-e8d9aab13ef9?w=1200&h=1500&fit=crop&crop=center" alt="">
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="big-num">03</div>
+    <div class="rule-tag">Rule Three</div>
+    <div class="rule-h">不要凭截图<br>"猜字体"<br>要回到<br>单一真实来源</div>
+    <div class="rule-p">
+      看到截图里有"压字"感，以为要换 condensed 字体——越改越偏。<br><br>
+      后来才发现：<strong>字体根本没变</strong>，只是大字号 + 负字距 + 容器缩放的视觉错觉。
+    </div>
+    <div class="insight">
+      <p>设计系统里必须有<em>单一真实来源（Source of Truth）</em>，任何导出都从它来。</p>
+    </div>
+    <div class="bar">
+      <span class="bar-account">惊喜之夜 · 夜枭</span>
+      <span class="bar-tag">3 / 4</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CARD 4 ═══ -->
+<div class="card">
+  <img class="card-img"
+    src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=1500&fit=crop&crop=center" alt="">
+  <div class="overlay"></div>
+  <div class="content">
+    <div class="big-num">04</div>
+    <div class="rule-tag">Rule Four</div>
+    <div class="rule-h">同一问题<br>被否两次，<br>就换路径</div>
+    <div class="rule-p">
+      前两次对方反馈"不对"，还在同一条路上<br>换字体、调坐标。<br><br>
+      第三次才意识到：<br>这不是参数问题，<strong>是任务类型选错了</strong>。<br>（应该截屏，不应该重画）
+    </div>
+    <div class="insight">
+      <p>所有 AI 协作都适用：<br><em>同一问题被否两次，暂停优化，<br>先重新确认目标与来源。</em></p>
+    </div>
+    <div class="bar">
+      <span class="bar-account">惊喜之夜 · 夜枭</span>
+      <span class="bar-tag">4 / 4</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ END CARD ═══ -->
+<div class="card">
+  <div class="end-wrap">
+    <div class="end-line"></div>
+    <div class="end-h">解决方案：<br>截屏，<br>不是导出</div>
+    <div class="end-q">
+      用 html2canvas 做 DOM 快照，<br>直接得到像素级一致的 PNG。<br><br>
+      AI 让「生成」变得便宜，<br>但让人真正变强的，是你能不能<br><strong>把需求说成可验收的标准。</strong>
+    </div>
+    <div class="bar" style="width:100%;border-top:1px solid rgba(232,92,42,.25)">
+      <span class="bar-account">惊喜之夜 · 夜枭</span>
+      <span class="bar-tag"># ClaudeDesign</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
