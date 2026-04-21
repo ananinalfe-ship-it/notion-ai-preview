@@ -7,411 +7,238 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-font-smoothing:antialiased}
-body{
-  background:#f0ede8;
-  font-family:'Noto Sans SC','PingFang SC','Helvetica Neue',sans-serif;
-  color:#1c1c1c;
-}
-
-/* ── 文章容器 ── */
-.article{
-  max-width:780px;
-  margin:0 auto;
-  background:#fff;
-}
-
-/* ── 封面 ── */
-.hero{
-  position:relative;
-  height:560px;overflow:hidden;
-}
-.hero img{
-  width:100%;height:100%;object-fit:cover;object-position:center 30%;
-}
-.hero-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(175deg,rgba(15,10,8,.2) 0%,rgba(15,10,8,.82) 100%);
-}
-.hero-inner{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;
-  justify-content:flex-end;
-  padding:56px 60px;
-}
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:16px;letter-spacing:.22em;color:#c0392b;
-  font-weight:600;text-transform:uppercase;
-  margin-bottom:20px;
-}
-.hero-eyebrow::before{
-  content:'';display:inline-block;
-  width:28px;height:2px;background:#c0392b;
-}
-.hero-title{
-  font-size:32px;font-weight:900;color:#fff;
-  line-height:1.35;margin-bottom:20px;
-}
-.hero-sub{
-  font-size:21px;color:rgba(255,255,255,.72);
-  line-height:1.6;
-}
-.hero-bar{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-top:32px;padding-top:24px;
-  border-top:1px solid rgba(255,255,255,.18);
-}
-.hero-account{font-size:18px;color:rgba(255,255,255,.55);letter-spacing:.05em}
-.hero-tag{
-  font-size:15px;color:#c0392b;
-  background:rgba(192,57,43,.15);
-  border:1px solid rgba(192,57,43,.3);
-  padding:5px 16px;border-radius:20px;
-}
-
-/* ── 导语 ── */
-.lead{
-  padding:52px 60px 40px;
-  border-bottom:1px solid #ece8e4;
-}
-.lead-label{
-  font-size:13px;letter-spacing:.2em;color:#c0392b;
-  font-weight:600;margin-bottom:16px;text-transform:uppercase;
-}
-.lead p{
-  font-size:23px;color:#444;line-height:1.85;
-}
+body{background:#f0ede8;font-family:'Noto Sans SC','PingFang SC','Helvetica Neue',sans-serif;color:#1c1c1c;}
+.article{max-width:780px;margin:0 auto;background:#fff;}
+.hero{position:relative;height:580px;overflow:hidden;}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:center 40%;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(175deg,rgba(10,8,6,.15) 0%,rgba(10,8,6,.78) 100%);}
+.hero-inner{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:56px 60px;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:16px;letter-spacing:.22em;color:#c0392b;font-weight:600;margin-bottom:20px;}
+.hero-eyebrow::before{content:'';display:inline-block;width:28px;height:2px;background:#c0392b;}
+.hero-title{font-size:32px;font-weight:900;color:#fff;line-height:1.35;margin-bottom:18px;}
+.hero-sub{font-size:20px;color:rgba(255,255,255,.68);line-height:1.6;}
+.hero-bar{display:flex;justify-content:space-between;align-items:center;margin-top:28px;padding-top:22px;border-top:1px solid rgba(255,255,255,.18);}
+.hero-account{font-size:17px;color:rgba(255,255,255,.5);letter-spacing:.05em}
+.hero-tag{font-size:14px;color:#c0392b;background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);padding:4px 14px;border-radius:20px;}
+.lead{padding:48px 60px 36px;border-bottom:1px solid #ece8e4;}
+.lead-label{font-size:13px;letter-spacing:.2em;color:#c0392b;font-weight:600;margin-bottom:14px;text-transform:uppercase;}
+.lead p{font-size:23px;color:#444;line-height:1.85;}
 .lead strong{color:#1c1c1c;font-weight:700}
-
-/* ── 正文区 ── */
-.body-wrap{padding:0 60px 64px}
-
-/* ── 章节 ── */
-.section{margin-top:56px}
-.section-head{
-  display:flex;align-items:flex-start;gap:0;
-  margin-bottom:28px;
-  position:relative;
-}
-.section-num{
-  font-size:96px;font-weight:900;
-  color:rgba(192,57,43,.08);
-  font-family:Georgia,serif;
-  line-height:1;
-  position:absolute;left:-12px;top:-18px;
-  user-select:none;
-}
-.section-title{
-  font-size:32px;font-weight:800;color:#1c1c1c;
-  line-height:1.3;
-  padding-left:0;
-  position:relative;z-index:1;
-  padding-top:8px;
-  border-left:4px solid #c0392b;
-  padding-left:20px;
-}
-.body p{
-  font-size:25px;color:#333;line-height:1.85;
-  margin-bottom:24px;
-}
+.photo{width:100%;display:block;}
+.photo img{width:100%;display:block;object-fit:cover;}
+.photo.full img{height:440px;}
+.photo.wide img{height:400px;}
+.photo.medium img{height:360px;}
+.photo-cap{font-size:14px;color:#888;padding:10px 60px 0;line-height:1.6;font-style:italic;}
+.photo-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;}
+.photo-grid img{width:100%;height:220px;object-fit:cover;display:block;}
+.photo-grid-cap{font-size:14px;color:#888;padding:10px 60px 0;font-style:italic;}
+.body-wrap{padding:0 60px 64px;}
+.section{margin-top:52px;}
+.section-head{margin-bottom:24px;position:relative;}
+.section-num{font-size:88px;font-weight:900;color:rgba(192,57,43,.07);font-family:Georgia,serif;line-height:1;position:absolute;left:-14px;top:-16px;user-select:none;}
+.section-title{font-size:32px;font-weight:800;color:#1c1c1c;line-height:1.3;position:relative;z-index:1;padding-top:6px;border-left:4px solid #c0392b;padding-left:20px;}
+.body p{font-size:25px;color:#333;line-height:1.85;margin-bottom:22px;}
 .body p:last-child{margin-bottom:0}
 .body strong{color:#1c1c1c;font-weight:700}
-.body em{
-  background:rgba(192,57,43,.08);
-  padding:1px 6px;border-radius:3px;
-  font-style:normal;color:#c0392b;font-weight:600;
-}
-
-/* ── 拉引块 ── */
-.pullquote{
-  border-left:5px solid #c0392b;
-  margin:36px 0;
-  padding:20px 28px;
-  background:#fdf9f9;
-}
-.pullquote p{
-  font-size:23px!important;
-  color:#555!important;
-  line-height:1.8!important;
-  font-style:italic;
-  margin-bottom:0!important;
-}
+.pullquote{border-left:5px solid #c0392b;margin:32px 0;padding:18px 28px;background:#fdf9f9;}
+.pullquote p{font-size:23px!important;color:#555!important;line-height:1.8!important;font-style:italic;margin-bottom:0!important;}
 .pullquote strong{color:#c0392b!important}
-
-/* ── 数据块 ── */
-.data-block{
-  background:#fdf9f9;
-  border:1px solid rgba(192,57,43,.15);
-  border-left:5px solid #c0392b;
-  border-radius:0 8px 8px 0;
-  padding:32px 36px;
-  margin:36px 0;
-}
-.data-block-label{
-  font-size:14px;letter-spacing:.18em;color:#c0392b;
-  font-weight:600;margin-bottom:20px;text-transform:uppercase;
-}
-.data-row{
-  display:flex;flex-wrap:wrap;gap:28px;
-}
-.data-item{flex:1;min-width:160px}
-.data-num{
-  font-size:38px;font-weight:900;color:#c0392b;
-  font-family:Georgia,serif;line-height:1.1;
-}
-.data-unit{font-size:18px;font-weight:600;color:#c0392b;margin-left:2px}
-.data-desc{font-size:18px;color:#666;margin-top:4px;line-height:1.5}
-.data-growth{
-  display:inline-block;
-  font-size:15px;font-weight:700;color:#27ae60;
-  background:rgba(39,174,96,.1);
-  padding:2px 8px;border-radius:4px;
-  margin-top:4px;
-}
-
-/* ── 亮点标签 ── */
-.insight-tag{
-  display:inline-flex;align-items:center;gap:8px;
-  background:#c0392b;color:#fff;
-  font-size:17px;font-weight:700;letter-spacing:.06em;
-  padding:8px 20px;border-radius:4px;
-  margin-bottom:24px;
-}
-
-/* ── 结语 ── */
-.closing{
-  margin-top:56px;
-  padding:44px 48px;
-  background:#1c1c1c;
-  border-radius:6px;
-  text-align:center;
-}
-.closing-line{
-  width:40px;height:3px;background:#c0392b;border-radius:2px;
-  margin:0 auto 32px;
-}
-.closing p{
-  font-size:25px;color:rgba(255,255,255,.85);
-  line-height:1.85;margin-bottom:24px;
-}
-.closing p:last-child{margin-bottom:0}
+.data-block{background:#fdf9f9;border:1px solid rgba(192,57,43,.15);border-left:5px solid #c0392b;border-radius:0 8px 8px 0;padding:28px 32px;margin:32px 0;}
+.data-block-label{font-size:13px;letter-spacing:.18em;color:#c0392b;font-weight:600;margin-bottom:18px;text-transform:uppercase;}
+.data-row{display:flex;flex-wrap:wrap;gap:24px;}
+.data-item{flex:1;min-width:140px;}
+.data-num{font-size:36px;font-weight:900;color:#c0392b;font-family:Georgia,serif;line-height:1.1;}
+.data-unit{font-size:17px;font-weight:600;color:#c0392b;margin-left:2px;}
+.data-desc{font-size:17px;color:#666;margin-top:4px;line-height:1.5;}
+.data-growth{display:inline-block;font-size:14px;font-weight:700;color:#27ae60;background:rgba(39,174,96,.1);padding:2px 8px;border-radius:4px;margin-top:4px;}
+.insight-tag{display:inline-flex;align-items:center;gap:8px;background:#c0392b;color:#fff;font-size:17px;font-weight:700;letter-spacing:.05em;padding:8px 20px;border-radius:4px;margin-bottom:22px;}
+.closing{margin-top:52px;padding:40px 48px;background:#1c1c1c;border-radius:6px;text-align:center;}
+.closing-line{width:40px;height:3px;background:#c0392b;border-radius:2px;margin:0 auto 28px;}
+.closing p{font-size:25px;color:rgba(255,255,255,.85);line-height:1.85;margin-bottom:20px;}
+.closing p:last-child{margin-bottom:0;}
 .closing strong{color:#c0392b}
-
-/* ── 底部署名 ── */
-.byline{
-  padding:32px 60px;
-  display:flex;justify-content:space-between;align-items:center;
-  border-top:1px solid #ece8e4;
-  background:#faf9f7;
-}
-.byline-name{font-size:18px;color:#999;letter-spacing:.06em}
-.byline-tag{
-  font-size:15px;color:#c0392b;
-  background:rgba(192,57,43,.08);
-  padding:5px 14px;border-radius:20px;
-}
-
-/* ── FAB ── */
-#dl-btn{
-  position:fixed;bottom:32px;right:32px;z-index:9999;
-  background:#c0392b;color:#fff;border:none;border-radius:50px;
-  padding:16px 28px;font-size:18px;font-weight:700;
-  font-family:'Noto Sans SC','PingFang SC',sans-serif;
-  cursor:pointer;box-shadow:0 4px 20px rgba(192,57,43,.45);
-  display:flex;align-items:center;gap:10px;letter-spacing:.04em;
-  transition:opacity .2s;
-}
-#dl-btn:hover{opacity:.88}
+.byline{padding:28px 60px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #ece8e4;background:#faf9f7;}
+.byline-name{font-size:17px;color:#999;letter-spacing:.05em;}
+.byline-tag{font-size:14px;color:#c0392b;background:rgba(192,57,43,.08);padding:4px 14px;border-radius:20px;}
+#dl-btn{position:fixed;bottom:32px;right:32px;z-index:9999;background:#c0392b;color:#fff;border:none;border-radius:50px;padding:16px 28px;font-size:18px;font-weight:700;font-family:'Noto Sans SC','PingFang SC',sans-serif;cursor:pointer;box-shadow:0 4px 20px rgba(192,57,43,.45);display:flex;align-items:center;gap:10px;letter-spacing:.04em;}
 </style>
 </head>
 <body>
-
 <article class="article">
 
-  <!-- 封面 -->
-  <div class="hero">
-    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=780&h=560&fit=crop&crop=center" alt="">
-    <div class="hero-overlay"></div>
-    <div class="hero-inner">
-      <div class="hero-eyebrow">2026 中国演出交易会 · 现场手记</div>
-      <div class="hero-title">演交会观察笔记（一）<br>第一天走完 30 个展位，<br>采购方反复问的不是「有没有 IP」，<br>而是这 3 件事</div>
-      <div class="hero-sub">D1 · 呼和浩特 · 惊喜之夜观察员</div>
-      <div class="hero-bar">
-        <span class="hero-account">惊喜之夜 · 夜枭</span>
-        <span class="hero-tag"># 演出行业</span>
+<div class="hero">
+  <img src="images/yanjiaohui-20260421/04-venue-hall.jpg" alt="演交会展厅">
+  <div class="hero-overlay"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">2026 中国演出交易会 · 现场手记</div>
+    <div class="hero-title">演交会观察笔记（一）<br>第一天走完 30 个展位，<br>采购方反复问的不是「有没有 IP」，<br>而是这 3 件事</div>
+    <div class="hero-sub">D1 · 呼和浩特 · 惊喜之夜观察员</div>
+    <div class="hero-bar">
+      <span class="hero-account">惊喜之夜 · 夜枭</span>
+      <span class="hero-tag"># 演出行业</span>
+    </div>
+  </div>
+</div>
+
+<div class="lead">
+  <div class="lead-label">D1 导语</div>
+  <p>背板还在上墙，洽谈区的桌椅刚摆好，通道里已经有人拿着资料在找人、对点。今天是 2026 中国演出交易会 D1。展厅还没正式开放，很多事情也还没真正开始——但站在现场，会有一种很明确的感觉：<strong>后台已经开机了。</strong></p>
+</div>
+
+<div class="photo full">
+  <img src="images/yanjiaohui-20260421/08-exterior-list.jpg" alt="演交会参展名录展板">
+</div>
+<div class="photo-cap">↑ 2026中国演出交易会 · 呼和浩特·内蒙古国际会展中心 · 参展名录展板</div>
+
+<div class="body-wrap">
+  <div class="section" style="margin-top:40px;">
+    <div class="data-block">
+      <div class="data-block-label">📊 本届演交会背景数据</div>
+      <div class="data-row">
+        <div class="data-item"><div class="data-num">数千<span class="data-unit">名</span></div><div class="data-desc">全国剧场剧院、演出经纪机构、舞台舞美企业等各类参会代表</div></div>
+        <div class="data-item"><div class="data-num">万余<span class="data-unit">平米</span></div><div class="data-desc">展览大厅，分设特装、演出、演艺技术与装备展区</div></div>
+        <div class="data-item"><div class="data-num">首次</div><div class="data-desc">落地呼和浩特，再创交易会新记录</div></div>
       </div>
     </div>
   </div>
 
-  <!-- 导语 -->
-  <div class="lead">
-    <div class="lead-label">D1 导语</div>
-    <p>背板还在上墙，洽谈区的桌椅刚摆好，通道里已经有人拿着资料在找人、对点。今天是 2026 中国演出交易会 D1。展厅还没正式开放，很多事情也还没真正开始——但站在现场，会有一种很明确的感觉：<strong>后台已经开机了。</strong></p>
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">一</div>
+      <div class="section-title">展区：启动感，不是热闹</div>
+    </div>
+    <div class="body">
+      <p>今天展区最明显的状态，其实就是"还在准备"。很多展位还在布展，背板一块块立起来，物料刚从箱子里拿出来。</p>
+      <p>但人已经先动起来了。通道里最常见的画面不是围观，而是找人——有人拿着资料站着聊，有人一边走一边认展位，有人刚打完招呼就开始交换联系方式。</p>
+      <div class="pullquote"><p>很多时候最先开始的，不是"谈合作"，而是先把人找到，把名字和项目对上，把那句<strong>"之后再细聊"先说出来。</strong></p></div>
+      <p>今天的展区，不是热闹，是<strong>启动</strong>。</p>
+    </div>
+  </div>
+</div>
+
+<div class="photo wide">
+  <img src="images/yanjiaohui-20260421/09-exterior-guide.jpg" alt="演交会导览图与会议日程">
+</div>
+<div class="photo-cap">↑ 会场导览图 + 4月21–23日完整会议日程</div>
+
+<div class="body-wrap">
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">二</div>
+      <div class="section-title">主会场：先把开场氛围铺出来</div>
+    </div>
+    <div class="body">
+      <p>下午的开幕式和主论坛在会展中心三层举行。走进去第一感觉是：主会场已经完全进入状态了。蓝色主视觉很完整，大屏亮着，穹顶灯阵也都打开了。</p>
+      <p>中国演出行业协会会长刘克智在主旨发言中把当前市场概括为四句话：</p>
+      <div class="pullquote"><p><strong>「内容为王、文旅共生、体验至上、数字赋能」</strong><br>——其中"文旅共生"与"体验至上"，对做沉浸式内容的团队来说是更熟悉的语言。</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="photo wide">
+  <img src="images/yanjiaohui-20260421/07-liukezhi-speech.jpg" alt="刘克智主旨发言">
+</div>
+<div class="photo-cap">↑ 中国演出行业协会会长刘克智发表主旨演讲《2025年中国演出市场发展特点与趋势总览》</div>
+
+<div class="body-wrap">
+  <div class="section">
+    <div class="insight-tag">📈 2025 年全国演出市场年度数据</div>
+    <div class="data-block">
+      <div class="data-block-label">中国演出行业协会 · 主论坛现场发布</div>
+      <div class="data-row">
+        <div class="data-item"><div class="data-num">837<span class="data-unit">亿</span></div><div class="data-desc">总收入</div><div class="data-growth">↑ 同比 +5.19%</div></div>
+        <div class="data-item"><div class="data-num">616<span class="data-unit">亿</span></div><div class="data-desc">演出票房</div><div class="data-growth">↑ 同比 +6.39%</div></div>
+        <div class="data-item"><div class="data-num">64<span class="data-unit">万场</span></div><div class="data-desc">营业性演出场次</div><div class="data-growth">↑ 同比 +6.58%</div></div>
+        <div class="data-item"><div class="data-num">1.94<span class="data-unit">亿</span></div><div class="data-desc">演出观众人次</div><div class="data-growth">↑ 同比 +4.22%</div></div>
+      </div>
+    </div>
   </div>
 
-  <!-- 正文 -->
-  <div class="body-wrap">
-
-    <!-- 背景数据 -->
-    <div class="section">
-      <div class="data-block">
-        <div class="data-block-label">📊 本届演交会背景数据</div>
-        <div class="data-row">
-          <div class="data-item">
-            <div class="data-num">数千<span class="data-unit">名</span></div>
-            <div class="data-desc">来自全国剧场剧院、演出经纪机构、舞台舞美企业等各类参会代表</div>
-          </div>
-          <div class="data-item">
-            <div class="data-num">万余<span class="data-unit">平米</span></div>
-            <div class="data-desc">展览大厅，分设特装展区、演出展区、演艺技术与装备展区</div>
-          </div>
-          <div class="data-item">
-            <div class="data-num">首次</div>
-            <div class="data-desc">落地呼和浩特，再创交易会新记录</div>
-          </div>
-        </div>
-      </div>
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">三</div>
+      <div class="section-title">物料先说话：气质在开口前就出来了</div>
     </div>
-
-    <!-- 一 -->
-    <div class="section">
-      <div class="section-head">
-        <div class="section-num">一</div>
-        <div class="section-title">展区：启动感，不是热闹</div>
-      </div>
-      <div class="body">
-        <p>今天展区最明显的状态，其实就是"还在准备"。很多展位还在布展，背板一块块立起来，物料刚从箱子里拿出来。</p>
-        <p>但人已经先动起来了。通道里最常见的画面不是围观，而是找人——有人拿着资料站着聊，有人一边走一边认展位，有人刚打完招呼就开始交换联系方式。</p>
-        <div class="pullquote"><p>很多时候最先开始的，不是"谈合作"，而是先把人找到，把名字和项目对上，把那句<strong>"之后再细聊"先说出来。</strong></p></div>
-        <p>今天的展区，不是热闹，是<strong>启动</strong>。</p>
-      </div>
+    <div class="body">
+      <p>虽然展厅还没正式开放，但有些项目的视觉已经先立起来了。一面背板、一张主视觉、一段介绍，平时看可能只是宣传物料；到了这种现场，它们会变得很具体。</p>
+      <p>因为人在还没坐下来之前，第一眼看到的就是这些。有的项目还没正式开始讲，<strong>但它的气质已经先出来了</strong>。有些墙一立起来，你大概就知道它想怎么被看见。</p>
     </div>
-
-    <!-- 二 -->
-    <div class="section">
-      <div class="section-head">
-        <div class="section-num">二</div>
-        <div class="section-title">主会场：把整个交易会的开场氛围铺出来</div>
-      </div>
-      <div class="body">
-        <p>下午的开幕式和主论坛在会展中心三层举行。走进去第一感觉是：主会场已经完全进入状态了。蓝色主视觉很完整，大屏亮着，穹顶灯阵也都打开了。</p>
-        <p>中国演出行业协会会长刘克智在主旨发言中把当前市场概括为四句话：</p>
-        <div class="pullquote"><p><strong>「内容为王、文旅共生、体验至上、数字赋能」</strong><br>——其中"文旅共生"与"体验至上"，对做沉浸式内容的团队来说是更熟悉的语言。</p></div>
-        <p>今天的主会场，重要的不是立刻发生了什么具体合作，而是<strong>先让所有人都进入同一种时间里</strong>。</p>
-      </div>
-    </div>
-
-    <!-- 行业数据 -->
-    <div class="section">
-      <div class="insight-tag">📈 2025 年全国演出市场年度数据发布</div>
-      <div class="data-block">
-        <div class="data-block-label">中国演出行业协会 · 主论坛现场发布</div>
-        <div class="data-row">
-          <div class="data-item">
-            <div class="data-num">837<span class="data-unit">亿</span></div>
-            <div class="data-desc">总收入</div>
-            <div class="data-growth">↑ 同比 +5.19%</div>
-          </div>
-          <div class="data-item">
-            <div class="data-num">616<span class="data-unit">亿</span></div>
-            <div class="data-desc">演出票房</div>
-            <div class="data-growth">↑ 同比 +6.39%</div>
-          </div>
-          <div class="data-item">
-            <div class="data-num">64<span class="data-unit">万场</span></div>
-            <div class="data-desc">营业性演出场次</div>
-            <div class="data-growth">↑ 同比 +6.58%</div>
-          </div>
-          <div class="data-item">
-            <div class="data-num">1.94<span class="data-unit">亿</span></div>
-            <div class="data-desc">演出观众人次</div>
-            <div class="data-growth">↑ 同比 +4.22%</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 三 -->
-    <div class="section">
-      <div class="section-head">
-        <div class="section-num">三</div>
-        <div class="section-title">物料先说话：气质已经在立展位之前出来了</div>
-      </div>
-      <div class="body">
-        <p>虽然展厅还没正式开放，但有些项目的视觉已经先立起来了。一面背板、一张主视觉、一段介绍，平时看可能只是宣传物料；到了这种现场，它们会变得很具体。</p>
-        <p>因为人在还没坐下来之前，第一眼看到的就是这些。有的项目还没正式开始讲，<strong>但它的气质已经先出来了</strong>。有些墙一立起来，你大概就知道它想怎么被看见。</p>
-        <p>另一边，一些舞美和技术相关的展位也已经在调灯、试烟——这些都不是大动作，但会让人一下子进入"演艺行业现场"的状态。</p>
-      </div>
-    </div>
-
-    <!-- 四 -->
-    <div class="section">
-      <div class="section-head">
-        <div class="section-num">四</div>
-        <div class="section-title">一个值得记下的信号：沉浸式首次独立成品类</div>
-      </div>
-      <div class="body">
-        <p>今天行业发布环节，主论坛现场公布了 <strong>2025 年全国演出市场五个品类的票房 TOP10</strong>——儿童剧、音乐剧、话剧、舞蹈舞剧、<strong>沉浸式演出</strong>。</p>
-        <div class="pullquote"><p>「<strong>沉浸式演出</strong>」第一次作为一个独立品类，与儿童剧、音乐剧、话剧、舞蹈舞剧并置在协会的年度发布里——对长期在这条赛道做内容的团队来说，<strong>不是一个小的行业信号。</strong></p></div>
-        <p>大屏上的片刻，很快会被翻译成后续宣发里的一句"背书型标签"。对一部已经上演多年的剧目来说，这种年度级别的点名，比现场发物料更直接。</p>
-      </div>
-    </div>
-
-    <!-- 五 -->
-    <div class="section">
-      <div class="section-head">
-        <div class="section-num">五</div>
-        <div class="section-title">AI 入席主论坛：被正式摆上桌了</div>
-      </div>
-      <div class="body">
-        <p>主论坛五场演讲中，中国信息通信研究院的《智启新章：人工智能赋能演出行业业态重塑与场景创新路径建议》是唯一直接命题「人工智能」的场次。</p>
-        <p>在演交会现场听到它，感觉还是不太一样。这个东西，<strong>开始被放进怎么做项目、怎么跑市场、怎么提高效率这些更具体的问题里了</strong>。</p>
-        <div class="pullquote"><p>这种"还没完全想明白，但已经不能不谈"的状态，反而很真实。行业开始承认，这个问题不能只留给技术公司、也不能只留给创作者私下各自尝试——<strong>它迟早会变成所有人都要面对的一个具体问题。</strong></p></div>
-        <p>因为这里不是只问"能不能做"，还会继续追问：做了以后，谁买单？谁来用？在哪个环节最先见效？</p>
-      </div>
-    </div>
-
-    <!-- 结语 -->
-    <div class="closing">
-      <div class="closing-line"></div>
-      <p>如果要给 D1 找一个词，大概还是会写：<strong>后台已经开机。</strong></p>
-      <p>今天没有什么特别戏剧性的事发生。展厅还在搭，流程在往前走，人和人开始慢慢对上，很多事情都只是刚刚开始。</p>
-      <p>但很多真正会发生的东西，都是从这种不太起眼的时刻慢慢长出来的。</p>
-    </div>
-
   </div>
+</div>
 
-  <!-- 底部署名 -->
-  <div class="byline">
-    <span class="byline-name">惊喜之夜 · 夜枭</span>
-    <span class="byline-tag"># 2026演交会</span>
+<div class="photo medium">
+  <img src="images/yanjiaohui-20260421/05-data-tourism.jpg" alt="旅游演艺市场数据">
+</div>
+<div class="photo-cap">↑ 2025年全国大中型旅游演艺数据：演出场次+4.95%、票房+6.43%、观演人数+3.01%；《超·大秦》2025年509场·上座率96%</div>
+
+<div class="body-wrap">
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">四</div>
+      <div class="section-title">一个值得记下的信号：沉浸式首次独立成品类</div>
+    </div>
+    <div class="body">
+      <p>今天行业发布环节，主论坛现场公布了 <strong>2025年全国演出市场五个品类的票房 TOP10</strong>——儿童剧、音乐剧、话剧、舞蹈舞剧、<strong>沉浸式演出</strong>。</p>
+      <div class="pullquote"><p>「<strong>沉浸式演出</strong>」第一次作为一个独立品类，与儿童剧、音乐剧等并置在协会的年度发布里——对长期在这条赛道做内容的团队来说，<strong>不是一个小的行业信号。</strong></p></div>
+      <p>大屏上的片刻，很快会被翻译成后续宣发里的一句"背书型标签"。对一部已经上演多年的剧目来说，这种年度级别的点名，比现场发物料更直接。</p>
+    </div>
   </div>
+</div>
+
+<div class="photo-grid">
+  <img src="images/yanjiaohui-20260421/01-top10-haidi.jpg" alt="《海底两万里》儿童剧TOP10">
+  <img src="images/yanjiaohui-20260421/02-top10-pipi.jpg" alt="《屁屁侦探老爹》儿童剧TOP10">
+  <img src="images/yanjiaohui-20260421/03-top10-qiaohu.jpg" alt="《巧虎大型舞台剧》儿童剧TOP10">
+</div>
+<div class="photo-grid-cap">↑ 主论坛现场：2025年度儿童剧票房TOP10颁奖（中国演出行业协会副会长兼秘书长潘燕主持）</div>
+
+<div class="body-wrap">
+  <div class="section">
+    <div class="section-head">
+      <div class="section-num">五</div>
+      <div class="section-title">AI 入席主论坛：被正式摆上桌了</div>
+    </div>
+    <div class="body">
+      <p>主论坛五场演讲中，中国信息通信研究院的《智启新章：人工智能赋能演出行业业态重塑与场景创新路径建议》是唯一直接命题「人工智能」的场次。</p>
+      <p>在演交会现场听到它，感觉还是不太一样。这个东西，<strong>开始被放进怎么做项目、怎么跑市场、怎么提高效率这些更具体的问题里了</strong>。</p>
+      <div class="pullquote"><p>这种"还没完全想明白，但已经不能不谈"的状态，反而很真实。行业开始承认，这个问题迟早会变成所有人都要面对的一个具体问题。</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="photo medium">
+  <img src="images/yanjiaohui-20260421/06-data-online.jpg" alt="线上内容与渠道拓展数据">
+</div>
+<div class="photo-cap">↑ 艺播计划：微博话题阅读超1.5亿 / 抖音直播院团专项引入499家院团·6183名演员·全年直播64.3万场·观看41.3亿人次</div>
+
+<div class="body-wrap">
+  <div class="closing">
+    <div class="closing-line"></div>
+    <p>如果要给 D1 找一个词，大概还是会写：<strong>后台已经开机。</strong></p>
+    <p>今天没有什么特别戏剧性的事发生。展厅还在搭，流程在往前走，人和人开始慢慢对上，很多事情都只是刚刚开始。</p>
+    <p>但很多真正会发生的东西，都是从这种不太起眼的时刻慢慢长出来的。</p>
+  </div>
+</div>
+
+<div class="byline">
+  <span class="byline-name">惊喜之夜 · 夜枭</span>
+  <span class="byline-tag"># 2026演交会</span>
+</div>
 
 </article>
-
-<!-- FAB 下载 -->
-<button id="dl-btn" onclick="downloadPage()">
-  <span>⬇</span><span id="dl-label">下载长图</span>
-</button>
+<button id="dl-btn" onclick="downloadPage()"><span>⬇</span><span id="dl-label">下载长图</span></button>
 <script>
 function downloadPage(){
-  var btn=document.getElementById('dl-btn');
-  var label=document.getElementById('dl-label');
-  btn.style.opacity='0.6';btn.disabled=true;
-  label.textContent='生成中…';
-  var s=document.createElement('script');
-  s.src='https://html2canvas.hertzen.com/dist/html2canvas.min.js';
+  var btn=document.getElementById('dl-btn'),label=document.getElementById('dl-label');
+  btn.style.opacity='0.6';btn.disabled=true;label.textContent='生成中…';
+  var s=document.createElement('script');s.src='https://html2canvas.hertzen.com/dist/html2canvas.min.js';
   document.head.appendChild(s);
   s.onload=function(){
-    html2canvas(document.querySelector('.article'),{
-      scale:2,useCORS:true,allowTaint:true,backgroundColor:'#f0ede8'
-    }).then(function(c){
-      var a=document.createElement('a');
-      a.href=c.toDataURL('image/jpeg',0.93);
-      a.download='yanjiaohui-observation-20260421.jpg';
-      a.click();
-      label.textContent='下载长图';
-      btn.style.opacity='1';btn.disabled=false;
+    html2canvas(document.querySelector('.article'),{scale:2,useCORS:true,allowTaint:true,backgroundColor:'#f0ede8'}).then(function(c){
+      var a=document.createElement('a');a.href=c.toDataURL('image/jpeg',0.93);
+      a.download='yanjiaohui-observation-20260421.jpg';a.click();
+      label.textContent='下载长图';btn.style.opacity='1';btn.disabled=false;
     });
   };
 }
