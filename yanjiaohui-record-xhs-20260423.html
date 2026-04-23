@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=375,initial-scale=1">
+<title>演交会四天，我们替《山海经》走了一趟 · 小红书</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<style>
+/* === 变量 === */
+:root {
+  --accent: #d4a84b;
+  --dark-bg: #080f1e;
+  --overlay: rgba(6,12,28,0.82);
+  --sans: -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",
+          "Source Han Sans SC","Noto Sans CJK SC",
+          "Microsoft YaHei UI","Microsoft YaHei",sans-serif;
+  --display: "Playfair Display",Georgia,"Times New Roman",serif;
+}
+
+/* === 全局 === */
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  width:375px;margin:0 auto;
+  background:#0a0a0a;
+  font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+img{image-rendering:-webkit-optimize-contrast;display:block}
+
+/* === 卡片基础 === */
+.card{
+  position:relative;
+  width:375px;
+  aspect-ratio:3/4;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  margin-bottom:4px;
+}
+
+/* === 背景图 === */
+.card-bg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+
+/* === 渐变遮罩 === */
+.card-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to top,
+    rgba(6,12,28,0.94) 0%,
+    rgba(6,12,28,0.58) 50%,
+    rgba(6,12,28,0.08) 100%
+  );
+}
+
+/* === 大编号（深靛金主题 v8：衬线体，左上角半透明） === */
+.card-num{
+  position:absolute;
+  top:20px;left:20px;
+  font-family:var(--display);
+  font-size:96px;
+  line-height:1;
+  font-weight:900;
+  color:var(--accent);
+  opacity:0.32;
+  letter-spacing:0;
+  z-index:2;
+  vertical-align:baseline;
+}
+
+/* === 底部文字区 === */
+.card-body{
+  position:relative;z-index:2;
+  padding:20px 22px 24px;
+}
+
+.card-eyebrow{
+  font-size:10px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.45);
+  margin-bottom:10px;
+  line-height:1.5;
+}
+.card-title{
+  font-size:26px;
+  font-weight:700;
+  color:#ffffff;
+  line-height:1.4;
+  margin-bottom:10px;
+  font-family:var(--display);
+  letter-spacing:0;
+}
+.card-fact{
+  font-size:13px;
+  color:rgba(255,255,255,0.82);
+  line-height:1.7;
+  padding-left:12px;
+  border-left:2px solid var(--accent);
+  margin-bottom:10px;
+}
+.card-caption{
+  font-size:10px;
+  color:rgba(255,255,255,0.32);
+  letter-spacing:0.5px;
+  line-height:1.5;
+}
+
+/* === 封面卡 === */
+.card-cover .card-main-title{
+  font-size:30px;
+  font-weight:800;
+  color:#ffffff;
+  line-height:1.25;
+  font-family:var(--display);
+  letter-spacing:0;
+  margin-bottom:6px;
+}
+.card-cover .card-subtitle{
+  font-size:13px;
+  color:var(--accent);
+  letter-spacing:1.5px;
+  margin-bottom:12px;
+}
+.card-cover .card-lede{
+  font-size:13px;
+  color:rgba(255,255,255,0.65);
+  line-height:1.75;
+  margin-bottom:10px;
+}
+.cover-rule{
+  width:32px;height:1px;
+  background:var(--accent);
+  margin-bottom:12px;
+}
+
+/* === 总结卡 === */
+.card-summary{
+  background:var(--dark-bg);
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+.summary-inner{
+  padding:32px 26px 28px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+  width:100%;
+}
+.s-eyebrow{
+  font-size:10px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.38);
+  line-height:1.5;
+}
+.s-rule{width:36px;height:1px;background:var(--accent)}
+.s-title{
+  font-family:var(--display);
+  font-size:22px;
+  font-weight:700;
+  color:#ffffff;
+  line-height:1.5;
+  letter-spacing:0;
+}
+.s-highlight{color:var(--accent)}
+.s-body{
+  font-size:13px;
+  color:rgba(255,255,255,0.62);
+  line-height:1.85;
+  max-width:290px;
+}
+.s-accent{color:var(--accent);font-weight:700}
+.s-tags{
+  font-size:11px;
+  color:rgba(255,255,255,0.32);
+  line-height:2.1;
+}
+.s-byline{
+  font-size:11px;
+  color:rgba(255,255,255,0.38);
+  letter-spacing:1px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding-top:14px;
+  width:100%;
+  text-align:center;
+  line-height:1.5;
+}
+
+/* === 每卡下载按钮 === */
+.card-dl{
+  position:absolute;
+  right:14px;bottom:14px;
+  z-index:5;
+  padding:7px 14px;
+  background:rgba(6,12,28,0.75);
+  border:1px solid var(--accent);
+  border-radius:20px;
+  color:var(--accent);
+  font-family:var(--sans);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0.5px;
+  cursor:pointer;
+  display:flex;align-items:center;gap:5px;
+  backdrop-filter:blur(4px);
+  -webkit-tap-highlight-color:transparent;
+  transition:all 0.2s;
+}
+.card-dl:hover{background:var(--accent);color:#080f1e}
+.card-dl svg{width:12px;height:12px;flex-shrink:0}
+
+/* === 下载时隐藏按钮 === */
+.downloading .card-dl{display:none!important}
+
+/* === Toast === */
+.dl-toast{
+  position:fixed;left:50%;bottom:70px;
+  transform:translateX(-50%) translateY(16px);
+  background:rgba(18,18,28,0.93);color:#fff;
+  padding:12px 20px;border-radius:8px;
+  font-family:var(--sans);font-size:13px;font-weight:500;
+  opacity:0;pointer-events:none;
+  transition:all 0.3s ease;z-index:100;
+  max-width:88%;text-align:center;line-height:1.6;
+}
+.dl-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- ① 封面卡 -->
+<div class="card card-cover" id="card-cover">
+  <img class="card-bg"
+    src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1080&h=1440&fit=crop&q=90&auto=format"
+    alt="演出行业交流现场" crossorigin="anonymous" />
+  <div class="card-overlay"></div>
+  <div class="card-body">
+    <div class="card-eyebrow">惊喜之夜 · 2026 演交会记录</div>
+    <div class="cover-rule"></div>
+    <div class="card-main-title">演交会四天</div>
+    <div class="card-subtitle">我们替《山海经》走了一趟</div>
+    <div class="card-lede">
+      演交会不是演出。<br>
+      它更像一个行业调度器——<br>
+      全国剧院和机构，把档期和预算摆上桌。
+    </div>
+    <div class="card-caption">▲ 演出行业 · 一年一度的行业聚场</div>
+  </div>
+  <button class="card-dl" onclick="saveCard('card-cover','封面卡')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    保存图片
+  </button>
+</div>
+
+<!-- ② 内容卡 01 -->
+<div class="card" id="card-01">
+  <img class="card-bg"
+    src="https://images.unsplash.com/photo-1541696490-8744a5dc0228?w=1080&h=1440&fit=crop&q=90&auto=format"
+    alt="空剧场，巨灵还在扬州排练厅" crossorigin="anonymous" />
+  <div class="card-overlay"></div>
+  <span class="card-num">01</span>
+  <div class="card-body">
+    <div class="card-eyebrow">巨灵本尊没来</div>
+    <div class="card-title">它还在扬州的<br>排练厅里</div>
+    <div class="card-fact">
+      来演交会的是我们——<br>
+      带着项目册、一段片花、<br>
+      下半年的巡演计划。
+    </div>
+    <div class="card-caption">▲ 剧场空间 · 一部戏在出发之前先被讲清楚</div>
+  </div>
+  <button class="card-dl" onclick="saveCard('card-01','卡01')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    保存图片
+  </button>
+</div>
+
+<!-- ③ 内容卡 02 -->
+<div class="card" id="card-02">
+  <img class="card-bg"
+    src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1080&h=1440&fit=crop&q=90&auto=format"
+    alt="音乐厅空间，洽谈从技术规格开始" crossorigin="anonymous" />
+  <div class="card-overlay"></div>
+  <span class="card-num">02</span>
+  <div class="card-body">
+    <div class="card-eyebrow">洽谈不是谈故事</div>
+    <div class="card-title">「台口多高？<br>装台需要几天？」</div>
+    <div class="card-fact">
+      每一个问题都不浪漫。<br>
+      每一个问题，都是一份落地清单。<br>
+      剧院方坐下的那一刻，才是真正的开始。
+    </div>
+    <div class="card-caption">▲ 音乐厅走廊 · 现场谈的是技术，是合约</div>
+  </div>
+  <button class="card-dl" onclick="saveCard('card-02','卡02')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    保存图片
+  </button>
+</div>
+
+<!-- ④ 内容卡 03 -->
+<div class="card" id="card-03">
+  <img class="card-bg"
+    src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?w=1080&h=1440&fit=crop&q=90&auto=format"
+    alt="舞台表演，行业对话在幕后发生" crossorigin="anonymous" />
+  <div class="card-overlay"></div>
+  <span class="card-num">03</span>
+  <div class="card-body">
+    <div class="card-eyebrow">同行不谈谁更厉害</div>
+    <div class="card-title">票房结构怎么做，<br>巡演成本怎么控</div>
+    <div class="card-fact">
+      这些对话里没有观众，<br>
+      但往往会决定一部剧能走多远。<br>
+      所有意向和问题，整理成了一张表。
+    </div>
+    <div class="card-caption">▲ 舞台表演 · 行业对话决定下一个城市站</div>
+  </div>
+  <button class="card-dl" onclick="saveCard('card-03','卡03')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    保存图片
+  </button>
+</div>
+
+<!-- ⑤ 总结卡 -->
+<div class="card card-summary" id="card-summary">
+  <div class="summary-inner">
+    <div class="s-eyebrow">下半年 · 全国巡演</div>
+    <div class="s-rule"></div>
+    <div class="s-title">
+      《山海经·巨灵之梦》<br>
+      <span class="s-highlight">即将在路上</span>
+    </div>
+    <div class="s-body">
+      惊喜之夜出品<br>
+      扬州市木偶研究所（江苏省木偶剧团）出演<br>
+      <br>
+      下次见面，巨灵会在。<br>
+      <span class="s-accent">剧场见。</span>
+    </div>
+    <div class="s-tags">
+      #沉浸式演出 &nbsp;#山海经 &nbsp;#剧场 &nbsp;#演交会<br>
+      #巡演 &nbsp;#木偶剧 &nbsp;#惊喜之夜 &nbsp;#幕后日记
+    </div>
+    <div class="s-byline">—— 夜枭｜惊喜之夜</div>
+  </div>
+  <button class="card-dl" onclick="saveCard('card-summary','总结卡')" style="z-index:6">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    保存图片
+  </button>
+</div>
+
+<div class="dl-toast" id="dlToast"></div>
+
+<script>
+const SLUG = '演交会四天巡演记录';
+
+function toast(msg, ms=2800) {
+  const t = document.getElementById('dlToast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._h);
+  t._h = setTimeout(() => t.classList.remove('show'), ms);
+}
+
+async function waitImgs(el) {
+  const imgs = [...el.querySelectorAll('img')];
+  await Promise.all(imgs.map(img =>
+    img.complete && img.naturalWidth > 0
+      ? Promise.resolve()
+      : new Promise(res => {
+          img.addEventListener('load', res, {once:true});
+          img.addEventListener('error', res, {once:true});
+        })
+  ));
+}
+
+async function saveCard(cardId, label) {
+  const card = document.getElementById(cardId);
+  const btn = card.querySelector('.card-dl');
+  if (!btn || btn.dataset.busy === '1') return;
+  btn.dataset.busy = '1';
+  const origHtml = btn.innerHTML;
+  btn.innerHTML = '<span style="width:10px;height:10px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;display:inline-block"></span>';
+
+  toast('正在渲染图片，请稍候…');
+  try {
+    await waitImgs(card);
+    if (document.fonts && document.fonts.ready) {
+      try { await document.fonts.ready; } catch(_) {}
+    }
+    document.body.classList.add('downloading');
+
+    const canvas = await html2canvas(card, {
+      useCORS: true,
+      allowTaint: false,
+      backgroundColor: '#080f1e',
+      scale: 2,
+      logging: false,
+      imageTimeout: 15000,
+      windowWidth: card.offsetWidth,
+      onclone: (d) => {
+        const btns = d.querySelectorAll('.card-dl');
+        btns.forEach(b => b.remove());
+      }
+    });
+
+    document.body.classList.remove('downloading');
+
+    const QUALITIES = [0.92, 0.85, 0.80];
+    const MAX_BYTES = 9 * 1024 * 1024;
+    const toBlob = q => new Promise(res => canvas.toBlob(b => res(b), 'image/jpeg', q));
+    let blob = null, usedQ = 0;
+    for (const q of QUALITIES) {
+      const b = await toBlob(q);
+      if (b && b.size <= MAX_BYTES) { blob = b; usedQ = q; break; }
+      if (!blob || (b && b.size < blob.size)) { blob = b; usedQ = q; }
+    }
+    if (!blob) throw new Error('blob 生成失败');
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${SLUG}_${label}.jpg`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+    const sizeMB = (blob.size / 1024 / 1024).toFixed(1);
+    toast(`✅ ${label} 已保存 ${sizeMB}MB`);
+  } catch(e) {
+    document.body.classList.remove('downloading');
+    toast('⚠️ 保存失败：' + (e.message || '请重试'), 3500);
+    console.error(e);
+  } finally {
+    btn.innerHTML = origHtml;
+    btn.dataset.busy = '0';
+  }
+}
+
+/* spin keyframe */
+const style = document.createElement('style');
+style.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
+document.head.appendChild(style);
+</script>
+</body>
+</html>
