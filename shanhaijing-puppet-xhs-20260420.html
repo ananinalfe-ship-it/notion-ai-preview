@@ -20,138 +20,265 @@ body{
   width:375px;
   margin:0 auto;
 }
-img{image-rendering:-webkit-optimize-contrast;display:block}
+img{image-rendering:-webkit-optimize-contrast;display:block;width:100%;height:100%;object-fit:cover}
+
+/* ── 基础卡片 ── */
 .card{
   position:relative;width:375px;aspect-ratio:3/4;
   overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;
+  background:#0d0d0d;
 }
-.card-bg{position:absolute;inset:0;background:#0d0d0d}
-.card-bg img{width:100%;height:100%;object-fit:cover;opacity:0.8}
-.card-grad{
-  position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(0,0,0,0.96) 0%,rgba(0,0,0,0.35) 55%,rgba(0,0,0,0.0) 100%);
-}
-.card-num{
-  position:absolute;top:20px;left:22px;
-  font-family:var(--display);font-size:96px;font-weight:900;
-  color:var(--accent);opacity:0.88;line-height:1;letter-spacing:0;
-}
+
+/* ── 品牌标 ── */
 .brand{
-  position:absolute;top:24px;right:18px;
+  position:absolute;top:18px;right:16px;z-index:10;
   font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
-  color:rgba(255,255,255,0.5);font-weight:500;
+  color:rgba(255,255,255,0.52);font-weight:500;
 }
-.card-body{position:relative;z-index:2;padding:20px 22px 26px}
-.ctag{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.48);margin-bottom:8px;font-weight:500}
-.ctitle{font-size:26px;font-weight:700;color:#fff;line-height:1.38;margin-bottom:12px}
-.cfact{font-size:13px;color:rgba(255,255,255,0.82);line-height:1.75;padding-left:10px;border-left:2px solid var(--accent);margin-bottom:9px}
-.ccap{font-size:10px;color:rgba(255,255,255,0.32);line-height:1.5;margin-top:4px}
 
-/* 封面 */
-.cover .card-grad{background:linear-gradient(to top,rgba(0,0,0,0.97) 0%,rgba(0,0,0,0.55) 45%,rgba(0,0,0,0.12) 100%)}
-.cov-eye{position:relative;z-index:2;padding:0 22px 6px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);font-weight:600}
-.cov-h1{position:relative;z-index:2;padding:0 22px 10px;font-size:27px;font-weight:800;color:#fff;line-height:1.32}
-.cov-line{position:relative;z-index:2;margin:0 22px 14px;height:1px;background:linear-gradient(to right,var(--accent),transparent)}
-.cov-sub{position:relative;z-index:2;padding:0 22px 10px;font-size:13px;color:rgba(255,255,255,0.66);line-height:1.7}
-.cov-by{position:relative;z-index:2;padding:0 22px 26px;font-size:11px;color:rgba(255,255,255,0.38);letter-spacing:1px}
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   封面：2×2 四图马赛克
+━━━━━━━━━━━━━━━━━━━━━━━━ */
+.mosaic-2x2{
+  position:absolute;inset:0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:2px;
+  background:#1a1005;
+}
+.mosaic-2x2 .cell{overflow:hidden}
+/* 整体渐变遮罩，从下方升起 */
+.cover-grad{
+  position:absolute;inset:0;z-index:3;
+  background:linear-gradient(to top,
+    rgba(0,0,0,0.97) 0%,
+    rgba(0,0,0,0.72) 38%,
+    rgba(0,0,0,0.22) 62%,
+    rgba(0,0,0,0.05) 100%);
+}
+.cover-body{
+  position:relative;z-index:4;
+  padding:22px 22px 28px;
+}
+.cov-eye{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);font-weight:700;margin-bottom:10px;
+}
+.cov-h1{
+  font-size:24px;font-weight:800;color:#fff;line-height:1.34;
+  margin-bottom:10px;
+}
+.cov-line{height:1px;background:linear-gradient(to right,var(--accent),transparent);margin-bottom:10px}
+.cov-sub{font-size:13px;color:rgba(255,255,255,0.62);line-height:1.72;margin-bottom:10px}
+.cov-by{font-size:11px;color:rgba(255,255,255,0.36);letter-spacing:1px}
 
-/* 总结卡 */
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   内容卡：上方双图 + 下方文字
+━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* 图区：占卡片上52% */
+.photo-zone{
+  position:absolute;top:0;left:0;right:0;
+  height:52%;
+  display:grid;
+  gap:2px;
+  background:#0d0d0d;
+  z-index:1;
+}
+/* 左大右小：3:2 */
+.pz-3-2{ grid-template-columns:3fr 2fr }
+/* 左右各半 */
+.pz-half{ grid-template-columns:1fr 1fr }
+/* 左小右大：2:3 */
+.pz-2-3{ grid-template-columns:2fr 3fr }
+/* 3等分 */
+.pz-3strip{ grid-template-columns:1fr 1fr 1fr }
+
+.photo-zone .cell{overflow:hidden}
+
+/* 图区下边渐变收口 */
+.photo-fade{
+  position:absolute;z-index:2;
+  left:0;right:0;
+  top:calc(52% - 40px);
+  height:56px;
+  background:linear-gradient(to bottom, rgba(13,13,13,0) 0%, rgba(13,13,13,1) 100%);
+}
+
+/* 文字区：占卡片下半 */
+.text-zone{
+  position:relative;z-index:3;
+  margin-top:52%;
+  background:#0d0d0d;
+  padding:16px 20px 20px;
+  flex:1;
+}
+.card-num-inline{
+  font-family:var(--display);font-size:72px;font-weight:900;
+  color:var(--accent);opacity:0.28;line-height:0.88;
+  position:absolute;top:14px;right:18px;
+  pointer-events:none;z-index:0;letter-spacing:0;
+}
+.ctag{
+  font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(255,255,255,0.42);margin-bottom:8px;font-weight:500;
+  position:relative;z-index:1;
+}
+.ctitle{
+  font-size:22px;font-weight:700;color:#fff;line-height:1.38;
+  margin-bottom:10px;position:relative;z-index:1;
+}
+.cfact{
+  font-size:13px;color:rgba(255,255,255,0.78);line-height:1.72;
+  padding-left:10px;border-left:2px solid var(--accent);
+  margin-bottom:8px;position:relative;z-index:1;
+}
+.ccap{
+  font-size:10px;color:rgba(255,255,255,0.28);line-height:1.5;
+  margin-top:6px;position:relative;z-index:1;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━
+   总结卡
+━━━━━━━━━━━━━━━━━━━━━━━━ */
 .sum-card{
   width:375px;aspect-ratio:3/4;
   background:linear-gradient(155deg,#1c1208 0%,#0d0d0d 50%,#141008 100%);
-  display:flex;flex-direction:column;justify-content:space-between;
-  padding:44px 28px 32px;
+  display:flex;flex-direction:column;
+  overflow:hidden;
 }
-.sum-quo{font-family:var(--display);font-size:72px;color:var(--accent);opacity:0.25;line-height:1;margin-bottom:16px}
-.sum-q{font-size:21px;font-weight:700;color:#fff;line-height:1.55;margin-bottom:16px}
-.sum-a{font-size:14px;color:rgba(255,255,255,0.72);line-height:1.85;border-left:2px solid var(--accent);padding-left:12px;margin-bottom:28px}
-.sum-box{border:1px solid rgba(196,131,42,0.38);border-radius:4px;padding:14px 16px;text-align:center;color:var(--accent);font-size:12px;letter-spacing:1px;line-height:1.7;margin-bottom:20px}
-.sum-tags{font-size:11px;color:rgba(255,255,255,0.28);line-height:2;text-align:center}
-.sum-ft{text-align:center;font-size:11px;color:rgba(255,255,255,0.28);letter-spacing:1px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.07)}
+/* 顶部4图横条 */
+.sum-photos{
+  display:grid;grid-template-columns:1fr 1fr 1fr 1fr;
+  gap:2px;height:22%;background:#0d0d0d;flex-shrink:0;
+}
+.sum-photos .cell{overflow:hidden}
+.sum-photo-fade{
+  height:32px;flex-shrink:0;
+  background:linear-gradient(to bottom,rgba(13,13,13,0),rgba(28,18,8,1));
+}
+.sum-body{
+  flex:1;padding:6px 28px 22px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.sum-quo{font-family:var(--display);font-size:64px;color:var(--accent);opacity:0.22;line-height:1;margin-bottom:12px}
+.sum-q{font-size:20px;font-weight:700;color:#fff;line-height:1.52;margin-bottom:14px}
+.sum-a{font-size:13px;color:rgba(255,255,255,0.68);line-height:1.85;border-left:2px solid var(--accent);padding-left:12px;margin-bottom:22px}
+.sum-box{border:1px solid rgba(196,131,42,0.36);border-radius:4px;padding:12px 14px;text-align:center;color:var(--accent);font-size:12px;letter-spacing:1px;line-height:1.7;margin-bottom:18px}
+.sum-tags{font-size:11px;color:rgba(255,255,255,0.26);line-height:1.9;text-align:center}
+.sum-ft{text-align:center;font-size:11px;color:rgba(255,255,255,0.26);letter-spacing:1px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.07)}
 </style>
 </head>
 <body>
 
-<!-- 封面卡 -->
-<div class="card cover">
-  <div class="card-bg">
-    <img src="images/shanhaijing-puppet-xhs-20260420/cover.jpg"
-         alt="《山海经·巨灵之梦》首演现场">
+<!-- ── 封面卡：2×2 四图马赛克 ── -->
+<div class="card cover" style="justify-content:flex-end">
+  <div class="mosaic-2x2">
+    <div class="cell"><img src="images/shanhaijing-puppet-xhs-20260420/cover.jpg"
+         alt="《山海经·巨灵之梦》首演现场" crossorigin="anonymous"></div>
+    <div class="cell"><img src="images/shanhaijing-puppet-xhs-20260420/card01.jpg"
+         alt="《巨灵之梦》演出实景" crossorigin="anonymous"></div>
+    <div class="cell"><img src="images/shanhaijing-puppet-xhs-20260420/card02.jpg"
+         alt="《巨灵之梦》舞台灯光" crossorigin="anonymous"></div>
+    <div class="cell"><img src="images/shanhaijing-puppet-xhs-20260420/card03.jpg"
+         alt="《巨灵之梦》演出场景" crossorigin="anonymous"></div>
   </div>
-  <div class="card-grad"></div>
+  <div class="cover-grad"></div>
   <div class="brand">惊喜之夜</div>
-  <div class="cov-eye">山海经·巨灵之梦 ｜ 幕后小记</div>
-  <div class="cov-h1">AI 能生成任何画面的年代，我们为什么还在剧场里扛起一只巨型木偶？</div>
-  <div class="cov-line"></div>
-  <div class="cov-sub">当「生成」变得越来越容易，我们反而更想保住那些必须靠身体、时间和劳动才能成立的东西。</div>
-  <div class="cov-by">—— 夜枭 ｜ 惊喜之夜</div>
+  <div class="cover-body">
+    <div class="cov-eye">山海经·巨灵之梦 ｜ 幕后小记</div>
+    <div class="cov-h1">AI 能生成任何画面的年代，我们为什么还在剧场里扛起一只巨型木偶？</div>
+    <div class="cov-line"></div>
+    <div class="cov-sub">当「生成」变得越来越容易，我们反而更想保住那些必须靠身体、时间和劳动才能成立的东西。</div>
+    <div class="cov-by">—— 夜枭 ｜ 惊喜之夜</div>
+  </div>
 </div>
 
-<!-- Card 01 -->
+<!-- ── Card 01：左大(3)右小(2) 双图 ── -->
 <div class="card">
-  <div class="card-bg">
-    <img src="images/shanhaijing-puppet-xhs-20260420/card01.jpg"
-         alt="《巨灵之梦》演出实景">
+  <div class="photo-zone pz-3-2">
+    <div class="cell"><img src="images/shanhaijing-puppet-xhs-20260420/card01.jpg"
+         alt="《巨灵之梦》演出实景" crossorigin="anonymous"></div>
+    <div class="cell"><img src="images/shanhaijing-puppet-xhs-20260420/cover.jpg"
+         alt="《山海经·巨灵之梦》首演" crossorigin="anonymous"></div>
   </div>
-  <div class="card-grad"></div>
-  <div class="card-num">01</div>
-  <div class="brand">惊喜之夜</div>
-  <div class="card-body">
+  <div class="photo-fade"></div>
+  <div class="text-zone">
+    <div class="card-num-inline">01</div>
     <div class="ctag">木偶 · 不是一种旧媒介</div>
     <div class="ctitle">大家买票进剧场，<br>要看的不是「一个巨物形象」</div>
-    <div class="cfact">是「几个人一起把它举起来」这件事本身——那份重量和操控的紧张，是这个场面核心</div>
+    <div class="cfact">是「几个人一起把它举起来」这件事本身——那份重量和操控的紧张，是这个场面的核心</div>
     <div class="cfact">5 米高的巨偶，从打造到让它在舞台上走起来，是计以月计的工程</div>
     <div class="ccap">▲ 《山海经·巨灵之梦》演出实景 ｜ 操偶师的身体劳动是演出意义的一部分</div>
   </div>
+  <div class="brand">惊喜之夜</div>
 </div>
 
-<!-- Card 02 -->
+<!-- ── Card 02：左小(2)右大(3) 双图 ── -->
 <div class="card">
-  <div class="card-bg">
-    <img src="images/shanhaijing-puppet-xhs-20260420/card02.jpg"
-         alt="《巨灵之梦》舞台灯光实景">
+  <div class="photo-zone pz-2-3">
+    <div class="cell"><img src="images/shanhaijing-puppet-xhs-20260420/cover.jpg"
+         alt="《巨灵之梦》舞台现场" crossorigin="anonymous"></div>
+    <div class="cell"><img src="images/shanhaijing-puppet-xhs-20260420/card02.jpg"
+         alt="《巨灵之梦》舞台灯光" crossorigin="anonymous"></div>
   </div>
-  <div class="card-grad"></div>
-  <div class="card-num">02</div>
-  <div class="brand">惊喜之夜</div>
-  <div class="card-body">
+  <div class="photo-fade"></div>
+  <div class="text-zone">
+    <div class="card-num-inline">02</div>
     <div class="ctag">现当代结合 · 不是装饰，是翻译</div>
-    <div class="ctitle">「当代」的所有手段，<br>是让木偶这种古老语言<br>被今天的人读懂</div>
+    <div class="ctitle">「当代」的所有手段，<br>是让古老语言<br>被今天的人读懂</div>
     <div class="cfact">多媒体不是替木偶制造奇观<br>音乐不是让传统显得洋气<br>而是对得上今天观众的感知节奏</div>
     <div class="ccap">▲ 《巨灵之梦》舞台现场 ｜ 沉浸式多媒体 × 扬州杖头木偶非遗</div>
   </div>
+  <div class="brand">惊喜之夜</div>
 </div>
 
-<!-- Card 03 -->
+<!-- ── Card 03：三等分 横条 + 双图 ── -->
 <div class="card">
-  <div class="card-bg">
-    <img src="images/shanhaijing-puppet-xhs-20260420/card03.jpg"
-         alt="《巨灵之梦》演出现场">
+  <div class="photo-zone pz-3strip">
+    <div class="cell"><img src="images/shanhaijing-puppet-xhs-20260420/card01.jpg"
+         alt="演出实景1" crossorigin="anonymous"></div>
+    <div class="cell"><img src="images/shanhaijing-puppet-xhs-20260420/card02.jpg"
+         alt="演出实景2" crossorigin="anonymous"></div>
+    <div class="cell"><img src="images/shanhaijing-puppet-xhs-20260420/card03.jpg"
+         alt="演出实景3" crossorigin="anonymous"></div>
   </div>
-  <div class="card-grad"></div>
-  <div class="card-num">03</div>
-  <div class="brand">惊喜之夜</div>
-  <div class="card-body">
+  <div class="photo-fade"></div>
+  <div class="text-zone">
+    <div class="card-num-inline">03</div>
     <div class="ctag">AI · 暂时的三个感觉</div>
-    <div class="ctitle">它更适合靠近排练厅，<br>而不是替代舞台</div>
+    <div class="ctitle">它更适合靠近排练厅，<br>而不是替代舞台中心</div>
     <div class="cfact">✓ 也许可以进来：前期视觉预演、音乐草稿生成、工种间沟通前置</div>
     <div class="cfact">✗ 暂时不碰：操偶师与巨偶之间真实的力学关系，观众看见劳动时产生的震动</div>
     <div class="ccap">▲ 扬州运河大剧院首演 2026.2.28 ｜ AI 能生成画面，但无法替代真实在场的震动</div>
   </div>
+  <div class="brand">惊喜之夜</div>
 </div>
 
-<!-- 总结卡 -->
+<!-- ── 总结卡：顶部4图横条 + 深色正文 ── -->
 <div class="sum-card">
-  <div>
-    <div class="sum-quo">"</div>
-    <div class="sum-q">当生成愈来愈便宜，我们还愿不愿意花几个月、几十个人的力气，把一只 5 米高的偶真的举到舞台上？</div>
-    <div class="sum-a">我们的答案在扬州的剧院里数了数，是愿意。</div>
-    <div class="sum-box">4月20-24日 · 全国演出交易会现场见<br>7月 · 百域偶韵 北京顺义大剧院</div>
-    <div class="sum-tags">#沉浸式演出 #非遗活化 #木偶剧 #山海经 #AI与艺术 #剧场幕后<br>#惊喜之夜 #巨灵之梦</div>
+  <div class="sum-photos">
+    <div class="cell"><img src="images/shanhaijing-puppet-xhs-20260420/cover.jpg"
+         alt="演出1" crossorigin="anonymous"></div>
+    <div class="cell"><img src="images/shanhaijing-puppet-xhs-20260420/card01.jpg"
+         alt="演出2" crossorigin="anonymous"></div>
+    <div class="cell"><img src="images/shanhaijing-puppet-xhs-20260420/card02.jpg"
+         alt="演出3" crossorigin="anonymous"></div>
+    <div class="cell"><img src="images/shanhaijing-puppet-xhs-20260420/card03.jpg"
+         alt="演出4" crossorigin="anonymous"></div>
   </div>
-  <div class="sum-ft">—— 夜枭 ｜ 惊喜之夜</div>
+  <div class="sum-photo-fade"></div>
+  <div class="sum-body">
+    <div>
+      <div class="sum-quo">"</div>
+      <div class="sum-q">当生成愈来愈便宜，我们还愿不愿意花几个月、几十个人的力气，把一只 5 米高的偶真的举到舞台上？</div>
+      <div class="sum-a">我们的答案在扬州的剧院里数了数，是愿意。</div>
+      <div class="sum-box">4月20-24日 · 全国演出交易会现场见<br>7月 · 百域偶韵 北京顺义大剧院</div>
+      <div class="sum-tags">#沉浸式演出 #非遗活化 #木偶剧 #山海经 #AI与艺术 #剧场幕后<br>#惊喜之夜 #巨灵之梦</div>
+    </div>
+    <div class="sum-ft">—— 夜枭 ｜ 惊喜之夜</div>
+  </div>
 </div>
 
 </body>
 </html>
-
