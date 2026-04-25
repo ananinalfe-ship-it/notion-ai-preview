@@ -26,7 +26,6 @@ body{
 }
 img{image-rendering:-webkit-optimize-contrast}
 .wrap{max-width:720px;margin:0 auto;background:var(--bg)}
-/* 刊头 */
 .masthead{
   padding:16px 36px 14px;
   display:flex;align-items:center;justify-content:space-between;
@@ -35,7 +34,6 @@ img{image-rendering:-webkit-optimize-contrast}
 }
 .masthead .brand{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:0.12em}
 .masthead .issue{font-size:12px;color:#aaa;letter-spacing:0.05em}
-/* 封面 */
 .cover{position:relative;height:500px;overflow:hidden}
 .cover img{width:100%;height:100%;object-fit:cover;filter:brightness(0.5)}
 .cover-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(20,44,36,0.3) 0%,rgba(10,30,22,0.9) 100%)}
@@ -43,9 +41,7 @@ img{image-rendering:-webkit-optimize-contrast}
 .cover-label{font-size:12px;letter-spacing:0.22em;color:rgba(255,255,255,0.6);text-transform:uppercase;margin-bottom:18px}
 .cover h1{font-size:29px;font-weight:800;color:#fff;line-height:1.5;font-family:var(--sans);margin-bottom:14px}
 .cover-sub{font-size:23px;font-style:italic;color:rgba(255,255,255,0.7);font-family:var(--display);line-height:1.5}
-/* 正文区域 */
 .body{padding:44px 36px 64px}
-/* 章节标题 */
 .section-title{
   font-size:32px;font-weight:800;color:var(--accent);
   font-family:var(--sans);line-height:1.4;
@@ -55,46 +51,36 @@ img{image-rendering:-webkit-optimize-contrast}
   content:'';display:block;position:absolute;bottom:0;left:0;
   width:52px;height:3px;background:var(--accent);
 }
-/* 正文 */
 p{font-size:25px;line-height:1.85;color:var(--text);margin-bottom:22px;font-family:var(--sans)}
-/* 引子 */
 .lede{
   font-size:23px;line-height:1.8;color:#2a2a2a;
   background:var(--paper);
   border-top:2px solid var(--accent);border-bottom:2px solid var(--accent);
   padding:22px 28px;margin:0 0 36px;font-family:var(--sans);
 }
-/* 引用块 */
 .pull-quote{margin:44px 0 40px;padding:26px 28px 30px;text-align:center;border-top:2px solid var(--accent);border-bottom:2px solid var(--accent)}
 .pull-quote .quo{display:block;font-family:var(--display);font-size:56px;color:var(--accent);line-height:1;font-weight:700;margin:0 auto 12px;height:38px;vertical-align:baseline}
 .pull-quote p{font-size:23px;line-height:1.75;color:var(--accent);font-style:italic;font-weight:600;margin:0}
-/* 要点框 */
 .takeaway{background:var(--paper);border-left:5px solid var(--accent);padding:22px 24px;margin:24px 0 28px;border-radius:0 4px 4px 0}
 .takeaway p{font-size:25px;margin:0 0 10px;color:var(--text)}
 .takeaway p:last-child{margin:0}
-/* 案例卡片 */
 .case-card{background:var(--paper);border-top:3px solid var(--accent);padding:24px 26px;margin:24px 0;border-radius:0 0 4px 4px}
 .case-card .case-title{font-size:25px;font-weight:800;color:var(--accent);margin-bottom:12px;font-family:var(--sans)}
 .case-card p{font-size:25px;margin-bottom:0;line-height:1.8}
-/* 分隔符 */
 .sep{text-align:center;color:var(--accent);font-size:13px;letter-spacing:0.35em;margin:36px 0;opacity:0.55}
-/* 图片 */
+/* 图片：不挤压，自然比例 */
 .img-wrap{margin:32px 0 0;overflow:hidden;border-radius:2px}
-.img-wrap img{width:100%;display:block;object-fit:cover;max-height:340px}
+.img-wrap img{width:100%;display:block;height:auto}
 .img-caption{font-size:13px;color:var(--muted);margin:8px 0 28px;line-height:1.6}
-/* 外部链接引用块 */
 .ext-ref{
   background:var(--paper);border-left:4px solid var(--accent-light);
   padding:18px 22px;margin:24px 0;border-radius:0 4px 4px 0;
 }
 .ext-ref p{font-size:25px;margin:0;color:#444;line-height:1.8}
-/* 参考来源 */
 .refs{margin-top:40px;padding:20px 24px;background:var(--paper);border-radius:4px}
 .refs h4{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:0.12em;margin-bottom:10px;text-transform:uppercase}
 .refs p{font-size:13px;color:#888;margin-bottom:6px;line-height:1.7}
-/* 落款 */
 .byline{margin-top:52px;padding-top:22px;border-top:2px solid var(--accent);font-size:14px;color:var(--muted);text-align:right;letter-spacing:0.05em}
-/* 下载FAB */
 .dl-fab{
   position:fixed;right:18px;bottom:18px;z-index:99;
   display:flex;align-items:center;gap:8px;padding:12px 18px;
@@ -126,8 +112,8 @@ p{font-size:25px;line-height:1.85;color:var(--text);margin-bottom:22px;font-fami
     <span class="issue">2026.04.25</span>
   </div>
   <div class="cover">
-    <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?w=2400&q=90&auto=format&fit=crop"
-         alt="剧场大幕" crossorigin="anonymous"/>
+    <img src="https://ananinalfe-ship-it.github.io/notion-ai-preview/images/shanhaijing-liubai-gzh-20260425/cover.jpg"
+         alt="《山海经·巨灵之梦》演出现场" crossorigin="anonymous"/>
     <div class="cover-overlay"></div>
     <div class="cover-text">
       <div class="cover-label">惊喜之夜 · 创作观察</div>
@@ -148,10 +134,10 @@ p{font-size:25px;line-height:1.85;color:var(--text);margin-bottom:22px;font-fami
     <h2 class="section-title">一、能写群像，为什么只讲一个</h2>
 
     <div class="img-wrap">
-      <img src="https://images.unsplash.com/photo-1541696490-8744a5dc0228?w=2400&q=90&auto=format&fit=crop"
-           alt="剧场座椅" crossorigin="anonymous"/>
+      <img src="https://ananinalfe-ship-it.github.io/notion-ai-preview/images/shanhaijing-liubai-gzh-20260425/section1.jpg"
+           alt="《巨灵之梦》舞台全景｜巨灵独立于舞台中心" crossorigin="anonymous"/>
     </div>
-    <p class="img-caption">▲ 舞台与观众席之间的距离，决定了叙事的密度</p>
+    <p class="img-caption">▲ 舞台上只有一尊形象——让观众有空间凝视，而非被信息淹没</p>
 
     <p>从文本资源的角度，山海经是一座矿。做群像戏，线索是现成的：一神一段、一兽一幕，十几个神话碎片拼起来，信息量足，奇观也足。这是许多「东方奇幻」题材默认的打开方式。</p>
     <p>但奇观堆得越满，观众反而越难被真正带进去。每一个神祇都只是匆匆亮相、留下一个剪影，就被下一个顶替。舞台上什么都有，台下记住的却往往只是「很热闹」。</p>
@@ -166,8 +152,8 @@ p{font-size:25px;line-height:1.85;color:var(--text);margin-bottom:22px;font-fami
     <h2 class="section-title">二、「留白」不是少，是克制</h2>
 
     <div class="img-wrap">
-      <img src="https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?w=2400&q=90&auto=format&fit=crop"
-           alt="空剧场" crossorigin="anonymous"/>
+      <img src="https://ananinalfe-ship-it.github.io/notion-ai-preview/images/shanhaijing-liubai-gzh-20260425/section2.jpg"
+           alt="《巨灵之梦》演出现场｜巨偶与观众席" crossorigin="anonymous"/>
     </div>
     <p class="img-caption">▲ 给巨偶留出被观众凝视的空间，是这部戏的设计原则</p>
 
@@ -194,10 +180,10 @@ p{font-size:25px;line-height:1.85;color:var(--text);margin-bottom:22px;font-fami
     <h2 class="section-title">三、减法不是第一次用的刀</h2>
 
     <div class="img-wrap">
-      <img src="https://images.unsplash.com/photo-1523676060187-f55189a71f5e?w=2400&q=90&auto=format&fit=crop"
-           alt="歌剧院内部" crossorigin="anonymous"/>
+      <img src="https://ananinalfe-ship-it.github.io/notion-ai-preview/images/shanhaijing-liubai-gzh-20260425/section3.jpg"
+           alt="《巨灵之梦》操偶师与巨偶｜人与物的力学关系" crossorigin="anonymous"/>
     </div>
-    <p class="img-caption">▲ 惊喜之夜三部剧的「减法」各有形态，背后是同一套判断</p>
+    <p class="img-caption">▲ 惊喜之夜不同剧目里的「减法」，形态各异，背后是同一套判断</p>
 
     <p>回看惊喜之夜的剧目矩阵，「减法」这把刀其实一直在用，只是方式不同。</p>
 
@@ -223,8 +209,8 @@ p{font-size:25px;line-height:1.85;color:var(--text);margin-bottom:22px;font-fami
     <h2 class="section-title">四、行业里还有谁在这么做</h2>
 
     <div class="img-wrap">
-      <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=2400&q=90&auto=format&fit=crop"
-           alt="现代建筑极简" crossorigin="anonymous"/>
+      <img src="https://ananinalfe-ship-it.github.io/notion-ai-preview/images/shanhaijing-liubai-gzh-20260425/section4.jpg"
+           alt="《巨灵之梦》舞台细节｜极简手段的表达力" crossorigin="anonymous"/>
     </div>
     <p class="img-caption">▲ 当代木偶领域「减法」案例：塞尔维亚《The Silent Boy》，2021</p>
 
