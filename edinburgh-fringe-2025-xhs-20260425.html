@@ -21,8 +21,6 @@ body{
   display:flex;flex-direction:column;align-items:center;padding:24px 0 40px;gap:20px;
 }
 img{image-rendering:-webkit-optimize-contrast}
-
-/* 每张卡片 */
 .card{
   position:relative;
   width:375px;
@@ -31,24 +29,20 @@ img{image-rendering:-webkit-optimize-contrast}
   border-radius:4px;
   flex-shrink:0;
 }
-/* 背景图 */
 .card-bg{
   position:absolute;inset:0;
   width:100%;height:100%;object-fit:cover;
 }
-/* 渐变遮罩 */
 .card-mask{
   position:absolute;inset:0;
   background:linear-gradient(to top, rgba(10,5,20,0.97) 0%, rgba(10,5,20,0.70) 40%, rgba(10,5,20,0.25) 75%, rgba(10,5,20,0.1) 100%);
 }
-/* 顶部国家/来源 */
 .card-source{
   position:absolute;top:20px;left:22px;right:22px;
   font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
   color:rgba(255,255,255,0.5);font-family:var(--sans);
   font-weight:500;
 }
-/* 大编号 */
 .card-num{
   position:absolute;top:14px;right:18px;
   font-size:96px;font-weight:800;
@@ -56,12 +50,10 @@ img{image-rendering:-webkit-optimize-contrast}
   font-family:var(--display);line-height:1;
   letter-spacing:0;
 }
-/* 底部文字区 */
 .card-body{
   position:absolute;bottom:0;left:0;right:0;
   padding:20px 22px 28px;z-index:2;
 }
-/* 标题 */
 .card-title{
   font-size:26px;font-weight:700;
   color:#fff;line-height:1.45;
@@ -69,7 +61,6 @@ img{image-rendering:-webkit-optimize-contrast}
   margin-bottom:12px;
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
 }
-/* 关键事实条 */
 .card-fact{
   font-size:13px;color:rgba(255,255,255,0.82);
   line-height:1.65;padding-left:12px;
@@ -77,16 +68,11 @@ img{image-rendering:-webkit-optimize-contrast}
   margin-bottom:10px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
-/* 图片来源 */
 .card-caption{font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.05em;margin-top:6px}
-
-/* 封面特殊 */
 .cover-card .card-title{font-size:28px;margin-bottom:10px}
 .cover-card .cover-sub{font-size:23px;font-style:italic;color:rgba(255,255,255,0.65);font-family:var(--display);line-height:1.5;margin-bottom:14px}
 .cover-card .cover-lede{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.7;border-top:1px solid rgba(255,255,255,0.15);padding-top:12px}
 .cover-card .cover-brand{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:block}
-
-/* 总结卡 */
 .summary-card{background:linear-gradient(135deg,#12002a 0%,#1e0a40 50%,#0a0018 100%)}
 .summary-card .sum-eyebrow{font-size:10px;letter-spacing:0.3em;color:var(--accent);text-transform:uppercase;margin-bottom:18px;display:block}
 .summary-card .sum-quote{font-size:23px;color:#fff;line-height:1.65;font-weight:600;margin-bottom:22px;font-family:var(--sans)}
@@ -95,8 +81,6 @@ img{image-rendering:-webkit-optimize-contrast}
 .summary-card .sum-tags{font-size:12px;color:var(--accent);opacity:0.85;margin-top:12px;line-height:1.8}
 .summary-card .sum-byline{font-size:11px;color:rgba(255,255,255,0.3);margin-top:14px;letter-spacing:0.05em}
 .sum-inner{padding:36px 24px 30px;display:flex;flex-direction:column;height:100%}
-
-/* 下载按钮 */
 .save-btn{
   position:absolute;bottom:14px;right:14px;z-index:10;
   background:rgba(107,79,160,0.85);color:#fff;
@@ -120,8 +104,8 @@ img{image-rendering:-webkit-optimize-contrast}
 <!-- ① 封面卡 -->
 <div class="card cover-card" id="card0">
   <img class="card-bg"
-       src="https://images.unsplash.com/photo-1499364615650-ec38552f4f34?w=1080&h=1440&fit=crop&q=90&auto=format"
-       alt="歌剧院大厅" crossorigin="anonymous"/>
+       src="https://images.unsplash.com/photo-1503095396549-807759245b35?w=1080&h=1440&fit=crop&q=90&auto=format"
+       alt="百老汇剧场" crossorigin="anonymous"/>
   <div class="card-mask"></div>
   <div class="card-source">Edinburgh · 艺术节观察</div>
   <div class="card-body">
@@ -139,8 +123,8 @@ img{image-rendering:-webkit-optimize-contrast}
 <!-- ② Card 01 -->
 <div class="card" id="card1">
   <img class="card-bg"
-       src="https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=1080&h=1440&fit=crop&q=90&auto=format"
-       alt="演唱会舞台" crossorigin="anonymous"/>
+       src="https://images.unsplash.com/photo-1514306191717-452ec28c7814?w=1080&h=1440&fit=crop&q=90&auto=format"
+       alt="舞台灯光" crossorigin="anonymous"/>
   <div class="card-mask"></div>
   <div class="card-source">Edinburgh Fringe 2025 · August</div>
   <div class="card-num">01</div>
@@ -158,8 +142,8 @@ img{image-rendering:-webkit-optimize-contrast}
 <!-- ③ Card 02 -->
 <div class="card" id="card2">
   <img class="card-bg"
-       src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1080&h=1440&fit=crop&q=90&auto=format"
-       alt="AI抽象" crossorigin="anonymous"/>
+       src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1080&h=1440&fit=crop&q=90&auto=format"
+       alt="数字代码矩阵" crossorigin="anonymous"/>
   <div class="card-mask"></div>
   <div class="card-source">2026 年 1 月 · 请愿事件</div>
   <div class="card-num">02</div>
@@ -177,8 +161,8 @@ img{image-rendering:-webkit-optimize-contrast}
 <!-- ④ Card 03 -->
 <div class="card" id="card3">
   <img class="card-bg"
-       src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1080&h=1440&fit=crop&q=90&auto=format"
-       alt="演唱会人群" crossorigin="anonymous"/>
+       src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1080&h=1440&fit=crop&q=90&auto=format"
+       alt="音乐厅观众席" crossorigin="anonymous"/>
   <div class="card-mask"></div>
   <div class="card-source">同一场艺术节 · 三种态度</div>
   <div class="card-num">03</div>
