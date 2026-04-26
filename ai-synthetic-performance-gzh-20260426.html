@@ -1,0 +1,348 @@
+<!doctype html><html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 合成表演到底动了演员什么——一篇 2024 年 Sage 期刊论文里的三种立场</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
+<style>
+:root{
+  --accent:#b5212b;
+  --accent-light:#fdf3f3;
+  --text:#1d1d1d;
+  --text-secondary:#4a4a4a;
+  --rule:#e0e0e0;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Source Han Sans SC","Noto Sans CJK SC","Microsoft YaHei UI","Microsoft YaHei",sans-serif;
+  --display:"Playfair Display",Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#fff}
+body{
+  font-family:var(--sans);color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  font-feature-settings:"kern" 1,"liga" 1;
+}
+img{image-rendering:-webkit-optimize-contrast;display:block;width:100%}
+.wrap{max-width:720px;margin:0 auto;padding:0 0 80px}
+
+/* Masthead */
+.masthead{
+  border-top:3px solid var(--accent);
+  border-bottom:1px solid var(--rule);
+  padding:16px 28px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.masthead .brand{font-size:13px;letter-spacing:0.12em;color:var(--text-secondary);font-weight:700}
+.masthead .date{font-size:12px;color:#888}
+
+/* Cover */
+.cover-img{position:relative;overflow:hidden}
+.cover-img img{width:100%;height:420px;object-fit:cover}
+.cover-inner{padding:36px 28px 32px}
+.cover-tag{
+  font-size:11px;letter-spacing:.15em;color:var(--accent);
+  font-weight:800;margin-bottom:16px;text-transform:uppercase;
+}
+.cover-title{
+  font-size:29px;line-height:1.3;font-weight:800;
+  color:var(--text);margin-bottom:20px;
+}
+.lede{
+  font-size:23px;line-height:1.75;color:var(--text-secondary);
+  border-left:3px solid var(--accent);padding-left:20px;
+}
+.byline{font-size:12px;color:#999;margin-top:16px}
+
+/* Divider */
+.rule{border:none;border-top:1px solid var(--rule);margin:32px 28px}
+.rule-thick{border:none;border-top:2px solid var(--text);margin:40px 28px 36px}
+
+/* Body text */
+.section{padding:0 28px}
+.section p{font-size:25px;line-height:1.85;color:var(--text);margin-bottom:22px}
+.section p strong{font-weight:700}
+
+/* Chapter heading */
+.chapter{padding:0 28px;margin-bottom:28px}
+.ch-num{
+  font-family:var(--display);font-size:48px;font-weight:900;
+  color:var(--accent);line-height:1;margin-bottom:6px;
+  vertical-align:baseline;
+}
+.ch-title{font-size:32px;font-weight:800;line-height:1.3;color:var(--text)}
+.ch-sub{font-size:14px;color:var(--text-secondary);margin-top:6px;font-weight:500}
+
+/* Section image */
+.sec-img{padding:0;margin:28px 0}
+.sec-img img{width:100%;height:300px;object-fit:cover}
+.sec-caption{
+  font-size:13px;color:#888;
+  padding:10px 28px 0;line-height:1.6;
+}
+
+/* Pull quote */
+.pull-quote{
+  margin:40px 28px;padding:28px 0;
+  border-top:2px solid var(--accent);
+  border-bottom:2px solid var(--accent);
+  text-align:center;
+}
+.pull-quote .quo{
+  display:block;font-family:var(--display);font-size:56px;
+  color:var(--accent);line-height:1;font-weight:700;
+  margin:0 auto 10px;height:36px;vertical-align:baseline;
+}
+.pull-quote p{
+  font-size:23px;line-height:1.65;color:var(--text);
+  font-weight:600;margin:0 0 12px;
+}
+.pull-quote .src{font-size:13px;color:#888}
+
+/* Fact box */
+.fact-box{
+  background:var(--accent-light);
+  border-left:4px solid var(--accent);
+  padding:20px 24px;margin:28px 28px;
+  border-radius:0 4px 4px 0;
+}
+.fact-box .fb-label{
+  font-size:11px;letter-spacing:.12em;color:var(--accent);
+  font-weight:800;text-transform:uppercase;margin-bottom:8px;
+}
+.fact-box p{font-size:25px;line-height:1.75;color:var(--text);margin:0}
+.fact-box p+p{margin-top:12px}
+
+/* Closing */
+.closing{padding:0 28px;margin-top:16px}
+.closing p{font-size:25px;line-height:1.85;color:var(--text);margin-bottom:22px}
+.closing .sign{
+  font-size:14px;color:var(--text-secondary);
+  margin-top:32px;padding-top:20px;
+  border-top:1px solid var(--rule);
+}
+
+/* References */
+.refs{padding:28px 28px;border-top:1px solid var(--rule);margin-top:40px}
+.refs h4{font-size:14px;letter-spacing:.1em;color:#888;font-weight:700;margin-bottom:12px;text-transform:uppercase}
+.refs ol{padding-left:20px}
+.refs li{font-size:13px;line-height:1.7;color:#666;margin-bottom:8px}
+
+/* Download FAB */
+.dl-fab{
+  position:fixed;right:18px;bottom:18px;z-index:99;
+  display:flex;align-items:center;gap:8px;
+  padding:12px 18px;
+  background:var(--accent);color:#fff;
+  border:none;border-radius:28px;cursor:pointer;
+  font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:.05em;
+  box-shadow:0 6px 22px rgba(0,0,0,.25);
+  transition:all .2s ease;-webkit-tap-highlight-color:transparent;
+}
+.dl-fab:hover{transform:translateY(-2px)}
+.dl-fab.loading{background:#666;cursor:wait;pointer-events:none}
+.dl-fab.done{background:#2d7a3a}
+.dl-fab svg{width:18px;height:18px;flex-shrink:0}
+.dl-fab .sp{width:16px;height:16px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.dl-toast{
+  position:fixed;left:50%;bottom:80px;transform:translateX(-50%) translateY(20px);
+  background:rgba(20,20,20,.92);color:#fff;padding:14px 22px;border-radius:8px;
+  font-family:var(--sans);font-size:14px;font-weight:500;
+  opacity:0;pointer-events:none;transition:all .3s ease;z-index:100;
+  max-width:90%;text-align:center;line-height:1.6;
+}
+.dl-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.downloading .dl-fab,.downloading .dl-toast{display:none}
+</style>
+</head>
+<body>
+<div class="wrap" id="main-wrap">
+
+<div class="masthead">
+  <span class="brand">夜枭 · 惊喜之夜</span>
+  <span class="date">2026 · 04</span>
+</div>
+
+<div class="cover-img">
+  <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=2400&q=90&auto=format&fit=crop"
+       alt="AI与数字表演" crossorigin="anonymous">
+</div>
+<div class="cover-inner">
+  <div class="cover-tag">学术观察 · AI与剧场</div>
+  <h1 class="cover-title">AI 合成表演到底动了演员什么</h1>
+  <p class="lede">一篇 2024 年 Sage 期刊论文里的三种立场——身份被操控、同意如何成立、表演者权益如何被界定。</p>
+  <div class="byline">▲ 基于 Sarah Thomas, <em>AI and Actors</em>, Emerging Media, 2024 &nbsp;|&nbsp; 夜枭｜惊喜之夜</div>
+</div>
+
+<hr class="rule-thick">
+
+<div class="section">
+  <p>2024 年，利物浦大学学者 Sarah Thomas 在 Sage 旗下学术期刊 <em>Emerging Media</em> 发表了一篇论文，题目是 <em>AI and Actors: Ethical Challenges, Cultural Narratives and Industry Pathways in Synthetic Media Performance</em>。</p>
+  <p>这篇论文的价值不在于给出「对/错」，而是把近年围绕 AI 合成表演的争议，推回到几个真正具体的问题：<strong>身份如何被操控、同意如何成立、表演者权益如何被界定。</strong></p>
+  <p>下面，我们不站队，只把三种立场按论文梳理的逻辑摆出来。</p>
+</div>
+
+<div class="pull-quote">
+  <span class="quo">&ldquo;</span>
+  <p>当「演员」可以被合成，谁来定义表演？</p>
+  <div class="src">—— 论文核心追问</div>
+</div>
+
+<hr class="rule">
+
+<!-- Section I -->
+<div class="chapter">
+  <div class="ch-num">Ⅰ</div>
+  <div class="ch-title">剧场方与制作方</div>
+  <div class="ch-sub">技术是工具，关键看怎么签</div>
+</div>
+
+<div class="sec-img">
+  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=2400&q=90&auto=format&fit=crop"
+       alt="合同与数字制作" crossorigin="anonymous">
+  <div class="sec-caption">▲ 数字替身的使用边界，最终落在合同条款的细化</div>
+</div>
+
+<div class="section">
+  <p>Thomas 的论文指出，合成表演技术本身是中性的：它既能用于已故演员的影像修复、多语言版本配音，也能在演员未参与的情况下生成「数字替身」。从产业视角看，这是降低制作成本、扩展叙事空间的新工具。</p>
+  <p>2024 年初，SAG-AFTRA 与 AI 配音公司 Replica Studios 达成「Digital Voice Replicas」协议——把数字声音替身的开发与对外授权使用区分开谈。行业并没有一刀切拒绝技术，而是在尝试用合同把边界写得更细。</p>
+</div>
+
+<div class="fact-box">
+  <div class="fb-label">关键前提</div>
+  <p>愿意接受工具化叙事的前提，是<strong>合同条款足够清晰、足够具体</strong>。没有合同保障，工具中性论就是一句空话。</p>
+</div>
+
+<hr class="rule">
+
+<!-- Section II -->
+<div class="chapter">
+  <div class="ch-num">Ⅱ</div>
+  <div class="ch-title">演员工会</div>
+  <div class="ch-sub">没有「具体且显著」的同意，就不算同意</div>
+</div>
+
+<div class="sec-img">
+  <img src="https://images.unsplash.com/photo-1518834107812-67b0b7c58434?w=2400&q=90&auto=format&fit=crop"
+       alt="舞台表演与劳动" crossorigin="anonymous">
+  <div class="sec-caption">▲ 演员的表演是劳动，数字替身的使用必须经过明确同意</div>
+</div>
+
+<div class="section">
+  <p>SAG-AFTRA 在 2023 年 TV/Theatrical 协议以及 2024 年 Interactive Media（电子游戏）协议中，反复强调同一条原则：任何「数字替身（Digital Replica）」的创建与使用，都必须获得演员<strong>明确、具体、显著（clear and conspicuous）</strong>的同意，而且每一次新的用途都要重新征得同意。</p>
+  <p>2024 年 7 月 26 日，SAG-AFTRA 对游戏行业发起罢工，核心诉求之一正是 AI 数字替身的使用规则。这场罢工后续与加州新法、行业博弈交织在一起，才让局势逐步出现缓和迹象。</p>
+</div>
+
+<div class="pull-quote">
+  <span class="quo">&ldquo;</span>
+  <p>技术可以中性，但权力关系不是。</p>
+  <div class="src">—— SAG-AFTRA 立场核心</div>
+</div>
+
+<div class="section">
+  <p>在没有强制性同意框架的前提下，「数字替身」很容易从工具滑向替代。这一派的逻辑非常清晰：<strong>没有「具体且显著」的同意，就不算同意。</strong></p>
+</div>
+
+<hr class="rule">
+
+<!-- Section III -->
+<div class="chapter">
+  <div class="ch-num">Ⅲ</div>
+  <div class="ch-title">观众与公众讨论</div>
+  <div class="ch-sub">逼真度跨过临界点之后</div>
+</div>
+
+<div class="sec-img">
+  <img src="https://images.unsplash.com/photo-1499364615650-ec38552f4f34?w=2400&q=90&auto=format&fit=crop"
+       alt="歌剧院观众" crossorigin="anonymous">
+  <div class="sec-caption">▲ 观众的「表演契约」：我们愿意为什么样的真假买单</div>
+</div>
+
+<div class="section">
+  <p>2025 年是合成表演技术在观感上发生明显跃迁的一年——AI 生成的人脸、声音、全身表演，在低分辨率视频通话和社交媒体场景下，已经能够稳定骗过非专业观众。</p>
+  <p>伴随这一跃迁，问题不再只是「能不能分辨真假」，而是<strong>「我们愿意为什么样的真假买单」</strong>。这关乎信任，也关乎一个更根本的文化问题。</p>
+</div>
+
+<div class="fact-box">
+  <div class="fb-label">立法进展</div>
+  <p>加州 AB 2602 与 AB 1836 两项数字替身相关法律在 2024 年通过、2025 年 1 月生效，试图把未经授权的数字复制纳入更明确的法律约束。</p>
+  <p>当舞台或银幕上的那个「人」可能不是人，<strong>我们对表演的契约还成立吗？</strong></p>
+</div>
+
+<hr class="rule-thick">
+
+<!-- Closing -->
+<div class="closing">
+  <p>Thomas 在论文里没有给出统一的解决方案。她更多是把问题摆得更清楚：在演员行业里，「负责任的 AI」必须同时落在四个层面——<strong>合同、工会、立法、观众认知</strong>。任何一层失衡，都可能让另外几层的努力作废。</p>
+  <p>戏剧从来都是一种关于「在场」的艺术。当「在场」本身可以被合成，我们留给观众的承诺会变成什么？</p>
+  <p>这个问题，我们没有答案，也没打算替任何一方回答。但作为一个长期做现场沉浸式戏剧的团队，我们倾向于先把问题问对，再谈方法。</p>
+  <div class="sign">—— 夜枭｜惊喜之夜&emsp;2026.04</div>
+</div>
+
+<!-- References -->
+<div class="refs">
+  <h4>参考来源</h4>
+  <ol>
+    <li>Thomas, S. (2024). <em>AI and Actors: Ethical Challenges, Cultural Narratives and Industry Pathways in Synthetic Media Performance</em>. Emerging Media, 2(3), 523–546. DOI: 10.1177/27523543241289108</li>
+    <li>SAG-AFTRA &amp; Replica Studios「Digital Voice Replicas」协议（2024 年 1 月）</li>
+    <li>SAG-AFTRA「Strikes Video Games Over A.I.」公告（2024 年 7 月 26 日）</li>
+    <li>加州 AB 2602 / AB 1836 数字替身法律（2025 年 1 月生效）</li>
+    <li>The Conversation: <em>Deepfakes leveled up in 2025</em>（行业综述）</li>
+  </ol>
+</div>
+
+</div><!-- end .wrap -->
+
+<button class="dl-fab" id="dlBtn" onclick="saveLongImage()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <polyline points="7 10 12 15 17 10"/>
+    <line x1="12" y1="15" x2="12" y2="3"/>
+  </svg>
+  <span id="dlText">保存长图</span>
+</button>
+<div class="dl-toast" id="dlToast"></div>
+
+<script>
+const FILENAME_BASE='AI合成表演三种立场';
+const MAX_BYTES=9*1024*1024;
+const HARD_MAX=10*1024*1024;
+const QUALITIES=[0.92,0.85,0.80];
+function toast(msg,ms=2400){const t=document.getElementById('dlToast');t.textContent=msg;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),ms);}
+async function waitImgsReady(root){const imgs=[...root.querySelectorAll('img')];await Promise.all(imgs.map(img=>img.complete&&img.naturalWidth>0?Promise.resolve():new Promise(res=>{img.addEventListener('load',res,{once:true});img.addEventListener('error',res,{once:true});})));}
+async function saveLongImage(){
+  const btn=document.getElementById('dlBtn');
+  if(btn.classList.contains('loading'))return;
+  btn.classList.add('loading');btn.innerHTML='<span class="sp"></span><span>生成中...</span>';
+  toast('正在渲染长图，请稍候（约 3-8 秒）');
+  try{
+    const target=document.getElementById('main-wrap');
+    await waitImgsReady(target);
+    if(document.fonts&&document.fonts.ready){try{await document.fonts.ready}catch(_){}}
+    document.body.classList.add('downloading');
+    const canvas=await html2canvas(target,{useCORS:true,allowTaint:false,backgroundColor:'#ffffff',scale:2,logging:false,imageTimeout:15000,windowWidth:target.offsetWidth,onclone:(d)=>{['dlBtn','dlToast'].forEach(id=>{const el=d.getElementById(id);if(el)el.remove();})}});
+    document.body.classList.remove('downloading');
+    const toBlob=(q)=>new Promise(res=>canvas.toBlob(b=>res(b),'image/jpeg',q));
+    let blob=null,usedQ=0;
+    for(const q of QUALITIES){const b=await toBlob(q);if(b&&b.size<=MAX_BYTES){blob=b;usedQ=q;break;}if(!blob||(b&&b.size<blob.size)){blob=b;usedQ=q;}}
+    if(!blob)throw new Error('blob生成失败');
+    const sizeMB=(blob.size/1024/1024).toFixed(1);
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download=FILENAME_BASE+'.jpg';document.body.appendChild(a);a.click();document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    btn.classList.remove('loading');btn.classList.add('done');
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>已保存</span>';
+    const overSize=blob.size>HARD_MAX;
+    toast(overSize?`⚠️ 已下载 ${sizeMB}MB · 超出建议大小`:`✅ 已下载 ${sizeMB}MB · 适配公众号`,overSize?5500:3800);
+    setTimeout(()=>{btn.classList.remove('done');btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>保存长图</span>';},4000);
+  }catch(e){
+    document.body.classList.remove('downloading');
+    btn.classList.remove('loading');
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span>保存长图</span>';
+    toast('⚠️ 生成失败：'+(e.message||'跨域或网络问题'),4000);console.error(e);
+  }
+}
+</script>
+</body></html>
