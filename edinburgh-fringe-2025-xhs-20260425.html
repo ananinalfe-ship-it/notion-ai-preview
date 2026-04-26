@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Edinburgh Fringe 2025：AI年与请愿书 | 夜枭</title>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"><\/script>
 <style>
   :root {
     --accent: #8b2252;
@@ -30,7 +31,44 @@
 
   img { image-rendering: -webkit-optimize-contrast; }
 
-  /* ── Cover card ────────────────────────────── */
+  /* Per-card download button */
+  .card-dl-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 12px;
+    background: rgba(0,0,0,0.58);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: background 0.18s ease, transform 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .card-dl-btn:hover { background: rgba(0,0,0,0.82); transform: scale(1.04); }
+  .card-dl-btn.loading { background: rgba(60,60,60,0.9); cursor: wait; pointer-events: none; }
+  .card-dl-btn.done { background: rgba(22,100,40,0.88); }
+  .card-dl-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+  .card-dl-btn .sp {
+    width: 13px; height: 13px;
+    border: 2px solid rgba(255,255,255,0.7);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Cover card */
   .cover-card {
     position: relative;
     width: 375px;
@@ -116,7 +154,7 @@
     letter-spacing: 1px;
   }
 
-  /* ── Content cards ──────────────────────────── */
+  /* Content cards */
   .card {
     position: relative;
     width: 375px;
@@ -202,7 +240,7 @@
     line-height: 1.5;
   }
 
-  /* ── Summary card ──────────────────────────── */
+  /* Summary card */
   .summary-card {
     position: relative;
     width: 375px;
@@ -284,7 +322,7 @@
 <body>
 
 <!-- 封面卡 -->
-<div class="cover-card">
+<div class="cover-card" id="card-cover">
   <img class="card-bg"
        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1080&h=1440&fit=crop&q=90&auto=format"
        alt="Edinburgh mountain and city skyline"
@@ -297,10 +335,18 @@
     <div class="cover-divider"></div>
     <span class="cover-byline">夜枭 · 惊喜之夜</span>
   </div>
+  <button class="card-dl-btn" onclick="saveCard('card-cover','封面-AI年与请愿书')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    <span>保存</span>
+  </button>
 </div>
 
-<!-- 卡01：AI进节目单 -->
-<div class="card">
+<!-- 卡01 -->
+<div class="card" id="card-01">
   <img class="card-bg"
        src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1080&h=1440&fit=crop&q=90&auto=format"
        alt="Festival crowd energy"
@@ -313,10 +359,18 @@
     <p class="card-fact">媒体称 2025 年 Fringe 是"AI 年"：AI 被写进剧本、被放进戏里——不是替人，而是拓边。</p>
     <div class="card-caption">▲ 艺术节现场 · 创作者们重新定义 AI 的位置</div>
   </div>
+  <button class="card-dl-btn" onclick="saveCard('card-01','01-AI进节目单')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    <span>保存</span>
+  </button>
 </div>
 
-<!-- 卡02：请愿书 -->
-<div class="card">
+<!-- 卡02 -->
+<div class="card" id="card-02">
   <img class="card-bg"
        src="https://images.unsplash.com/photo-1547153760-18fc86324498?w=1080&h=1440&fit=crop&q=90&auto=format"
        alt="Street art urban expression"
@@ -329,10 +383,18 @@
     <p class="card-fact">Luke Oseland 要求 Fringe 禁止 AI 文案和海报："一开始觉得好笑，后来发现它在稀释这个行业。"</p>
     <div class="card-caption">▲ 从好笑到不对劲的那个临界点</div>
   </div>
+  <button class="card-dl-btn" onclick="saveCard('card-02','02-请愿书')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    <span>保存</span>
+  </button>
 </div>
 
-<!-- 卡03：三派立场 -->
-<div class="card">
+<!-- 卡03 -->
+<div class="card" id="card-03">
   <img class="card-bg"
        src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1080&h=1440&fit=crop&q=90&auto=format"
        alt="Stage performance warm lighting"
@@ -345,10 +407,18 @@
     <p class="card-fact">创作派：AI 是新工具 / 观众派：想看"人"在场 / 从业派：设计和文案是进这行的门口</p>
     <div class="card-caption">▲ 谁在画那条线？ · 争的不是技术，是位置</div>
   </div>
+  <button class="card-dl-btn" onclick="saveCard('card-03','03-三派立场')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    <span>保存</span>
+  </button>
 </div>
 
 <!-- 总结卡 -->
-<div class="summary-card">
+<div class="summary-card" id="card-summary">
   <div>
     <div class="summary-accent-bar"></div>
     <p class="summary-quote">AI 可以进创作，但一旦开始<em>替代劳动</em>，艺术家立刻就不浪漫了。</p>
@@ -363,7 +433,84 @@
   <div class="summary-footer">
     <span class="summary-byline">—— 夜枭｜惊喜之夜</span>
   </div>
+  <button class="card-dl-btn" onclick="saveCard('card-summary','总结-AI与艺术边界')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    <span>保存</span>
+  </button>
 </div>
 
+<script>
+async function waitImgsReady(root) {
+  const imgs = [...root.querySelectorAll('img')];
+  await Promise.all(imgs.map(img =>
+    img.complete && img.naturalWidth > 0
+      ? Promise.resolve()
+      : new Promise(res => {
+          img.addEventListener('load', res, { once: true });
+          img.addEventListener('error', res, { once: true });
+        })
+  ));
+}
+
+async function saveCard(cardId, filename) {
+  const cardEl = document.getElementById(cardId);
+  const btn = cardEl ? cardEl.querySelector('.card-dl-btn') : null;
+  if (!cardEl || !btn) return;
+  if (btn.classList.contains('loading')) return;
+
+  btn.classList.add('loading');
+  const origHTML = btn.innerHTML;
+  btn.innerHTML = '<span class="sp"><\/span><span>生成中<\/span>';
+
+  try {
+    await waitImgsReady(cardEl);
+    if (document.fonts && document.fonts.ready) {
+      try { await document.fonts.ready; } catch(_) {}
+    }
+
+    const canvas = await html2canvas(cardEl, {
+      useCORS: true,
+      allowTaint: false,
+      backgroundColor: '#111111',
+      scale: 2,
+      logging: false,
+      imageTimeout: 15000,
+      windowWidth: cardEl.offsetWidth,
+      onclone: (clonedDoc) => {
+        clonedDoc.querySelectorAll('.card-dl-btn').forEach(b => b.remove());
+      }
+    });
+
+    const blob = await new Promise(res => canvas.toBlob(res, 'image/jpeg', 0.92));
+    if (!blob) throw new Error('blob 生成失败');
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename + '.jpg';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+    btn.classList.remove('loading');
+    btn.classList.add('done');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"><\/polyline><\/svg><span>已保存<\/span>';
+    setTimeout(() => {
+      btn.classList.remove('done');
+      btn.innerHTML = origHTML;
+    }, 3000);
+  } catch(e) {
+    btn.classList.remove('loading');
+    btn.innerHTML = origHTML;
+    alert('保存失败：' + (e.message || '跨域或网络问题'));
+    console.error(e);
+  }
+}
+<\/script>
 </body>
 </html>
