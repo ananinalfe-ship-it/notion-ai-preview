@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2025 年 5 款 AI 配乐工具现状｜行业小笔记</title>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <style>
+    :root {
+      --accent: #0d9488;
+      --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+              "Source Han Sans SC", "Noto Sans CJK SC",
+              "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+      --display: "Playfair Display", Georgia, "Times New Roman", serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0a0a0a;
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    img { image-rendering: -webkit-optimize-contrast; }
+
+    /* ── Base card ── */
+    .card {
+      position: relative;
+      width: 375px;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: #111;
+    }
+    .card-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.82;
+    }
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.0) 60%);
+      z-index: 1;
+    }
+    /* Large number top-left */
+    .card-num {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      font-size: 96px;
+      font-family: var(--display);
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1;
+      z-index: 2;
+      opacity: 0.92;
+      vertical-align: baseline;
+      letter-spacing: 0;
+    }
+    /* Bottom text zone */
+    .card-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 22px 20px 28px;
+      z-index: 2;
+    }
+    .card-tag {
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 8px;
+    }
+    .card-title {
+      font-size: 26px;
+      font-family: var(--display);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      vertical-align: baseline;
+      letter-spacing: 0;
+    }
+    .card-fact {
+      font-size: 13px;
+      color: rgba(255,255,255,0.85);
+      border-left: 2px solid var(--accent);
+      padding-left: 10px;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .card-caption {
+      font-size: 10px;
+      color: rgba(255,255,255,0.32);
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    /* ── Cover card specifics ── */
+    .cover-card .card-bottom { padding: 32px 24px 36px; }
+    .brand-tag {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .cover-title {
+      font-size: 28px;
+      font-family: var(--display);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 14px;
+      letter-spacing: 0;
+      vertical-align: baseline;
+    }
+    .cover-divider {
+      width: 36px;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 14px;
+    }
+    .cover-subtitle {
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.7;
+    }
+
+    /* ── Summary card ── */
+    .summary-card {
+      background: #061212;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 38px 28px 36px;
+    }
+    .s-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+    .s-title {
+      font-size: 26px;
+      font-family: var(--display);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.4;
+      margin-bottom: 22px;
+      letter-spacing: 0;
+      vertical-align: baseline;
+    }
+    .s-list {
+      list-style: none;
+      margin-bottom: 24px;
+    }
+    .s-list li {
+      font-size: 13px;
+      color: rgba(255,255,255,0.82);
+      border-left: 2px solid var(--accent);
+      padding: 6px 0 6px 12px;
+      margin-bottom: 5px;
+      line-height: 1.5;
+    }
+    .s-list li strong { color: #fff; }
+    .s-cta {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .s-tags {
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      line-height: 2;
+      margin-bottom: 14px;
+    }
+    .s-byline {
+      font-size: 11px;
+      color: rgba(255,255,255,0.38);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 12px;
+    }
+
+    /* ── Per-card save button ── */
+    .save-btn {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      z-index: 10;
+      background: rgba(0,0,0,0.52);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 20px;
+      color: #fff;
+      font-size: 11px;
+      font-family: var(--sans);
+      padding: 6px 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .save-btn:hover { background: rgba(0,0,0,0.75); }
+    .save-btn svg { width: 12px; height: 12px; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<!-- ── 封面卡 ── -->
+<div class="card cover-card" id="card0">
+  <img class="card-bg"
+       src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=1080&h=1440&fit=crop&q=90&auto=format"
+       alt="AI music abstract"
+       crossorigin="anonymous" />
+  <div class="card-overlay"></div>
+  <div class="card-bottom">
+    <div class="brand-tag">AI × 音乐 · 行业观察</div>
+    <div class="cover-title">2025 年 5 款<br>AI 配乐工具<br>现状速览</div>
+    <div class="cover-divider"></div>
+    <div class="cover-subtitle">AIVA · Amadeus Code · Soundraw<br>Boomy · Suno<br>谁擅长「哪一步」？</div>
+  </div>
+  <button class="save-btn" onclick="saveCard(0)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    ↓ 保存图片
+  </button>
+</div>
+
+<!-- ── 内容卡 01：AIVA ── -->
+<div class="card" id="card1">
+  <img class="card-bg"
+       src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=1080&h=1440&fit=crop&q=90&auto=format"
+       alt="Symphony concert hall"
+       crossorigin="anonymous" />
+  <div class="card-overlay"></div>
+  <span class="card-num">01</span>
+  <div class="card-bottom">
+    <div class="card-tag">AIVA · 擅长骨架</div>
+    <div class="card-title">搭骨架<br>交给 AIVA</div>
+    <div class="card-fact">首个被法国版权协会 SACEM 承认著作权的 AI 作曲家，曾由 CMG Orchestra 在 Sony 录音棚真人演奏</div>
+    <div class="card-fact">先让它出「可演奏草稿」，再由人调整配器细节——强在秩序感，不强在惊喜</div>
+    <div class="card-caption">▲ 交响音乐厅｜AIVA 最擅长情感配乐骨架</div>
+  </div>
+  <button class="save-btn" onclick="saveCard(1)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    ↓ 保存图片
+  </button>
+</div>
+
+<!-- ── 内容卡 02：Amadeus Code + Soundraw ── -->
+<div class="card" id="card2">
+  <img class="card-bg"
+       src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=1080&h=1440&fit=crop&q=90&auto=format"
+       alt="Piano keys close up"
+       crossorigin="anonymous" />
+  <div class="card-overlay"></div>
+  <span class="card-num">02</span>
+  <div class="card-bottom">
+    <div class="card-tag">Amadeus Code · Soundraw</div>
+    <div class="card-title">旋律灵感<br>+ 版权安全 BGM</div>
+    <div class="card-fact">Amadeus Code：批量生成旋律片段，导出 MIDI 继续打磨，当「旋律候选池」用，不当成品</div>
+    <div class="card-fact">Soundraw：仅用自有曲库训练，版权安全，按情绪/时长一键生成短视频背景音</div>
+    <div class="card-caption">▲ 钢琴即兴｜旋律灵感 × 版权安全 BGM 两条路</div>
+  </div>
+  <button class="save-btn" onclick="saveCard(2)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    ↓ 保存图片
+  </button>
+</div>
+
+<!-- ── 内容卡 03：Boomy + Suno ── -->
+<div class="card" id="card3">
+  <img class="card-bg"
+       src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1080&h=1440&fit=crop&q=90&auto=format"
+       alt="Music production studio"
+       crossorigin="anonymous" />
+  <div class="card-overlay"></div>
+  <span class="card-num">03</span>
+  <div class="card-bottom">
+    <div class="card-tag">Boomy · Suno · 极速出稿</div>
+    <div class="card-title">极速 demo<br>+ 一句话成歌</div>
+    <div class="card-fact">Boomy：累计超 210 万首，零基础即可生成并分发至 Spotify / Apple Music——先把氛围做出来再雕细节</div>
+    <div class="card-fact">Suno：2025 讨论度最高，一句 prompt → 带人声带歌词完整歌；发布前务必核查版权边界</div>
+    <div class="card-caption">▲ 音乐制作台｜从 demo 到成歌的最快两条路</div>
+  </div>
+  <button class="save-btn" onclick="saveCard(3)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    ↓ 保存图片
+  </button>
+</div>
+
+<!-- ── 总结卡（纯深色，无背景图）── -->
+<div class="card summary-card" id="card4">
+  <div class="s-label">一句话选工具 · AI 配乐 2025</div>
+  <div class="s-title">别把它们当<br>「一个万能 AI」</div>
+  <ul class="s-list">
+    <li>要骨架 → <strong>AIVA</strong></li>
+    <li>要旋律点子 → <strong>Amadeus Code</strong></li>
+    <li>要版权安全 BGM → <strong>Soundraw</strong></li>
+    <li>要极速 demo → <strong>Boomy</strong></li>
+    <li>要「点子直接成歌」→ <strong>Suno</strong></li>
+  </ul>
+  <p class="s-cta">你会让 AI 进到剧场创作链路的哪一环？起旋律 / 编曲配器 / 做 BGM / 极速 demo / 直接成歌——评论区聊聊 👇</p>
+  <div class="s-tags">#AI配乐 #AI音乐工具 #剧场创作 #惊喜之夜 #音乐制作</div>
+  <div class="s-byline">—— 夜枭｜惊喜之夜</div>
+  <button class="save-btn" onclick="saveCard(4)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    ↓ 保存图片
+  </button>
+</div>
+
+<script>
+async function saveCard(idx) {
+  const card = document.getElementById('card' + idx);
+  const btn = card.querySelector('.save-btn');
+  if (!btn) return;
+  btn.style.display = 'none';
+  try {
+    if (document.fonts && document.fonts.ready) {
+      try { await document.fonts.ready; } catch(_) {}
+    }
+    const imgs = [...card.querySelectorAll('img')];
+    await Promise.all(imgs.map(img =>
+      img.complete && img.naturalWidth > 0
+        ? Promise.resolve()
+        : new Promise(res => {
+            img.addEventListener('load', res, { once: true });
+            img.addEventListener('error', res, { once: true });
+          })
+    ));
+    const canvas = await html2canvas(card, {
+      useCORS: true, allowTaint: false,
+      backgroundColor: '#061212',
+      scale: 2, logging: false, imageTimeout: 15000,
+      windowWidth: card.offsetWidth
+    });
+    btn.style.display = '';
+    const url = canvas.toDataURL('image/jpeg', 0.92);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ai-music-tools-2025-card' + (idx + 1) + '.jpg';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  } catch(e) {
+    btn.style.display = '';
+    alert('保存失败：' + (e.message || '未知错误'));
+    console.error(e);
+  }
+}
+</script>
+<!-- revised xhs-meigong-487fda3d-202604281530: cover and card 01 image replaced with unused xhs images --></body>
+</html>
